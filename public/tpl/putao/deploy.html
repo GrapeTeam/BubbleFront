@@ -1,0 +1,184 @@
+<div class="contentbatchMask">
+    <div class="loading-spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
+<script type="text/ng-template" id="configAddModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">添加</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+            <div class="form-group" ng-repeat="item in list track by $index">
+                <label class="col-sm-2 control-label">内容</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="list[$index]" placeholder="请输入内容">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<script type="text/ng-template" id="serivceAddModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">服务</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">url</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.url" placeholder="请输入URL">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">服务描述</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.serviceDescription" placeholder="请输入服务描述">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">服务描述</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.serviceName" placeholder="请输入服务名称">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">服务状态</label>
+                <div class="col-sm-9">
+                    <select class="form-control" ng-model="value.state">
+                        <option value="0">0</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<script type="text/ng-template" id="AppAddModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">APP</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">domain</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.domain" placeholder="请输入domain">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">APP名称</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.name" placeholder="请输入APP名称">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">APP描述</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.desp" placeholder="请输入APP描述">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<div class="hbox hbox-auto-xs overflow-h pos-rlt" unselectable="on" ng-init="app.settings.full = true;">
+    <ul class="nav nav-tabs nav-justified deploy-nav">
+        <li ng-class="{active: currentTab == 0}" ng-click="tabChange(0)">
+            <a>APP</a>
+        </li>
+        <li ng-class="{active: currentTab == 1}" ng-click="tabChange(1)">
+            <a>Config</a>
+        </li>
+    </ul>
+    <div class="deploy-wrap-box" ng-show="currentTab == 0">
+        <div class="deploy-box">
+            <div class="servicebox h-full">
+                <div class="applistbox b">
+                    <div class="list-header padder b-b">App列表
+                        <button type="button" class="btn btn-info pull-right m-t-md btn-xs" ng-click="insertApp()">添加App</button>
+                    </div>
+                    <div class="itembox wrapper-sm">
+                        <div class="alert pull-left item {{item.select ? 'alert-danger':'alert-info'}}" ng-repeat="item in app" ng-show="item.desp"
+                            ng-click="appClick(item)">
+                            <div>
+                                <span class="ng-binding ng-scope">{{item.desp}}</span>
+                            </div>
+                            <div class="btnbox">
+                                <div class="updatebtn" ng-click="updateApp(item)"><i class="fa fa-edit"></i></div>
+                                <div class="deletebtn" ng-click="deleteApp(item)"><i class="fa fa-trash-o"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="servicelistbox b">
+                    <div class="list-header padder b-b">
+                        服务列表
+                        <button type="button" class="btn btn-info pull-right m-t-md btn-xs" ng-click="insertSerivce()">添加服务</button>
+                    </div>
+                    <div class="itembox">
+                        <div class="item" ng-repeat="item in service" ng-show="item.serviceDescription">
+                            <span class="check padder-sm pull-left" ng-click="addSerivce(item)" ng-class="{active: item.active}">
+                                <i class="fa fa-check-square"></i>
+                            </span>
+                            <span class="text pull-left">{{item.serviceDescription}}</span>
+                            <span class="icon pull-left" ng-click="updateService(item)">
+                                <i class="fa fa-align-justify"></i>
+                            </span>
+                            <span class="icon pull-left" ng-click="deleteService(item)">
+                                    <i class="fa fa-trash-o"></i>
+                                </span>
+                            <div class="clear-b"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="deploy-mind" type="application/kityminder" minder-data-type="json"></div>
+            </div>
+        </div>
+    </div>
+    <div class="config-wrap-box" ng-show="currentTab == 1">
+        <div class="config-box wrapper">
+            <select class="form-control" ng-model="currentService" ng-change="serviceClick()" ng-options="item.serviceDescription for item in service"></select>
+            <div class="panel panel-default m-t" ng-if="currentRule.length">
+                <div class="panel-heading font-bold">配置列表</div>
+                <div class="panel-body">
+                    <table class="table table-striped b-t b-light">
+                        <thead>
+                            <tr>
+                                <th ng-repeat="(key, value) in currentRule[0]">{{key}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <button ng-show="currentRule.length" class="btn pull-right btn-info" ng-click="save($event)">保存</button>
+        </div>
+    </div>
+</div>
+</div>
+</div>

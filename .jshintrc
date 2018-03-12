@@ -1,0 +1,18 @@
+{
+    "globals": {
+        "$": false,
+        "bubbleFrame": false,
+        "window": false,
+        "swal": false,
+        "document": false
+    },
+    "curly": true,
+    "eqeqeq": false,
+    "noarg": true,
+    "noempty": true,
+    "undef": true,
+    "unused": true,
+    "maxdepth": 4,
+    "eqnull": true,
+    "esversion": 6
+}

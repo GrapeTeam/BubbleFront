@@ -1,0 +1,113 @@
+/*************************************
+ * Components question
+ */
+
+.question-box .question-item {
+    display: inline-block;
+    width: auto;
+    min-width: 100px;
+    height: 100px;
+    line-height: 90px;
+    position: relative;
+    top: 0;
+    text-align: center;
+    margin-right: 10px;
+    border: 1px #ddd solid;
+    border-radius: 7px;
+    cursor: pointer;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+    padding: 5px;
+}
+
+.question-box .question-item:hover {
+    top: -10px;
+    box-shadow: 0px 5px 15px 0px #bfbfbf;
+}
+
+.question-box .quesition-list {
+    height: 100%;
+    width: 15%;
+    overflow: auto;
+    box-sizing: border-box;
+    float: left;
+}
+
+.question-box .quesition-header {
+    height: 45px;
+    font-size: 16px;
+    line-height: 45px;
+}
+
+.question-box .quesition-item {
+    height: 45px;
+    line-height: 45px;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
+}
+
+.question-box .quesition-item:hover {
+    background: #ececec;
+    cursor: pointer;
+}
+
+.question-box .option-box {
+    height: 100%;
+    width: 20%;
+    overflow: auto;
+    box-sizing: border-box;
+    float: left;
+}
+
+.question-box.min .preview-box {
+    width: 65%;
+}
+
+.question-box .preview-box {
+    width: 80%;
+    float: left;
+}
+
+.option-box .item {
+    height: 45px;
+    width: 100%;
+    line-height: 45px;
+    box-sizing: border-box;
+}
+
+.option-box .name {
+    width: 70%;
+    height: 100%;
+    float: left;
+}
+
+.option-box .name input {
+    height: 100%;
+    width: 100%;
+}
+
+.option-box .tool {
+    width: 10%;
+    height: 100%;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+    float: left;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
+}
+
+.option-box .addbtn {
+    font-size: 20px;
+}
+
+.option-box .tool:hover {
+    color: #989898;
+}
+
+.preview-box .inputitem {
+    margin: 0 15px 0 0;
+}

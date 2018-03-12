@@ -1,0 +1,197 @@
+.deploy-wrap-box {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 42px;
+}
+
+.deploy-box {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.deploy-nav.nav-tabs>li.active>a {
+    border-bottom-color: #f1f1f1 !important;
+}
+
+.deploy-box #deploy-mind {
+    padding-right: 200px;
+    padding-left: 200px;
+    height: 100%;
+    width: 100%;
+}
+
+.deploy-box .servicelistbox {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100%;
+    overflow: hidden;
+    background: #f6f8f8;
+}
+
+.deploy-box .list-header {
+    height: 59px;
+    line-height: 59px;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.deploy-box .itembox {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.deploy-box .servicelistbox .itembox .item {
+    padding: 10px 0;
+    border-bottom: 1px #ddd solid;
+}
+
+.deploy-box .servicelistbox .itembox .item .text {
+    display: block;
+    width: 90px;
+    margin: 0 auto;
+    float: left;
+}
+
+.deploy-box .servicelistbox .itembox .item .icon {
+    padding: 0 5px;
+}
+
+.deploy-box .servicelistbox .itembox i {
+    /* color: #aab4cd; */
+    font-size: 16px;
+    opacity: .5;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.deploy-box .servicelistbox .check i:hover {
+    opacity: 1;
+}
+
+.deploy-box .servicelistbox .icon i:hover {
+    opacity: 1;
+    color: #23b7e5;
+}
+
+.deploy-box .servicelistbox .check.active i {
+    opacity: 1;
+    color: #23b7e5;
+}
+
+.deploy-box .applistbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    overflow: auto;
+    padding: 5px;
+    background: #f6f8f8;
+}
+
+.deploy-box .applistbox .item {
+    padding: 5px 10px;
+    min-height: 40px;
+    margin: 5px 0;
+    cursor: pointer;
+    width: 100%;
+    padding-right: 50px;
+}
+
+.deploy-box .applistbox .item:hover .btnbox {
+    opacity: 1;
+}
+
+.deploy-box .applistbox .item .btnbox {
+    position: absolute;
+    width: 50px;
+    height: 100%;
+    right: 0;
+    top: 0;
+    z-index: 10;
+    opacity: 0;
+    transition: all .2s;
+}
+
+.deploy-box .applistbox .item .btnbox .deletebtn {
+    position: absolute;
+    top: 0;
+    left: 25px;
+    height: 40px;
+    width: 25px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.deploy-box .applistbox .item .btnbox .updatebtn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 40px;
+    width: 25px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.deploy-box .applistbox .item .btnbox>div i {
+    font-size: 16px;
+    transition: all .2s;
+}
+
+.deploy-box .applistbox .item .btnbox>div:hover i {
+    color: #23b7e5;
+}
+
+.config-wrap-box {
+    position: absolute;
+    top: 42px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.config-wrap-box .config-box {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    position: relative;
+}
+
+.config-wrap-box .config-box .configitembox {
+    width: 20%;
+    height: 100%;
+    float: left;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px;
+}
+
+.config-wrap-box .config-box .fieldbox {
+    width: 40%;
+}
+
+.config-wrap-box .config-box .textbox textarea {
+    height: 100% !important;
+}
+
+.config-wrap-box .config-box .tablelist,
+.config-wrap-box .config-box .fieldlist {
+    height: 48%;
+    padding: 15px 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.config-wrap-box .config-box .line {
+    margin: 3% 0;
+}

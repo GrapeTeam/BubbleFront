@@ -1,0 +1,45 @@
+import bubbleFrame from "./config";
+import angular from "angular";
+import "angular-animate";
+import "angular-cookies";
+import "angular-resource";
+import "angular-touch";
+import "angular-ui-router";
+import "angular-bootstrap";
+import "angular-sanitize";
+import "ngstorage";
+import "oclazyload";
+import "./bubble/services/ui-load";
+import "./bubble/modules/angular-ui-calendar/calendar";
+
+import "./bubble/modules/datetimepicker/datetimepicker";
+import "./bubble/modules/datetimepicker/datetimepicker.css";
+
+import "./bubble/modules/slimscroll/jquery.mousewheel";
+import "./bubble/modules/slimscroll/jquery.mCustomScrollbar";
+import "./bubble/modules/slimscroll/jquery.mCustomScrollbar.min.css";
+
+import "./bubble/directives/ui-img";
+import "./bubble/directives/ui-jq";
+import "./bubble/directives/ui-nav";
+import "./bubble/directives/ui-tree";
+import "./bubble/directives/ui-audio";
+import "./bubble/directives/ui-video";
+import "./bubble/directives/ui-swiper";
+import "./bubble/directives/ui-sitechose";
+import "./bubble/directives/ui-butterbar";
+import "./bubble/directives/ui-bubble-modal";
+import "./bubble/directives/ui-scroll-load";
+import "./bubble/directives/ui-validate";
+import "./bubble/directives/ui-async-select";
+import "./bubble/directives/ui-toggleclass";
+import "./bubble/directives/ui-button-toggle";
+import "./bubble/directives/ui-json-edit";
+import "./bubble/directives/ui-fullscreen";
+import "./bubble/directives/tree-table";
+import "./bubble/directives/select-table";
+import "./bubble/directives/treenav";
+import "./bubble/directives/file-chose";
+import "./bubble/directives/ui-minScroll";
+import "./bubble/controllers/modalController";
+import "./bubble/directives/ui-datetimepicker";
