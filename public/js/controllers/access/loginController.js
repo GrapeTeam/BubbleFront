@@ -32,7 +32,7 @@ bubbleFrame.register('loginController', function ($timeout, $scope, bubble, $sta
                 $localStorage.logininfo = JSON.stringify(v);
                 window.logininfo = v;
                 $rootScope.logininfo = v;
-                $state.go("app.content");
+                $state.go("app.appManage");
                 window.localStorage.sitename = v.webinfo[0].wbname;
                 window.localStorage.siteid = v.webinfo[0].wbid;
                 window.localStorage.sitewbgid = v.webinfo[0].wbgid;

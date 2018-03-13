@@ -6,7 +6,7 @@
     var router = bubbleFrame.router()             //获取一级路由对象
 
     router.add("access", null);
-    router.add("app", null);
+    router.add("app",null);
     //登录路由
     var parent = router.setParent("access", "access");
     parent.add("login");            //登录
@@ -15,7 +15,9 @@
     parent.add("changepwd");          
     //系统路由
     parent = router.setParent("app", "app");
-    parent.add("user")();                 //用户管理
+    parent.add("user")();
+    parent.add("appManage","", ["mind"])("../../style/putao/deploy"); 
+    parent.add("serviceManage")("../../style/putao/deploy");                  //用户管理
     parent.add("reportReply")("report");          //举报快接回复管理
     parent.add("reportType", "")("report");       //举报类型管理
     parent.add("report{type}", "", "angularBootstrapNavTree")("report");     //举报管理

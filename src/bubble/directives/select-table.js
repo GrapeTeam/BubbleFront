@@ -442,7 +442,7 @@ app.directive('selectTable', ['$http', 'bubble', '$compile', '$timeout', functio
                         swal("删除失败");
                     }
                 }
-                bubble.openModal("deleteitem", "", { names: names, ids: ids, functionName: getFunctionName("delete"), hook: $scope.control && $scope.control.deleteFn }, cb)
+                bubble.openModal("deleteitem", "", { names: names, ids: ids, functionName: getFunctionName("delete|GrapeFW"), hook: $scope.control && $scope.control.deleteFn }, cb)
             };
 
             $scope.tableEdit = function (v) {
@@ -474,7 +474,6 @@ app.directive('selectTable', ['$http', 'bubble', '$compile', '$timeout', functio
                 $scope.hiddenFooter = false;
                 $scope.loadingshower = true;
                 var success = function (v) {
-                    console.log(v)
                     if (v.errorcode) {
                         swal(v.message || v.data);
                         return;
@@ -507,7 +506,6 @@ app.directive('selectTable', ['$http', 'bubble', '$compile', '$timeout', functio
                             uploader = new TableUpload().init();
                         });
                     }
-
                     $scope.totalItems = v.totalSize;
                     $scope.totalPages = Math.ceil($scope.totalItems / $scope.pageSize);
                     $scope.hiddenPagination = v.totalPages == 1 && false;
@@ -520,7 +518,7 @@ app.directive('selectTable', ['$http', 'bubble', '$compile', '$timeout', functio
                     fn && fn($scope.list);
                 }
                 if (!$scope.control || !$scope.control.pageFn) {
-                    ($scope.selectPar === "" || $scope.selectPar === undefined) && $scope.searchPar === undefined ? bubble._call(getFunctionName("page"), $scope.currentPage, $scope.pageSize === null ? "10" : $scope.pageSize).success(success) : bubble._call(getFunctionName(search && bubble.getInterface($scope.interface).search ? "search" : "pageBy"), $scope.currentPage, $scope.pageSize === null ? "10" : $scope.pageSize, $scope.searchPar || $scope.selectPar).success(success);
+                    ($scope.selectPar === "" || $scope.selectPar === undefined) && $scope.searchPar === undefined ? bubble._call(getFunctionName("page|GrapeFW"), $scope.currentPage, $scope.pageSize === null ? "10" : $scope.pageSize).success(success) : bubble._call(getFunctionName(search && bubble.getInterface($scope.interface).search ? "search" : "pageBy"), $scope.currentPage, $scope.pageSize === null ? "10" : $scope.pageSize, $scope.searchPar || $scope.selectPar).success(success);
                 } else {
                     $scope.control.pageFn($scope.currentPage, $scope.pageSize === null ? "10" : $scope.pageSize, success);
                 }
@@ -597,7 +595,15 @@ app.controller("selectTableCreate", ["$scope", "$modalInstance", "items", "bubbl
         if (items.hook) {
             items.hook($scope.value, cb);
         } else {
-            bubble._call(items.scope.interface + ".add", $scope.value).success(cb);
+            bubble._call(items.scope.interface + ".add|GrapeFW", $scope.value).success(function(v){
+                if (!v.errorcode) {
+                    swal("添加成功");
+                    $modalInstance.dismiss('cancel');
+                } else {
+                    swal("添加失败");
+                    $modalInstance.dismiss('cancel');
+                }
+            });
         }
     }
 

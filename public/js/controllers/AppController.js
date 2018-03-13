@@ -1,3 +1,6 @@
+bubbleFrame.register('appController', function ($scope, bubble, $modal, $http, $stateParams) {
+    
+});
 var initAjaxState = {
     menu: false,
     count: false,

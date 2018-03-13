@@ -1415,5 +1415,30 @@
             visible: true,
             edit: false
         },
+    }).registerFields('service',{
+            url:{
+                data:"s:",
+                mark:'url',
+                visible:true,
+                edit:true,
+            },
+            serviceDescription:{
+                data:"s:",
+                mark:'服务描述',
+                visible:true,
+                edit:true,
+            },
+            serviceName:{
+                data:"s:",
+                mark:'服务名称',
+                visible:true,
+                edit:true,
+            },
+            state:{
+                data:"int:",
+                mark:'状态',
+                visible:true,
+                edit:true,
+            },
     });
 })();
