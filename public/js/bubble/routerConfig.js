@@ -92,7 +92,7 @@
     parent.add("questionanswer{qid}");   //问卷答复
     //葡萄云配置
     parent = router.setParent("putao", "putao");
-    parent.add("config");                           //配置管理
+    parent.add("config")();                           //配置管理
     parent.add("interface");                        //接口管理
     parent.add("application", "", "masonry");       //应用管理
     parent.add("service");                          //服务管理
