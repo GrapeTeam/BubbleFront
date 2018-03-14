@@ -1,1 +1,3 @@
-bubbleFrame.register('serviceManageController', function ($scope, bubble, $rootScope, $timeout, $state) {})
+bubbleFrame.register('serviceManageController', function ($scope, bubble, $rootScope, $timeout, $state) {
+    
+})
