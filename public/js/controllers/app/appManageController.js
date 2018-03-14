@@ -55,65 +55,6 @@ bubbleFrame.register('appManageController', function ($scope, bubble, $timeout, 
         }
     }
 
-    var intsertText = function (v) {
-        v = JSON.parse(JSON.stringify(v));
-        for (var tmp in v) {
-            for (var i = 0; i < v[tmp].rule.length; i++) {
-                delete v[tmp].rule[i].$$hashKey;
-                v[tmp].rule[i].fieldType = parseInt(v[tmp].rule[i].fieldType);
-                v[tmp].rule[i].checkType = parseInt(v[tmp].rule[i].checkType);
-            }
-        }
-        $scope.text = v ? JSON.stringify(v) : {};
-    }
-
-    var autoForm = function () {
-        $scope.serviceConfig = [];
-        $scope.field = {
-            fieldName: {
-                data: "s:",
-                mark: "字段名",
-                edit: true,
-                visible: false
-            },
-            fieldType: {
-                data: "s:",
-                mark: "字段类型",
-                edit: true,
-                visible: false
-            },
-            initValue: {
-                data: "s:",
-                mark: "初始值",
-                edit: true,
-                visible: false
-            },
-            failedValue: {
-                data: "s:",
-                mark: "值",
-                edit: true,
-                visible: false
-            },
-            checkType: {
-                data: "s:",
-                mark: "验证类型",
-                edit: true,
-                visible: false
-            },
-        }
-        $scope.value = {};
-
-        var watchFn = function (n, o) {
-            if (Object.getOwnPropertyNames(n).length)
-                intsertText($scope.currentService.tableConfig);
-        }
-
-        $scope.currentService && intsertText($scope.currentService.tableConfig);
-        $scope.$watch("value", watchFn, true);
-    }
-
-    autoForm();
-
     $timeout(function () {
         $scope.mind = new Mind().init();
     });
@@ -155,7 +96,7 @@ bubbleFrame.register('appManageController', function ($scope, bubble, $timeout, 
         $scope.service = v.data;
         $scope.currentService = v.data[0];
         v.data[0].select = true;
-        $scope.serviceClick(v.data[0]);
+        // $scope.serviceClick(v.data[0]);
         if ($scope.service && $scope.app) {
             $scope.mind && $scope.mind.render($scope.app[0]);
             loading(false);
@@ -311,118 +252,6 @@ bubbleFrame.register('appManageController', function ($scope, bubble, $timeout, 
             bubble.updateScope($scope);
         });
     };
-
-    $scope.serviceClick = function () {
-        if (!$scope.currentService) {
-            return;
-        }
-        var v = $scope.currentService;
-        var count = 0;
-        for (var i = 0; i < $scope.service.length; i++) {
-            $scope.service[i].select = false;
-        }
-        v.select = true;
-        $scope.currentService.tableConfig = v.tableConfig && typeof v.tableConfig === "string" ? JSON.parse(v.tableConfig) : v.tableConfig;
-        intsertText($scope.currentService.tableConfig);
-        if ($scope.currentService.tableConfig) {
-            $scope.serviceConfig = [];
-            for (var tmp in $scope.currentService.tableConfig) {
-                $scope.serviceConfig.push(tmp);
-                if (++count == 1) {
-                    $scope.currentConfig = tmp;
-                    $scope.currentRule = $scope.currentService.tableConfig[$scope.currentConfig].rule;
-                }
-            }
-        } else {
-            $scope.serviceConfig = [];
-            $scope.currentConfig = "";
-            $scope.currentRule = "";
-        }
-        $scope.value = {};
-        insertSelect();
-        $scope.getHtml();
-    }
-
-    $scope.fieldTypeList = { "0": "公开", "1": "隐藏", "2": "保护" };
-    $scope.checkTypeList = {
-        1: "不为空",
-        2: "为空",
-        3: "大于0",
-        4: "小于0",
-        5: "等于0",
-        6: "整数",
-        7: "自然数(包含小数)",
-        8: "金额",
-        9: "小数",
-        10: "email",
-        11: "手机号",
-        12: "工商执照号",
-        13: "纯中文",
-        26: "账号ID",
-        14: "不包含空格的字符串",
-        15: "真实姓名",
-        16: "身份证号",
-        17: "时间戳（年月日时分秒）",
-        18: "星期",
-        19: "月",
-        20: "IP地址",
-        21: "URL",
-        22: "密码",
-        23: "中国邮政编码",
-        24: "日期",
-        25: "时间",
-        27: "unix时间戳",
-        28: "银行卡号",
-    };
-
-    $scope.getHtml = function () {
-        $timeout(function () {
-            var box = $(".config-wrap-box table tbody").html("");
-            for (var i = 0; i < $scope.currentRule.length; i++) {
-                box.append("<tr></tr>");
-                var tbox = box.find("tr:last");
-                for (var tmp in $scope.currentRule[i]) {
-                    tbox.append("<td></td>");
-                    if (tmp == "fieldType") {
-                        $scope.currentRule[i][tmp] = $scope.currentRule[i][tmp] + "";
-                        box.find("td:last").append($compile("<select class='form-control' ng-model='currentRule[" + i + "][\"" + tmp + "\"]' ng-options='key as value for (key, value) in fieldTypeList'></select>")($scope));
-                    } else if (tmp == "checkType") {
-                        $scope.currentRule[i][tmp] = $scope.currentRule[i][tmp] + "";
-                        box.find("td:last").append($compile("<select class='form-control' ng-model='currentRule[" + i + "][\"" + tmp + "\"]' ng-options='key as value for (key, value) in checkTypeList'></select>")($scope));
-                    } else {
-                        box.find("td:last").append($compile("<input type='text' ng-model='currentRule[" + i + "][\"" + tmp + "\"]' class='form-control' />")($scope));
-                    }
-                }
-            }
-        });
-    };
-
-    $scope.serviceTableClick = function (v) {
-        $scope.currentRule = $scope.currentService.tableConfig[v].rule;
-        $scope.getHtml();
-    }
-
-    $scope.serviceFieldClick = function (v) {
-        $scope.value = v;
-    }
-
-    $scope.save = function (e) {
-        if ($scope.ajaxed) {
-            return;
-        }
-        $scope.ajaxed = true;
-        $(e.currentTarget).html("请求中...");
-        intsertText($scope.currentService.tableConfig);
-        bubble._call("service.update|GrapeFW", $scope.currentService.id, { tableConfig: $scope.text }).success(function (v) {
-            $scope.ajaxed = false;
-            $(e.currentTarget).html("保存");
-            if (!v.errorcode) {
-                swal("保存成功");
-            } else {
-                swal("保存失败");
-            }
-        });
-    }
 });
 
 bubbleFrame.register("serivceAddController", function ($scope, bubble, $timeout, items, $modalInstance) {

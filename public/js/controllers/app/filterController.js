@@ -1,0 +1,1 @@
+bubbleFrame.register('filterController', function ($scope, bubble, $timeout, $compile) {})

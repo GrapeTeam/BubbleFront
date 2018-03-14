@@ -65,6 +65,7 @@ bubbleFrame.register('configController', function ($scope, bubble, $timeout, $co
     autoForm();
 
     bubble._call("service.page|GrapeFW", 1, 1000).success(function (v) {
+        console.log(v)
         var count = 0;
         $scope.service = v.data;
         $scope.currentService = v.data[0];
@@ -111,7 +112,7 @@ bubbleFrame.register('configController', function ($scope, bubble, $timeout, $co
     };
 
     var insertSelect = function () {
-        var tpl = $('<select class="form-control"></select>');
+        var tpl = $('<select class="form-control  service"></select>');
         for (var i = 0; i < $scope.serviceConfig.length; i++) {
             tpl.append('<option value="' + $scope.serviceConfig[i] + '">' + $scope.serviceConfig[i] + '</option>');
         }
@@ -195,7 +196,7 @@ bubbleFrame.register('configController', function ($scope, bubble, $timeout, $co
     };
 
     $scope.addTable = function () {
-        bubble.customModal("configEditModal.html", "configEditController", "lg", "", function (v) {
+        bubble.customModal("configAddModal.html", "configAddController", "lg", "", function (v) {
             if (!$scope.currentService.tableConfig) {
                 $scope.currentService.tableConfig = {};
             }
@@ -207,12 +208,39 @@ bubbleFrame.register('configController', function ($scope, bubble, $timeout, $co
         });
     };
 
-    $scope.editTable = function () {
-        $scope.currentRule
+    $scope.editTable = function (e) {
+        var item = $(".service").find("option:selected").val()
+        if (item) {
+            bubble.customModal("configEditModal.html", "configEditController", "lg", $scope.currentService.tableConfig, function (v) {
+                var name = v.service
+                $scope.currentService.tableConfig[item].tableName = v.table
+                $scope.currentService.tableConfig[v.service] = $scope.currentService.tableConfig[item]
+                delete $scope.currentService.tableConfig[item]
+                $scope.serviceClick()
+            });
+        } else {
+            swal('请添加配置')
+        }
     };
 
     $scope.removeTable = function () {
-        $scope.currentRule
+        var item = $(".service").find("option:selected").val();
+        if (item) {
+            swal({
+                title: "确定要删除"+item+"配置吗?",
+                text: ""+item+"会被立即删除并无法撤销该操作",
+                icon: "warning",
+                buttons: {
+                    cancel: "取消",
+                    defeat: "删除",
+                },
+            }).then(function (rs) {
+                delete $scope.currentService.tableConfig[item]
+                $scope.serviceClick()
+            })
+        } else {
+            swal('请选择配置')
+        }
     };
 
     $scope.save = function (e) {
@@ -222,26 +250,46 @@ bubbleFrame.register('configController', function ($scope, bubble, $timeout, $co
         $scope.ajaxed = true;
         $(e.currentTarget).html("请求中...");
         intsertText($scope.currentService.tableConfig);
-        bubble._call("service.update|GrapeFW", $scope.currentService.id, { tableConfig: $scope.text }).success(function (v) {
-            $scope.ajaxed = false;
-            $(e.currentTarget).html("保存");
-            if (!v.errorcode) {
-                swal("保存成功");
-            } else {
-                swal("保存失败");
-            }
-        });
+        // bubble._call("service.update|GrapeFW", $scope.currentService.id, { tableConfig: $scope.text }).success(function (v) {
+        //     $scope.ajaxed = false;
+        //     $(e.currentTarget).html("保存");
+        //     if (!v.errorcode) {
+        //         swal("保存成功");
+        //     } else {
+        //         swal("保存失败");
+        //     }
+        // });
     }
 });
 
-bubbleFrame.register('configEditController', function ($scope, bubble, $timeout, items, $modalInstance) {
+bubbleFrame.register('configAddController', function ($scope, bubble, $timeout, items, $modalInstance) {
     $scope.value = items;
-
     $scope.ok = function () {
         if (!$scope.value) {
             swal("请输入配置名称");
         }
         $modalInstance.close($scope.value);
+    }
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    }
+});
+bubbleFrame.register('configEditController', function ($scope, bubble, $timeout, items, $modalInstance) {
+    var item = $(".service").find("option:selected").val()
+    $scope.value = {
+        service: item,
+        table: items[item].tableName
+    };
+
+    $scope.ok = function () {
+        if (!$scope.value.service) {
+            swal("请输入配置名称");
+        } else if (!$scope.value.table) {
+            swal("请表配置名称");
+        } else {
+            $modalInstance.close($scope.value);
+        }
     }
 
     $scope.cancel = function () {

@@ -93,7 +93,8 @@
             act: "vote",
             power: "GrapeRight",
             log: "GrapeLog",
-            webInfo: 'GrapeWebInfo'
+            webInfo: 'GrapeWebInfo',
+            filter:'GrapeFilter'
         },
         //若配置其他ID,则覆写通用配置
         "17": {
@@ -629,6 +630,9 @@
         upload: {
             file: "{uploadhost}/FileServer/UploadFile?appid={appid}",
             visible: "{uploadhost}",
+        },
+        filter:{
+            page:['page',"Page",'filterPage']
         }
     });
 })()

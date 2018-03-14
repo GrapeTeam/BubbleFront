@@ -1345,19 +1345,19 @@
             visible: true,
             edit: false
         },
-    }).registerFields("webInfo",{
-        title:{
-            data:'s:',
-            mark:'站点名称',
-            visible:true,
-            edit:false,
+    }).registerFields("webInfo", {
+        title: {
+            data: 's:',
+            mark: '站点名称',
+            visible: true,
+            edit: false,
         }
-    }).registerFields('link',{
-        name:{
-            data:'s:',
-            mark:'站点名称',
-            visible:true,
-            edit:false,
+    }).registerFields('link', {
+        name: {
+            data: 's:',
+            mark: '站点名称',
+            visible: true,
+            edit: false,
         }
     }).registerFields("powerContent", {
         name: {
@@ -1415,30 +1415,50 @@
             visible: true,
             edit: false
         },
-    }).registerFields('service',{
-            url:{
-                data:"s:",
-                mark:'url',
-                visible:true,
-                edit:true,
-            },
-            serviceDescription:{
-                data:"s:",
-                mark:'服务描述',
-                visible:true,
-                edit:true,
-            },
-            serviceName:{
-                data:"s:",
-                mark:'服务名称',
-                visible:true,
-                edit:true,
-            },
-            state:{
-                data:"int:",
-                mark:'状态',
-                visible:true,
-                edit:true,
-            },
+    }).registerFields('service', {
+        url: {
+            data: "s:",
+            mark: 'url',
+            visible: true,
+            edit: true,
+        },
+        serviceDescription: {
+            data: "s:",
+            mark: '服务描述',
+            visible: true,
+            edit: true,
+        },
+        serviceName: {
+            data: "s:",
+            mark: '服务名称',
+            visible: true,
+            edit: true,
+        },
+        state: {
+            data: "int:",
+            mark: '状态',
+            visible: true,
+            edit: true,
+        },
+    }).registerFields("filter", {
+        url: {
+            data: 's:',
+            mark: "过滤字符串",
+            edit: true,
+            visible: true
+        },
+        hurl: {
+            data: 's:',
+            mark: "回调字符串",
+            edit: true,
+            visible: true
+        },
+        type: {
+            data: "select:前置HOOK|后置HOOK",
+            dictionaries: { "0": "前置HOOK", "0": "后置HOOK" },
+            mark: "回调类型",
+            visible: true,
+            edit: true
+        },
     });
 })();
