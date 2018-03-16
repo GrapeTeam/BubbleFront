@@ -52,9 +52,21 @@
     transition: color .2s;
     border-bottom: 1px #eaeff0 solid;
 }
+.addConfig {
+    height: 35px;
+    line-height: 35px;
+    cursor: pointer;
+    text-align: center;
+    transition: color .2s;
+    border-bottom: 1px #eaeff0 solid;
+}
 
 .config-wrap-box .addbtn:hover,
-.config-wrap-box .removebtn:hover {
+.config-wrap-box .removebtn:hover
+ {
+    color: #19a9d5;
+}
+.addConfig:hover{
     color: #19a9d5;
 }
 
@@ -65,7 +77,13 @@
     position: relative;
     top: 3px;
 }
-
+ .addConfig i {
+    font-size: 24px;
+    margin-right: 10px;
+    color: #27c24c;
+    position: relative;
+    top: 3px;
+}
 .config-wrap-box .removebtn i {
     margin-right: 10px;
     font-size: 20px;
