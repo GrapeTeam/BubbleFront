@@ -1441,24 +1441,32 @@
             edit: true,
         },
     }).registerFields("filter", {
-        url: {
+        appid: {
             data: 's:',
-            mark: "过滤字符串",
+            mark: "appid",
             edit: true,
             visible: true
         },
-        hurl: {
+        callback: {
             data: 's:',
             mark: "回调字符串",
             edit: true,
             visible: true
         },
-        type: {
-            data: "select:前置HOOK|后置HOOK",
-            dictionaries: { "0": "前置HOOK", "0": "后置HOOK" },
-            mark: "回调类型",
+        filter: {
+            data: "s:",
+            mark: "回调字符串",
             visible: true,
             edit: true
         },
+        ctime:{
+            data:"data:",
+            mark: "创建时间",
+            visible: true,
+            edit: false,
+            onRender: function (v) {
+                return v.$numberLong ? new Date(v.$numberLong).Format("yyyy-MM-dd hh:mm:ss") : new Date(v).Format("yyyy-MM-dd hh:mm:ss");
+            }
+        }
     });
 })();

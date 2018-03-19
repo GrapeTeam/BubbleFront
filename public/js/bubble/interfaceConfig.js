@@ -1,6 +1,6 @@
 (function () {
     var config226 = {
-        api: "226:801",
+        api: "226:999",
         upload: "226:8080"
     };
 
@@ -26,13 +26,14 @@
         "185:7000": "http://60.173.1.185:7000",
         "185:9000": "http://60.173.1.185:9000",
         "59:803": "http://59.110.21.171:803",
-        "226:810": "http://123.57.214.226:810"
+        "226:810": "http://123.57.214.226:810",
+        "226:999": "http://123.57.214.226:999"
     });
 
     bubbleFrame.setDistributive({
         debug: {
             "GrapeFW": {
-                api: "226:810",
+                api: "226:999",
                 upload: "226:8080"
             },
             22: config226,
@@ -632,7 +633,7 @@
             visible: "{uploadhost}",
         },
         filter:{
-            page:['page',"Page",'filterPage']
+            page:['page',"hookService",'pageBefore']
         }
     });
 })()

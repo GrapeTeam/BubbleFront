@@ -1,0 +1,1 @@
+bubbleFrame.register('beforeHookController', function ($scope, bubble, $timeout, $compile) {})

@@ -18,7 +18,8 @@
     parent.add("user")();
     parent.add("appManage","", ["mind"])("../../style/putao/deploy"); 
     parent.add("serviceManage")("../../style/putao/deploy");                  //用户管理
-    parent.add("filter")();
+    parent.add("afterHook")();
+    parent.add("beforeHook")();
     parent.add("reportReply")("report");          //举报快接回复管理
     parent.add("reportType", "")("report");       //举报类型管理
     parent.add("report{type}", "", "angularBootstrapNavTree")("report");     //举报管理

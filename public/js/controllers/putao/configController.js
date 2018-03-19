@@ -89,7 +89,7 @@ bubbleFrame.register('configController', function ($scope, bubble, $timeout, $co
             }
         }
         $scope.serviceClick(v.data[0]);
-        $scope.serviceClick1(v.data[0]);
+        // $scope.serviceClick1(v.data[0]);
 
     });
 
@@ -157,8 +157,8 @@ bubbleFrame.register('configController', function ($scope, bubble, $timeout, $co
     };
 
     var insertSelect = function (type) {
-        var tpl = $('<div class="form-group"><label>服务配置</label><select class="form-control m-b service"></select></div>');
-        var tpl1 = $('<div class="form-group"><label>表配置</label><select class="form-control m-b config1"></select></div>');
+        var tpl = $('<div class="form-group"><label>表配置</label><select class="form-control m-b service"></select></div>');
+        var tpl1 = $('<div class="form-group"><label>服务配置</label><select class="form-control m-b config1"></select></div>');
         for (var i = 0; i < $scope.serviceConfig.length; i++) {
             tpl.find("select").append('<option value="' + $scope.serviceConfig[i] + '">' + $scope.serviceConfig[i] + '</option>');
         }

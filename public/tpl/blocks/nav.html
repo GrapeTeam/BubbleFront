@@ -9,25 +9,45 @@
     </li>
     <li ui-sref-active="active">
         <a ui-sref="app.serviceManage">
-            <i class="text-info icon-grid"></i>
+            <i class="text-info-dker fa fa-list-ul"></i>
             <span class="font-bold">服务管理</span>
         </a>
     </li>
     <li ui-sref-active="active">
         <a ui-sref="app.putao.config">
-            <i class="text-info icon-grid"></i>
+            <i class="text-info-dker fa fa-wrench"></i>
             <span class="font-bold">配置管理</span>
         </a>
     </li>
-    <li ui-sref-active="active">
-        <a ui-sref="app.filter">
-            <i class="text-info icon-grid"></i>
+    <li ui-sref-active="active" class="hassub">
+        <a class="auto">
+            <i class="text-info-dker fa fa-paw"></i>
+            <span class="pull-right text-muted">
+                <i class="fa fa-fw fa-angle-right text"></i>
+            </span>
             <span class="font-bold">过滤器管理</span>
         </a>
+        <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+                <a href>
+                    <span>过滤器管理</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.beforeHook">
+                    <span>前置HOOK</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.afterHook">
+                    <span>后置HOOK</span>
+                </a>
+            </li>
+        </ul>
     </li>
     <li ui-sref-active="active">
         <a ui-sref="app.putao.api">
-            <i class="text-info icon-grid"></i>
+            <i class="fa fa-eye text-info"></i>
             <span class="font-bold">接口管理</span>
         </a>
     </li>
