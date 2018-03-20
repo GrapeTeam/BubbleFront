@@ -1,19 +1,59 @@
+<script type="text/ng-template" id="edit1All.html">
+    <div class="modal-header">
+        <h3 class="modal-title">编辑</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                        <label class="col-sm-2 control-label">app名称</label>
+                        <div class="col-sm-9">
+                                <async-select key="desp" interface="app" ng-model="value.appid"></async-select>
+                        </div>
+                    </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">过滤字符串</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.callback" placeholder="请输入回调">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">回调字符串</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.filter" placeholder="请输入过滤u字符串">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
 <script type="text/ng-template" id="filterCreate.html">
     <div class="modal-header">
         <h3 class="modal-title">服务</h3>
     </div>
     <div class="modal-body">
         <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                        <label class="col-sm-2 control-label">app名称</label>
+                        <div class="col-sm-9">
+                                <async-select key="desp" interface="app" ng-model="value.appid"></async-select>
+                        </div>
+                    </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">过滤字符串</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" ng-model="value.url" placeholder="请输入URL">
+                    <input type="text" class="form-control" ng-model="value.filter" placeholder="请输入过滤字符串">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">回调字符串</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" ng-model="value.hurl" placeholder="请输入回掉字符串">
+                    <input type="text" class="form-control" ng-model="value.callback" placeholder="请输入回掉字符串">
                 </div>
             </div>
             <div class="form-group">
@@ -21,10 +61,53 @@
                 <div class="col-sm-9">
                     <select class="form-control" ng-model="value.type">
                         <option value="0">前置HOOK</option>
-                        <option value="1">后置HOOK</option>
                     </select>
                 </div>
             </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<script type="text/ng-template" id="edit1App.html">
+    <div class="modal-header">
+        <h3 class="modal-title">编辑</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                        <label class="col-sm-2 control-label">app名称</label>
+                        <div class="col-sm-9" id='app'>
+                            <async-select key="desp" interface="app" ng-model="value.appid"></async-select>
+                        </div>
+                    </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<script type="text/ng-template" id="edit1Filter.html">
+    <div class="modal-header">
+        <h3 class="modal-title">编辑</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                        <label class="col-sm-2 control-label">{{attr}}</label>
+                        <div class="col-sm-9" id='app'>
+                                <input type="text" class="form-control" ng-model="value" placeholder="{{attr}}">
+                        </div>
+                    </div>
         </form>
     </div>
     <div class="modal-footer">
@@ -40,6 +123,6 @@
         <h1 class="m-n font-thin h3">请求过滤</h1>
     </div>
     <div class="wrapper">
-        <select-table multiple="true" editable="true" interface="filter" title="过滤器列表" create-modal="filterCreate.html" control="tableControl"></select-table>
+        <select-table multiple="true" editable="true" interface="filter1" title="过滤器列表" create-modal="filterCreate.html" control="tableControl"></select-table>
     </div>
 </div>

@@ -104,6 +104,7 @@ bubbleFrame.register('appManageController', function ($scope, bubble, $timeout, 
     });
 
     bubble._call("app.page|GrapeFW", 1, 1000).success(function (v) {
+        console.log(v)
         $scope.app = v.data;
         v.data[0].select = true;
         v.data[0].meta = v.data[0].meta.split(",");

@@ -95,7 +95,8 @@
             power: "GrapeRight",
             log: "GrapeLog",
             webInfo: 'GrapeWebInfo',
-            filter:'GrapeFilter'
+            filter:'GrapeFW',
+            filter1:'GrapeFW'
         },
         //若配置其他ID,则覆写通用配置
         "17": {
@@ -633,7 +634,16 @@
             visible: "{uploadhost}",
         },
         filter:{
-            page:['page',"hookService",'pageBefore']
+            page:['filter',"hookService",'pageBefore'],
+            delete:['filter','hookService',"delete",[typeList.String, typeList.Int]],
+            update:['filter','hookService','update',[typeList.String, typeList.String,typeList.Int]],
+            add:['filter','hookService','insert'],
+        },
+        filter1:{
+            page:['filter1',"hookService",'pageAfter'],
+            delete:['filter1','hookService',"delete",[typeList.String, typeList.Int]],
+            update:['filter1','hookService','update',[typeList.String, typeList.String,typeList.Int]],
+            add:['filter1','hookService','insert'],
         }
     });
 })()

@@ -389,7 +389,7 @@ app.directive('selectTable', ['$http', 'bubble', '$compile', '$timeout', functio
                 bubble.openModal("edit", "", {
                     value: v !== "" ? v : "",
                     id: o._id ? o._id : o.id,
-                    functionName: getFunctionName("update"),
+                    functionName: getFunctionName("update | GrapeFW"),
                     key: k,
                     field: $scope.visible[k],
                     hook: $scope.control && $scope.control.editFn
@@ -425,6 +425,8 @@ app.directive('selectTable', ['$http', 'bubble', '$compile', '$timeout', functio
                 for (var i = 0; i < list.length; i++) {
                     list[i].checked && (ids.push(list[i]._id ? list[i]._id : list[i].id), names.push(list[i].name ? list[i].name : list[i]._id ? list[i]._id : list[i].id));
                 }
+                console.log(names)
+                console.log(ids)
                 var cb = function (v) {
                     if (v) {
                         var count = 0;
@@ -442,7 +444,7 @@ app.directive('selectTable', ['$http', 'bubble', '$compile', '$timeout', functio
                         swal("删除失败");
                     }
                 }
-                bubble.openModal("deleteitem", "", { names: names, ids: ids, functionName: getFunctionName("delete|GrapeFW"), hook: $scope.control && $scope.control.deleteFn }, cb)
+                bubble.openModal("deleteitem", "", { names: names, ids: ids, functionName: getFunctionName("delete"), hook: $scope.control && $scope.control.deleteFn }, cb)
             };
 
             $scope.tableEdit = function (v) {
@@ -518,7 +520,7 @@ app.directive('selectTable', ['$http', 'bubble', '$compile', '$timeout', functio
                     fn && fn($scope.list);
                 }
                 if (!$scope.control || !$scope.control.pageFn) {
-                    ($scope.selectPar === "" || $scope.selectPar === undefined) && $scope.searchPar === undefined ? bubble._call(getFunctionName("page|GrapeFW"), $scope.currentPage, $scope.pageSize === null ? "10" : $scope.pageSize).success(success) : bubble._call(getFunctionName(search && bubble.getInterface($scope.interface).search ? "search" : "pageBy"), $scope.currentPage, $scope.pageSize === null ? "10" : $scope.pageSize, $scope.searchPar || $scope.selectPar).success(success);
+                    ($scope.selectPar === "" || $scope.selectPar === undefined) && $scope.searchPar === undefined ? bubble._call(getFunctionName("page"), $scope.currentPage, $scope.pageSize === null ? "10" : $scope.pageSize).success(success) : bubble._call(getFunctionName(search && bubble.getInterface($scope.interface).search ? "search" : "pageBy"), $scope.currentPage, $scope.pageSize === null ? "10" : $scope.pageSize, $scope.searchPar || $scope.selectPar).success(success);
                 } else {
                     $scope.control.pageFn($scope.currentPage, $scope.pageSize === null ? "10" : $scope.pageSize, success);
                 }
@@ -568,7 +570,7 @@ app.directive('selectTable', ['$http', 'bubble', '$compile', '$timeout', functio
 }]);
 
 app.controller("selectTableCreate", ["$scope", "$modalInstance", "items", "bubble", function ($scope, $modalInstance, items, bubble) {
-    $scope.value = { wbid: window.localStorage.siteid };
+    $scope.value = { };
     if (items.scope.selectPar instanceof Array) {
         for (var i = 0; i < items.scope.selectPar.length; i++) {
             if (items.scope.selectPar[i].logic == "==") {
@@ -595,6 +597,8 @@ app.controller("selectTableCreate", ["$scope", "$modalInstance", "items", "bubbl
         if (items.hook) {
             items.hook($scope.value, cb);
         } else {
+            var se =  $(".ng-valid select")[0]
+            $scope.value.name = $(se).find("option:selected").text();
             bubble._call(items.scope.interface + ".add|GrapeFW", $scope.value).success(function(v){
                 if (!v.errorcode) {
                     swal("添加成功");

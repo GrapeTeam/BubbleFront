@@ -1441,21 +1441,49 @@
             edit: true,
         },
     }).registerFields("filter", {
-        appid: {
-            data: 's:',
-            mark: "appid",
-            edit: true,
-            visible: true
+        name: {
+            data: "s:",
+            mark: "app名称",
+            visible: true,
+            edit: false,
         },
         callback: {
             data: 's:',
-            mark: "回调字符串",
+            mark: "回调RPC字符串",
+            edit: false,
+            visible: true
+        },
+        filter: {
+            data: "s:",
+            mark: "过滤器字符串",
+            visible: true,
+            edit: false
+        },
+        ctime:{
+            data:"data:",
+            mark: "创建时间",
+            visible: true,
+            edit: false,
+            onRender: function (v) {
+                return v.$numberLong ? new Date(v.$numberLong).Format("yyyy-MM-dd hh:mm:ss") : new Date(v).Format("yyyy-MM-dd hh:mm:ss");
+            }
+        }
+    }).registerFields("filter1", {
+        name: {
+            data: "s:",
+            mark: "app名称",
+            visible: true,
+            edit: true,    
+        },
+        callback: {
+            data: 's:',
+            mark: "回调RPC字符串",
             edit: true,
             visible: true
         },
         filter: {
             data: "s:",
-            mark: "回调字符串",
+            mark: "过滤器字符串",
             visible: true,
             edit: true
         },
@@ -1463,7 +1491,7 @@
             data:"data:",
             mark: "创建时间",
             visible: true,
-            edit: false,
+            edit: true,
             onRender: function (v) {
                 return v.$numberLong ? new Date(v.$numberLong).Format("yyyy-MM-dd hh:mm:ss") : new Date(v).Format("yyyy-MM-dd hh:mm:ss");
             }

@@ -17,17 +17,16 @@ var swithMainLoading = function (v) {
 }
 //左侧菜单控制器
 bubbleFrame.register('navController', function ($scope, bubble, $rootScope, $timeout, $state) {
-    bubble._call("menu.show").success(function (v) {
         swithMainLoading("menu");
-        var list = {};
-        for (var i = 0; i < v.length; i++) {
-            var t = v[i];
-            list[t.sname] = t;
-        }
-        $scope.menuList = list;
-        $scope.include = function (v) {
-            return $state.includes(v);
-        }
+        // var list = {};
+        // for (var i = 0; i < v.length; i++) {
+        //     var t = v[i];
+        //     list[t.sname] = t;
+        // }
+        // $scope.menuList = list;
+        // $scope.include = function (v) {
+        //     return $state.includes(v);
+        // }
         $timeout(function () {
             $("ul.nav.pos-rlt>li").mouseenter(function (e) {
                 var t = $(e.currentTarget);
@@ -41,7 +40,6 @@ bubbleFrame.register('navController', function ($scope, bubble, $rootScope, $tim
                 $("ul.nav.pos-rlt").find(".poptext").hide();
             });
         });
-    });
 })
 //右上角齿轮任务控制器
 bubbleFrame.register('taskPopUpController', function ($scope, bubble) {
