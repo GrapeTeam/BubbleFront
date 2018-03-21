@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">回调字符串</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" ng-model="value.filter" placeholder="请输入过滤u字符串">
+                    <input type="text" class="form-control" ng-model="value.filter" placeholder="请输入过滤字符串">
                 </div>
             </div>
         </form>
@@ -96,7 +96,7 @@
         </button>
     </div>
 </script>
-<script type="text/ng-template" id="editFilter.html">
+<script type="text/ng-template" id="editCallback.html">
     <div class="modal-header">
         <h3 class="modal-title">编辑</h3>
     </div>
@@ -105,7 +105,29 @@
                 <div class="form-group">
                         <label class="col-sm-2 control-label">{{attr}}</label>
                         <div class="col-sm-9" id='app'>
-                                <input type="text" class="form-control" ng-model="value" placeholder="{{attr}}">
+                                <input type="text" class="form-control" ng-model="value.callback" placeholder="{{attr}}">
+                        </div>
+                    </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<script type="text/ng-template" id="editfilter.html">
+    <div class="modal-header">
+        <h3 class="modal-title">编辑</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                        <label class="col-sm-2 control-label">{{attr}}</label>
+                        <div class="col-sm-9" id='app'>
+                                <input type="text" class="form-control" ng-model="value.filter" placeholder="{{attr}}">
                         </div>
                     </div>
         </form>

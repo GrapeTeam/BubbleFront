@@ -637,13 +637,13 @@
             page:['filter',"hookService",'pageBefore'],
             delete:['filter','hookService',"delete",[typeList.String, typeList.Int]],
             update:['filter','hookService','update',[typeList.String, typeList.String,typeList.Int]],
-            add:['filter','hookService','insert'],
+            add:['filter','hookService','insert',[typeList.String,typeList.Int]],
         },
         filter1:{
             page:['filter1',"hookService",'pageAfter'],
             delete:['filter1','hookService',"delete",[typeList.String, typeList.Int]],
             update:['filter1','hookService','update',[typeList.String, typeList.String,typeList.Int]],
-            add:['filter1','hookService','insert'],
+            add:['filter1','hookService','insert',[typeList.String,typeList.Int]],
         }
     });
 })()

@@ -1473,25 +1473,25 @@
             data: "s:",
             mark: "app名称",
             visible: true,
-            edit: true,    
+            edit: false,    
         },
         callback: {
             data: 's:',
             mark: "回调RPC字符串",
-            edit: true,
+            edit: false,
             visible: true
         },
         filter: {
             data: "s:",
             mark: "过滤器字符串",
             visible: true,
-            edit: true
+            edit: false
         },
         ctime:{
             data:"data:",
             mark: "创建时间",
             visible: true,
-            edit: true,
+            edit: false,
             onRender: function (v) {
                 return v.$numberLong ? new Date(v.$numberLong).Format("yyyy-MM-dd hh:mm:ss") : new Date(v).Format("yyyy-MM-dd hh:mm:ss");
             }

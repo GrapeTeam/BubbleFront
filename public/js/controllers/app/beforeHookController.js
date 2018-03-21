@@ -4,23 +4,23 @@ bubbleFrame.register('beforeHookController', function ($scope, bubble, $timeout,
         ],
         html: ['<a class="btn btn-sm m-t-n-xs"><i class="fa fa-edit"></i></a>'
 
-    ],
+        ],
         onClick: function (key, v) {
             var id = v.appid;
-            var f = v.fiter;
+            var f = v.Callback;
             var c = v.callback;
             var n = v.name;
             bubble.customModal("editAll.html", "editAllController", "lg", v, function (rs) {
-                bubble._call('filter.update', rs.id, rs, 0).success(function (data) {
+                console.log(rs)
+                bubble._call('filter.update',v.id,bubble.replaceBase64(JSON.stringify(rs)),0).success(function (data) {
                     if (data.errorcode == 0) {
+                        $scope.tableControl.reload();
                         swal('更新成功')
-                    }else{
-                        console.log(v)
+                    } else {
                         v.appid = id;
                         v.callback = c;
-                        v.filter = f;
+                        v.Callback = f;
                         v.name = n;
-                        console.log(v)
                         swal('更新失败')
                     }
                 })
@@ -31,44 +31,69 @@ bubbleFrame.register('beforeHookController', function ($scope, bubble, $timeout,
             //其他的hook钩子函数类似
             //特征码$scope.control && $scope.control.xxxFn
             bubble._call('filter.delete', v, 0).success(function (rs) {
-
+                fn(rs)
 
             })
         },
         onPage: function (v) {
-            console.log(v)
-            for (var i = 0; i < v.length; i++) {
-                if (!v[i].name) {
-                    v[i].name = '非法app'
+            bubble._call('app.page', 1, 10000).success(function (rs) {
+                $scope.app = rs.data;
+                for (var i = 0; i < v.length; i++) {
+                    for (var j = 0; j < $scope.app.length; j++) {
+                        if (Number(v[i].appid) == $scope.app[j].id) {
+                            v[i].name = $scope.app[j].desp
+                            break;
+                            
+                        } else {
+                            v[i].name = '非法app'
+                        }
+                    }
                 }
-            }
-            console.log(v)
+            })
         },
         onColumnClick: function (k, v, i) {
             var name = v[k];
             var id = v.appid
             if (k == 'name') {
                 bubble.customModal("editApp.html", "editAppController", "lg", v, function (rs) {
-                    bubble._call('filter.update', rs.id, rs, 0).success(function (data) {
+                    console.log(rs)
+                    bubble._call('filter.update', v.id, bubble.replaceBase64(JSON.stringify(rs)), 0).success(function (data) {
                         if (data.errorcode == 0) {
                             swal('更新成功')
-                        }else{
+                            $scope.tableControl.reload();
+                        } else {
                             v.appid = id;
                             v[k] = name;
-                            console.log(v)
+                            swal('更新失败')
+                        }
+                    })
+                });
+            } else if(k=='ctime'){
+                return false;
+            }else if(k=='callback'){
+                bubble.customModal("editCallback.html", "editCallbackController", "lg", { key: k, value: v }, function (rs) {
+                    console.log(rs)
+                    bubble._call('filter.update', v.id, bubble.replaceBase64(JSON.stringify(rs)), 0).success(function (data1) {
+                        if (data1.errorcode == 0) {
+                            swal('更新成功')
+                            $scope.tableControl.reload();
+                        } else {
+                            v.appid = id;
+                            v[k] = name;
                             swal('更新失败')
                         }
                     })
                 });
             }else{
-                bubble.customModal("editFilter.html", "editFilterController", "lg", {key:k,value:v}, function (rs) {
-                    bubble._call('filter.update', rs.id, rs, 0).success(function (data1) {
+                bubble.customModal("editfilter.html", "editfilterController", "lg", { key: k, value: v }, function (rs) {
+                    console.log(rs)
+                    bubble._call('filter.update', v.id, bubble.replaceBase64(JSON.stringify(rs)), 0).success(function (data1) {
                         if (data1.errorcode == 0) {
                             swal('更新成功')
-                        }else{
+                            $scope.tableControl.reload();
+                        } else {
                             v.appid = id;
                             v[k] = name;
-                            console.log(v)
                             swal('更新失败')
                         }
                     })
@@ -80,14 +105,14 @@ bubbleFrame.register('beforeHookController', function ($scope, bubble, $timeout,
     }
 })
 bubbleFrame.register('editAppController', function ($scope, bubble, $timeout, items, $modalInstance) {
-    $scope.value = items
+    $scope.value = { 
+        appid:items.appid 
+    }
     $scope.ok = function () {
         if (!$scope.value) {
             swal("请输入app名称");
             return;
         }
-        var text = $(".ng-valid select").find("option:selected").text();
-        $scope.value.name = text;
         $modalInstance.close($scope.value);
     }
 
@@ -95,18 +120,34 @@ bubbleFrame.register('editAppController', function ($scope, bubble, $timeout, it
         $modalInstance.dismiss('cancel');
     }
 });
-bubbleFrame.register('editFilterController', function ($scope, bubble, $timeout, items, $modalInstance) {
+bubbleFrame.register('editCallbackController', function ($scope, bubble, $timeout, items, $modalInstance) {
     $scope.attr = items.key;
-    $scope.value = items.value[$scope.attr]
+    $scope.value = {
+        callback:items.value[$scope.attr]
+    }
     $scope.ok = function () {
         if (!$scope.value) {
             swal("请输入app名称");
             return;
         }
-        items.value[$scope.attr] = $scope.value;
+        $modalInstance.close($scope.value);
+    }
 
-        console.log(items)
-        $modalInstance.close(items.value);
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    }
+});
+bubbleFrame.register('editfilterController', function ($scope, bubble, $timeout, items, $modalInstance) {
+    $scope.attr = items.key;
+    $scope.value = {
+        filter:items.value[$scope.attr]
+    }
+    $scope.ok = function () {
+        if (!$scope.value) {
+            swal("请输入app名称");
+            return;
+        }
+        $modalInstance.close($scope.value);
     }
 
     $scope.cancel = function () {
@@ -114,17 +155,16 @@ bubbleFrame.register('editFilterController', function ($scope, bubble, $timeout,
     }
 });
 bubbleFrame.register('editAllController', function ($scope, bubble, $timeout, items, $modalInstance) {
-$scope.value = items;
-console.log(items)
-console.log($scope.value)
+    $scope.value = {
+        callback:items.callback,
+        appid:items.appid,
+        filter:items.filter
+    };
     $scope.ok = function () {
         if (!$scope.value) {
             swal("请输入app名称");
             return;
         }
-        var text = $(".ng-valid select").find("option:selected").text();
-        console.log(text)
-        $scope.value.name = text;
         $modalInstance.close($scope.value);
     }
 

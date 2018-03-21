@@ -425,8 +425,6 @@ app.directive('selectTable', ['$http', 'bubble', '$compile', '$timeout', functio
                 for (var i = 0; i < list.length; i++) {
                     list[i].checked && (ids.push(list[i]._id ? list[i]._id : list[i].id), names.push(list[i].name ? list[i].name : list[i]._id ? list[i]._id : list[i].id));
                 }
-                console.log(names)
-                console.log(ids)
                 var cb = function (v) {
                     if (v) {
                         var count = 0;
@@ -538,11 +536,13 @@ app.directive('selectTable', ['$http', 'bubble', '$compile', '$timeout', functio
                     return;
                 }
                 bubble.customModal($scope.createModal, $scope.createController ? $scope.createController : "selectTableCreate", "lg", { scope: $scope, hook: $scope.control && $scope.control.addFn }, function (v) {
+                    console.log(v)
                     if (typeof v === 'string') {
                         $scope.list.length < $scope.pageSize ? $scope.getPage() : ($scope.totalItems + $scope.pageSize, $scope.currentPage++ , $scope.getPage());
                         return;
                     }
                     $scope.list.length < $scope.pageSize ? $scope.list.push(v) : ($scope.totalItems + $scope.pageSize, $scope.currentPage++ , $scope.getPage());
+                    console.log($scope.list)
                     if ($scope.list.length == 1) {
                         $scope.hiddenFooter = false;
                         ele.html($compile(boxtpl.replace("@table", getTable()).replace("@title", $scope.title || ""))($scope));
@@ -597,9 +597,10 @@ app.controller("selectTableCreate", ["$scope", "$modalInstance", "items", "bubbl
         if (items.hook) {
             items.hook($scope.value, cb);
         } else {
-            var se =  $(".ng-valid select")[0]
-            $scope.value.name = $(se).find("option:selected").text();
-            bubble._call(items.scope.interface + ".add|GrapeFW", $scope.value).success(function(v){
+            var type = $scope.value.type
+            delete $scope.value.type
+            console.log($scope.value)
+            bubble._call(items.scope.interface + ".add", bubble.replaceBase64(JSON.stringify($scope.value)),type).success(function(v){
                 if (!v.errorcode) {
                     swal("添加成功");
                     $modalInstance.dismiss('cancel');
