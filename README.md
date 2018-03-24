@@ -19,14 +19,15 @@ The app will be hosted at http://localhost:3000
 页面由 模板 | 控制器 | 样式组成
 
 # 路由配置
+```javascript
 配置于public/js/bubble/routerConfig.js
 获取一级路由
 bubbleFrame.router()
 
 设置多级路由,支持链式操作,详见routerConfig.js
-var parent = router.setParent(上级路由名称, 文件夹名称[后续样式以及控制器等文件查找均使用上级路由所在文件夹为基础,该文件夹名称作为偏移量寻找]);
-
+```
 # 配置demo
+```javascript
 parent.add(demo(路由名称), 控制器, 依赖, 模板);
 parent = router.setParent(demo, demoFile);  新增子路由demo,文件夹名称为demoFile
 parent.add("wechat");                       demo子路由新增wechat路由
@@ -36,14 +37,16 @@ parent.add("demo2","123")("123");                       demo子路由
 wechat页面文件存于
 public/js/controller/demoFile/wecahtController.js
 public/tpl/demoFile/wecaht.html
+
 demo1页面文件则存于
 public/js/controller/demoFile/demo1Controller.js
 public/tpl/demoFile/demo1.html
 public/style/demoFile/demo1.css
+
 demo2页面文件则存于
 public/js/controller/demoFile/123Controller.js
 public/tpl/demoFile/demo2.html
 public/style/demoFile/123.css
-
+```
 # 页面配置方法
 parent.add(路由名称,控制器名称(若不填写则使用路由名称,null表示无控制器), [依赖项,详见public/js/bubble/lazyloadConfig.js])(页面子样式,若未填写名称则使用路由名称,框架会到style中寻找样式文件);
