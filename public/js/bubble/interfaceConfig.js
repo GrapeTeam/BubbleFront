@@ -1,6 +1,6 @@
 (function () {
     var config226 = {
-        api: "226:999",
+        api: "226:801",
         upload: "226:8080"
     };
 
