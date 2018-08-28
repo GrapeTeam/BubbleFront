@@ -1,0 +1,99 @@
+<div>
+    <!--新建任务弹窗-->
+    <script type="text/ng-template" id="taskCreateModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">新建任务</h3>
+        </div>
+        <div class="modal-body">
+            <json-edit json="value" field="field"></json-edit>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">取消</button>
+            <button class="btn btn-info ladda-button" ng-click="ok($event)">
+                <span class="ladda-label">确认</span>
+                <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </script>
+    <!--新建任务弹窗-->
+    <!--任务操作弹窗-->
+    <script type="text/ng-template" id="taskChangeModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">任务状态</h3>
+        </div>
+        <div class="modal-body">
+            <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">状态</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" ng-model="value">
+                            <option value="1">开始</option>
+                            <option value="2">完成</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">取消</button>
+            <button class="btn btn-info ladda-button" ng-click="ok($event)">
+                <span class="ladda-label">确认</span>
+                <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </script>
+    <!--任务操作弹窗-->
+    <div class="wrapper-md bg-light b-b">
+        <h1 class="m-n font-thin h3">任务管理</h1>
+    </div>
+    <div class="hbox hbox-auto-xs hbox-auto-sm">
+        <div class="wrapper-md">
+            <div class="clearfix m-b">
+                <button type="button" class="btn btn-sm btn-default btn-addon" ng-click="addEvent()">
+                    <i class="fa fa-plus"></i>添加任务
+                </button>
+                <button type="button" class="btn btn-sm btn-default btn-addon m-l-sm" ng-click="changMode()">
+                    <i class="fa fa-bars"></i> {{mode == 'calendar' ? '任务列表' : '任务概况'}}
+                </button>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-sm btn-default" ng-show="mode == 'calendar'"
+                            ng-click="today()">转到今天
+                    </button>
+                    <div class="btn-group m-l-xs">
+                        <button class="btn btn-sm btn-default" ng-show="mode == 'calendar'"
+                                ng-click="changeView('agendaDay')">日
+                        </button>
+                        <button class="btn btn-sm btn-default" ng-show="mode == 'calendar'"
+                                ng-click="changeView('agendaWeek')">周
+                        </button>
+                        <button class="btn btn-sm btn-default" ng-show="mode == 'calendar'"
+                                ng-click="changeView('month')">月
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="pos-rlt">
+                <div class="fc-overlay">
+                    <div class="panel bg-white b-a pos-rlt">
+                        <span class="arrow"></span>
+                        <div class="h4 font-thin m-b-sm">{{event.title}}</div>
+                        <div class="line b-b b-light"></div>
+                        <div><i class="icon-calendar text-muted m-r-xs"></i> {{event.show_start}}</div>
+                        <div class="ng-hide" ng-show='event.end'><i class="icon-clock text-muted m-r-xs"></i>
+                            {{event.end | date:'medium'}}
+                        </div>
+                        <div class="ng-hide" ng-show='event.location'><i class="icon-pointer text-muted m-r-xs"></i>
+                            {{event.location}}
+                        </div>
+                        <div class="m-t-sm">{{event.info}}</div>
+                        <div class="m-t-sm">{{event.url}}</div>
+                    </div>
+                </div>
+                <div class="calendar" ng-model="eventSources" ui-calendar="uiConfig.calendar"
+                     ng-if="refresh && eventSources && eventSources.length" ng-show="mode == 'calendar'"></div>
+                <select-table multiple="false" editable="true" interface="task" title="任务列表" ng-show="mode == 'table'"
+                              control="tableControl"></select-table>
+            </div>
+        </div>
+    </div>
+</div>

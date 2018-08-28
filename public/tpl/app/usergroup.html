@@ -1,0 +1,34 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">用户组管理</h1>
+</div>
+<div class="wrapper">
+    <select-table multiple="true" editable="true" interface="userGroup" title="用户组列表" control="control"
+                  create-modal="userCreate.html"></select-table>
+</div>
+<div class="temp-wrap-box" ng-click="closeTempMask($event)">
+    <div class="temp-box bg-light lter">
+        <div class="temp-header wrapper b-b">
+            <h2 class="m-n font-thin h3">
+                权限详情({{infoName}})
+                <a class="pull-right btn btn-sm btn-info m-r-sm ng-binding" ng-click="confirmTemp()">确定</a>
+                <a class="pull-right btn btn-sm btn-default m-r-sm ng-binding" ng-click="closeTemp()">关闭</a>
+            </h2>
+        </div>
+        <div class="wrapper usergroupbox">
+            <tabset justified="true" class="tab-container">
+                <tab heading="系统权限">
+                    <div class="usergroupitembox">
+                        <div ng-repeat="item in systemList">
+                            <div class="item-tr b" style="text-align: left;padding-left:15px;">
+                                <div class="checkbox pull-left m-n m-r"><label class="i-checks"><input
+                                    ng-model="item.check" type="checkbox" value=""><i></i></label></div>
+                                <i class="{{item.icon}}"></i> {{item.name}}
+                            </div>
+                            <div class="line line-dashed b-b line-lg"></div>
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div>

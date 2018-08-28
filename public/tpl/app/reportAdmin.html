@@ -1,0 +1,39 @@
+<!-- hbox layout -->
+<div class="hbox hbox-auto-xs bg-light wrapper" ng-init="app.settings.full = true;">
+    <div class="panel panel-default">
+        <div class="panel-heading font-bold">定时发送举报信息</div>
+        <div class="panel-body">
+            <form class="form-horizontal" method="get">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">管理员手机号</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="Info.phone" class="form-control">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">定时发送时间</label>
+                    <div class="col-sm-10">
+                        <div class="input-group w-full">
+                            <input type="text" ng-model="Info.time" class="form-control">
+                            <div class="input-group-btn dropdown" dropdown>
+                                <button type="button" class="btn btn-default" dropdown-toggle>{{type}}<span
+                                    class="caret"></span></button>
+                                <ul class="dropdown-menu pull-right">
+                                    <li ng-repeat="item in list" ng-click="click(item)"><a href>{{item}}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <button class="pull-right btn btn-info ladda-button" ng-click="confirm($event)">
+                    <span class="ladda-label">确定</span>
+                    <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+                </button>
+                <button class="btn m-r-xs btn-info pull-right" ng-click="review()">还原</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /hbox layout -->

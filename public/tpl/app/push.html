@@ -1,0 +1,76 @@
+<div class="hbox hbox-auto-xs bg-light contentBox pos-rlt" ng-init="app.settings.full = true;">
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3">推送管理</h1>
+    </div>
+    <div class="push-wrap-box">
+        <div class="push-list">
+            <table class="table table-striped b" ng-show="news && news.length">
+                <thead>
+                <tr>
+                    <th>文章标题</th>
+                    <th>作者</th>
+                    <th>来源</th>
+                    <th>发布时间</th>
+                    <th style="width:180px;text-align:center;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in news" class="hover" ng-click="preview(item)">
+                    <td ng-click="newsClick(item)">{{item.mainName}}</td>
+                    <td ng-click="newsClick(item)">{{item.author}}</td>
+                    <td ng-click="newsClick(item)">{{item.souce}}</td>
+                    <td ng-click="newsClick(item)">{{item.time}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-default" ng-click="cancel(item, $event)">拒绝推送</button>
+                        <button class="btn btn-sm btn-default" ng-click="confirm(item, $event)">推送确认</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="tipsbox" ng-show="!news.length">暂无推送新闻</div>
+        </div>
+        <div class="push-preview b-l">
+            <div class="preview-box">
+                <div class="content-box">
+                    <h3>
+                        {{pnew.mainName}}
+                    </h3>
+                    <div class="content-info">
+                        <span> 来源: {{d.souce}} </span><span> 发布时间：{{d.time}} </span><span> 作者：{{d.author}} </span>
+                    </div>
+                    <div class="content b-t wrapper-md m-t">
+
+                    </div>
+                </div>
+            </div>
+            <div class="tipsbox" ng-show="!pnew" style="width:160px;margin-left:-80px;">请选择推送新闻预览</div>
+        </div>
+    </div>
+    <div class="push-cloumn-move">
+        <div class="push-move-box">
+            <div class="title">
+                <h3>
+                    请选择该推送文章所处栏目
+                    <button type="button" class="btn btn-default pull-right m-l-sm m-t-sm" ng-click="closeColumn()">关闭
+                    </button>
+                    <button type="button" class="btn btn-info pull-right m-l-sm m-t-sm" ng-click="save()">确认</button>
+                </h3>
+            </div>
+            <div class="content-box wrapper">
+                <abn-tree ng-if="columnData" tree-data="columnData" tree-control="tree" on-select="onSelect(branch)"
+                          icon-leaf="fa fa-columns"
+                          expand-level="2" icon-expand="fa fa-plus" icon-collapse="fa fa-minus">
+                </abn-tree>
+            </div>
+        </div>
+    </div>
+    <div class="contentbatchMask">
+        <div class="loading-spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+    </div>
+</div>

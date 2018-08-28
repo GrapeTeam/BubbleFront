@@ -1,0 +1,122 @@
+<script type="text/ng-template" id="quesitionIndexAdd.html">
+    <div class="modal-header">
+        <h3 class="modal-title">编辑</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">问卷名称</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.name" placeholder="请输入问卷名称">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">问卷类型</label>
+                <div class="col-sm-9">
+                    <async-select key="name" interface="questionnaireType" ng-model="value.type"></async-select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">问卷开始时间</label>
+                <div class="col-sm-9">
+                    <datetimepicker value="value.startTime"></datetimepicker>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">问卷结束时间</label>
+                <div class="col-sm-9">
+                    <datetimepicker value="value.endTime"></datetimepicker>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<div class="contentbatchMask">
+    <div class="loading-spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
+<div class="question-box min">
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3">问卷管理</h1>
+    </div>
+    <div class="wrapper-md">
+        <select-table multiple="true" editable="true" interface="questionnaire"
+                      create-controller="questionIndexCreateController" title="问卷列表"
+                      create-modal="quesitionIndexAdd.html"
+                      control="tableControl"></select-table>
+    </div>
+    <ui-bubble-modal show="modalVisible" name="选项管理" confirm="modalConfirm">
+        <div class="quesition-list b-r">
+            <p class="m-n b-b quesition-header padder">问题列表
+                <span class="h6 text-info">(点击问题添加至问卷)</span>
+            </p>
+            <div class="padder quesition-item" ng-repeat="item in quesitionList" ng-click="add(item)">{{item.name}}
+            </div>
+        </div>
+        <div class="option-box b-r">
+            <p class="m-n b-b quesition-header padder">问题管理</p>
+            <div class="item b-b" ng-repeat="item in currentQs track by $index">
+                <div class="name b-r padder">
+                    {{item.name}}
+                </div>
+                <div class="tool b-r" ng-click="moveup(item, $index)">
+                    <i class="fa fa-arrow-up"></i>
+                </div>
+                <div class="tool b-r">
+                    <i class="fa fa-arrow-down" ng-click="movedown(item, $index)"></i>
+                </div>
+                <div class="tool">
+                    <i class="fa fa-times" ng-click="remove(item, $index)"></i>
+                </div>
+            </div>
+            <div class="item b-b text-center" ng-show="!currentQs.length">
+                请在左侧添加题目
+            </div>
+        </div>
+        <div class="preview-box">
+            <p class="m-n b-b quesition-header padder">问卷预览</p>
+            <div class="wrapper">
+                <div class="m-b-lg" ng-repeat="item in currentQs track by $index">
+                    <p>{{$index + 1}}. {{item.name}}</p>
+                    <div class="m-t">
+                        <div class="inputitem checkbox pull-left" ng-if="item.type == 1"
+                             ng-repeat="items in item.options track by $index">
+                            <label class="i-checks">
+                                <input type="checkbox" ng-checked="item.select" value="{{items.id}}">
+                                <i></i>
+                                {{items.name}}
+                            </label>
+                        </div>
+                        <div ng-if="item.type == 0" class="inputitem radio  pull-left"
+                             ng-repeat="items in item.options track by $index">
+                            <label class="i-checks">
+                                <input type="radio" name="iteminput" value="{{items.id}}">
+                                <i></i>
+                                {{items.name}}
+                            </label>
+                        </div>
+                        <div ng-if="item.type == 3" class="inputitem pull-left w-full">
+                            <textarea name="" rows="7" class="form-control"></textarea>
+                        </div>
+                        <div ng-if="item.type == 4" class="inputitem pull-left w-full">
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="clear-b"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui-bubble-modal>
+</div>

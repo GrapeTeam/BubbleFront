@@ -1,0 +1,140 @@
+<div class="hbox hbox-auto-xs" ng-init="app.settings.full = true;">
+    <!--新建Interface弹窗-->
+    <script type="text/ng-template" id="interfaceCreate.html">
+        <div class="modal-header">
+            <h3 class="modal-title">添加APP</h3>
+        </div>
+        <div class="modal-body">
+            <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">接口名称</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="value.interface" placeholder="请输入字段名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">接口描述</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="value.desp" placeholder="请输入字段名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">所在类ID</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="value.appclsid" placeholder="请输入字段名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">readtime</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="value.readtime" placeholder="请输入字段名">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">取消</button>
+            <button class="btn btn-info ladda-button" ng-click="ok($event)">
+                <span class="ladda-label">确定</span>
+                <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </script>
+    <!--新建Interface弹窗END-->
+    <!--新建Class弹窗-->
+    <script type="text/ng-template" id="classCreate.html">
+        <div class="modal-header">
+            <h3 class="modal-title">添加APP</h3>
+        </div>
+        <div class="modal-body">
+            <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">类名称</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="value.classname" placeholder="请输入字段名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">所属服务</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="value.sid" placeholder="请输入字段名">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">取消</button>
+            <button class="btn btn-info ladda-button" ng-click="ok($event)">
+                <span class="ladda-label">确定</span>
+                <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </script>
+    <!--新建Class弹窗END-->
+    <div class="col w-auto-xs lter b-r navbox w-md">
+        <div class="col w-md w-auto-xs lter subnav">
+            <div class="subnav-top b-b">
+                服务类
+                <a class="pull-right btn btn-sm btn-info m-t-md m-r-sm ng-binding animated fadeIn"
+                   ng-show="currentClass" ng-click="pageMode = pageMode == 'List' ? 'Edit' : 'List'">{{pageMode ==
+                    'List' ? '编辑' : '退出'}}</a>
+                <a class="pull-right btn btn-sm btn-info m-t-md m-r-sm ng-binding" ng-click="createClass()">新建</a>
+            </div>
+            <a class="subnav-item hover-color ng-binding ng-scope hover-anchor" ng-class="{active: item.selected}"
+               ng-click="classClick(item)"
+               ng-repeat="item in classList">
+                {{item.classname}}
+                <div class="pull-right hover-action delete-btn" ng-click="deleteClass(item, $index)"><i
+                    class="fa fa-times"></i></div>
+                <div class="pull-right hover-action edit-btn" ng-click="openEdit(item)"><i class="fa fa-edit"></i></div>
+            </a>
+        </div>
+    </div>
+    <div class="shift in hidden-xm">
+        <div class="line bg-line line-xs"></div>
+    </div>
+    <div class="col">
+        <div class="wrapper bg-light lt b-b h-70">
+            <h1 class="m-n font-thin h3 wrapper-xs">服务接口</h1>
+        </div>
+        <div class="pos-rlt ng-scope wrapper" ng-show="pageMode == 'List'">
+            <div class="b tipsbox-h" ng-if="!currentClass">请选择服务类以查看类接口</div>
+            <select-table ng-if="currentClass" multiple="true" editable="true" interface="interface"
+                          select-par="tablePar" title="App管理"
+                          control="tableControl" create-modal="interfaceCreate.html"></select-table>
+        </div>
+        <div class="pos-rlt ng-scope wrapper" ng-show="pageMode == 'Edit'">
+            <div class="b tipsbox-h" ng-if="!currentClass">请选择服务类以查看类接口</div>
+            <div class="panel panel-default" ng-if="currentClass">
+                <div class="panel-heading font-bold">类编辑</div>
+                <div class="panel-body">
+                    <form class="bs-example form-horizontal ng-pristine ng-valid">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">类名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="currentClass.classname"
+                                       placeholder="">
+                                <span class="help-block m-b-none"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">所属服务</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="currentClass.sid" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button class="btn btn-info ladda-button pull-right" ng-click="classEdit($event)">
+                                    <span class="ladda-label">确定</span>
+                                    <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--主内容END-->
+</div>

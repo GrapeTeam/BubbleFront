@@ -1,0 +1,359 @@
+<div class="hbox hbox-auto-xs navbox" ng-init="app.settings.full = true;">
+    <!--主内容-->
+    <div class="col w-s w-auto-xs lter b-r subnav">
+        <div class="subnav-top b-b">配置分类</div>
+        <a class="subnav-item hover-color" ng-click="typeClick($event, key)" ng-class="item.select ? 'active' : ''"
+           ng-repeat="(key, item) in type">{{item.name}}</a>
+    </div>
+    <div class="shift in hidden-xm">
+        <div class="line bg-line line-xs"></div>
+    </div>
+    <div class="col padder clear">
+        <div class="fade-in-up ng-enter">
+            <div class="configbox-top">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1 class="m-n font-thin h3 text-black">配置列表<a ui-toggle-class="active"
+                                                                       data-target=".config-mask-box"
+                                                                       class="pull-right btn btn-sm btn-info m-t-md">编辑模式</a>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-default btn-sm m-r-xs" ng-click="groupClick($event, $index)"
+                            ng-class="item.select ? 'active' : ''"
+                            ng-repeat="item in list track by item.name" ng-show="item.name != 'default'">{{item.name}}
+                    </button>
+                </div>
+            </div>
+            <div class="wrapper padder-v row">
+                <div class="line bg-line line-xs"></div>
+            </div>
+            <div class="row padder">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        配置项列表
+                        <a class="pull-right btn btn-sm m-t-n-xs" ng-click="openVisible()"><i
+                            class="glyphicon glyphicon-cog"></i></a>
+                    </div>
+                    <div class="row wrapper">
+                        <div class="col-sm-12">
+                            <div class="input-group">
+                                <input type="text" class="input-sm form-control" placeholder="Search">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-sm btn-default" type="button">搜索</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped b-t b-light">
+                            <thead>
+                            <tr>
+                                <th ng-repeat="item in visibleItem track by item.key">{{item.ch ? item.ch : item.key}}
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in configList.list track by item.id">
+                                <td ng-repeat="v in visibleItem track by v.key">{{item[v.key]}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <footer class="panel-footer">
+                        <div class="row">
+                            <div class="col-sm-12 text-right text-center-xs">
+                                <ul class="pagination pagination-sm m-t-none m-b-none" ng-show="false">
+                                    <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
+                                    <li><a href="">1</a></li>
+                                    <li><a href="">2</a></li>
+                                    <li><a href="">3</a></li>
+                                    <li><a href="">4</a></li>
+                                    <li><a href="">5</a></li>
+                                    <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--主内容END-->
+</div>
+<!--编辑模式弹层-->
+<div class="config-mask-box" ng-click="closeMask($event)">
+    <div class="config-edit-box fade-in-up ng-enter modal-content hbox hbox-auto-xs">
+        <div class="col w-s w-auto-xs lter b-r subnav">
+            <div class="subnav-top b-b">配置分类</div>
+            <a class="subnav-item hover-color hover-anchor" ng-click="typeClick($event, $index)"
+               ng-class="item.select ? 'active' : ''"
+               ng-repeat="item in type">
+                <div class="pull-right text-muted hover-action delete-btn" ng-click="deleteType(item, type)"><i
+                    class="fa fa-times"></i></div>
+                <div class="pull-right text-muted hover-action edit-btn"
+                     ng-click="openEdit($index, item.name, 'type', 'name')"><i class="fa fa-edit"></i></div>
+                {{item.name}}
+            </a>
+            <div class="wrapper b-t">
+                <span tooltip="分步创建新配置" class="pull-right text-muted inline wrapper-xs m-r-sm"><i
+                    class="fa fa-question"></i></span>
+                <a href="" class="btn btn-sm btn-default" ng-click="createType()"><i
+                    class="fa fa-plus fa-fw m-r-xs"></i> New Config</a>
+            </div>
+        </div>
+        <div class="shift in hidden-xm">
+            <div class="line bg-line line-xs"></div>
+        </div>
+        <div class="col padder clear">
+            <div class="fade-in ng-enter">
+                <div class="config-edit-box-top">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            <h1 class="m-n font-thin h3 text-black">
+                                配置列表
+                                <button class="pull-right btn btn-info ladda-button m-t-md" ui-toggle-class="active"
+                                        data-target=".config-mask-box">
+                                    <span class="ladda-label">退出</span>
+                                    <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+                                </button>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn btn-default btn-sm m-r-xs" ng-click="groupClick($event, $index)"
+                                ng-class="item.select ? 'active' : ''"
+                                ng-repeat="item in list" ng-show="item.name != 'default'">{{item.name}}
+                        </button>
+                    </div>
+                </div>
+                <div class="wrapper padder-v row">
+                    <div class="line bg-line line-xs"></div>
+                </div>
+                <div class="row padder">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            配置项列表
+                            <a class="pull-right btn btn-sm m-t-n-xs" ng-click="openVisible()"><i
+                                class="glyphicon glyphicon-cog"></i></a>
+                        </div>
+                        <div class="row wrapper">
+                            <div class="col-sm-12">
+                                <div class="input-group">
+                                    <input type="text" class="input-sm form-control" placeholder="Search">
+                                    <span class="input-group-btn">
+                                            <button class="btn btn-sm btn-default" type="button">搜索</button>
+                                        </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped b-t b-light">
+                                <thead>
+                                <tr>
+                                    <th style="width:20px;" ng-show="list.length">
+                                        <label class="i-checks m-b-none">
+                                            <input type="checkbox" ng-click="allCheck($event)"
+                                                   ng-model="configList.checked"><i></i>
+                                        </label>
+                                    </th>
+                                    <th ng-repeat="item in visibleItem track by item.key">{{item.ch ? item.ch :
+                                        item.key}}
+                                    </th>
+                                    <th style="width:30px;"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in configList.list track by item.id">
+                                    <td><label class="i-checks m-b-none"><input type="checkbox"
+                                                                                ng-click="itemCheck($event, $index)"
+                                                                                ng-model="item.checked"><i></i></label>
+                                    </td>
+                                    <td ng-repeat="v in visibleItem track by v.key"
+                                        ng-click="openEdit($parent.$index, item[v], 'table', v)">{{item[v.key]}}
+                                    </td>
+                                    <td ng-click="openJsonEdit($index)" ng-show="item.configjson">
+                                        <a href=""><i class="fa fa-edit"></i></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <footer class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-12 text-right text-center-xs">
+                                    <button class="btn m-b-xs btn-sm btn-primary btn-addon table-delete-btn pull-left"
+                                            ng-click="deleteConfig()" disabled><i class="fa fa-trash-o"></i>删除
+                                    </button>
+                                    <ul class="pagination pagination-sm m-t-none m-b-none pull-right" ng-show="false">
+                                        <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
+                                        <li><a href="">1</a></li>
+                                        <li><a href="">2</a></li>
+                                        <li><a href="">3</a></li>
+                                        <li><a href="">4</a></li>
+                                        <li><a href="">5</a></li>
+                                        <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--编辑模式弹层END-->
+
+
+<!--JSON编辑器弹窗-->
+<script type="text/ng-template" id="configCreate.html">
+    <div class="modal-header">
+        <h3 class="modal-title">新建配置</h3>
+    </div>
+    <div class="modal-body">
+        <tabset class="tab-container">
+            <p>{{text[steps.percent <= 30 ? 0 : steps.percent <= 60 ? 1 : 2]}}</p>
+            <progressbar value="steps.percent" class="progress-xs" type="success"></progressbar>
+            <tab heading="分类" active="steps.step1" select="tabclick(0)">
+                <form name="step1" class="form-validation">
+                    <div class="type-create-box" ng-class="$parent.$parent.typemode == 'new' ? 'active' : ''">
+                        <div class="input-group table-text">
+                            <span tooltip="分组字段" class="input-group-addon text-danger">
+                                {{$parent.$parent.typename.groupBy ? $parent.$parent.typename.groupBy : "无分组"}}
+                            </span>
+                            <select class="form-control w-full" required ng-model="$parent.$parent.typename"
+                                    ng-change="typechange()" ng-options="item.name for item in typelist"></select>
+                        </div>
+                        <div class="table-text-active w-full">
+                            <div class="panel panel-default m-n">
+                                <div class="panel-heading font-bold">新建分类</div>
+                                <div class="panel-body">
+                                    <form name="newtypefrom" class="form-validation">
+                                        <div class="form-group">
+                                            <label>分类名</label>
+                                            <input type="text" ng-model="$parent.$parent.newtype.name"
+                                                   class="form-control" placeholder="请输入分类名称" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>配置分组字段</label>
+                                            <input type="text" ng-model="$parent.$parent.newtype.groupBy"
+                                                   class="form-control" placeholder="请输入字段名称">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary pull-right m-l-xs"
+                                                ng-disabled="step1.$invalid" ng-click="insertType($event)">Confirm
+                                        </button>
+                                        <button type="button" class="btn btn-default pull-right"
+                                                ng-click="$parent.$parent.newtype = {name: '1',groupBy: '1'};$parent.$parent.typemode = 'select'">
+                                            Cancel
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-t m-b">
+                        <button type="button" class="btn btn-info btn-rounded"
+                                ng-show="$parent.$parent.typemode == 'select'"
+                                ng-click="$parent.$parent.newtype = {name: '',groupBy: ''};$parent.$parent.typemode = 'new'">
+                            New
+                        </button>
+                        <button class="btn btn-default btn-rounded" ng-show="$parent.$parent.typemode == 'select'"
+                                ng-disabled="step1.$invalid" ng-click="tabclick(1)">Next
+                        </button>
+                    </div>
+                </form>
+            </tab>
+            <tab heading="配置描述" disabled="step1.$invalid" active="steps.step2" select="tabclick(1)">
+                <form name="step2" class="form-validation">
+                    <p>分组:<span tooltip="字段类型详见描述符文档" class="pull-right text-muted "><i
+                        class="fa fa-question"></i></span></p>
+                    <select class="form-control w-full no-transition" ng-show="$parent.$parent.fieldmode == 'select'"
+                            ng-model="$parent.$parent.group" ng-change="fieldchange"
+                            ng-options="item.name for item in typename.list"></select>
+                    <input type="text" ng-show="$parent.$parent.fieldmode == 'new'" ng-model="group.name"
+                           ng-disabled="typename.groupBy == ''" class="form-control no-transition"
+                           placeholder="请输入字段名称">
+                    <div class="b-a m-t table-responsive">
+                        <table class="table table-striped b-t b-light" style="min-width: 534px">
+                            <thead>
+                            <tr>
+                                <th style="width: 20%">字段</th>
+                                <th style="width: 30%">字段描述</th>
+                                <th style="width: 43%">字段类型</th>
+                                <th class="text-center" style="width: 7%">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="(key, value) in field">
+                                <td><input type="text" name="{{key}}" disabled ng-model="key" class="form-control"
+                                           placeholder="" required></td>
+                                <td><input type="text" name="{{value.mark}}" ng-model="value.mark" class="form-control"
+                                           placeholder="" required></td>
+                                <td><input type="text" name="{{value.data}}" ng-model="value.data" class="form-control"
+                                           placeholder="" required></td>
+                                <td>
+                                    <div class="text-center m-t-xs cursor-p">
+                                        <a><i class="fa fa-check text-success text-active"></i><i tooltip="不建议执行删除操作"
+                                                                                                  class="fa fa-times text-danger text"
+                                                                                                  ng-click="deleteField(key)"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" ng-model="newfield.key" class="form-control" placeholder=""></td>
+                                <td><input type="text" ng-model="newfield.mark" class="form-control" placeholder="">
+                                </td>
+                                <td><input type="text" ng-model="newfield.data" class="form-control" placeholder="">
+                                </td>
+                                <td>
+                                    <div class="text-center m-t-xs cursor-p" ng-click="insertField($event)"
+                                         tooltip="输入内容添加新描述">
+                                        <a><i class="fa fa-plus text-info text"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="m-t m-b">
+                        <button type="button" ng-show="$parent.$parent.fieldmode == 'new'"
+                                class="btn btn-info btn-rounded" ng-click="createField($event)">Confirm
+                        </button>
+                        <button type="button" ng-show="$parent.$parent.fieldmode == 'new'" ng-disabled="!step3Enable"
+                                class="btn btn-default btn-rounded" ng-click="fieldModeChange('select')">Cancel
+                        </button>
+                        <button type="button" ng-show="$parent.$parent.fieldmode == 'select'"
+                                ng-disabled="typename.groupBy == ''" class="btn btn-info btn-rounded"
+                                ng-click="fieldModeChange('new')">New
+                        </button>
+                        <button type="button" ng-show="$parent.$parent.fieldmode == 'select'"
+                                class="btn btn-default btn-rounded" ng-click="tabclick(0)">Prev
+                        </button>
+                        <button type="submit" ng-show="$parent.$parent.fieldmode == 'select'"
+                                ng-disabled="!step3Enable || step2.$invalid" class="btn btn-default btn-rounded"
+                                ng-click="tabclick(2)">Next
+                        </button>
+                        <span ng-show="typename.groupBy == ''" tooltip="仅当该分类存在分组字段时可新建分组描述"
+                              class="pull-right text-muted m-r m-t-xs"><i class="fa fa-question"></i></span>
+                    </div>
+                </form>
+            </tab>
+            <tab heading="配置项" disabled="!step3Enable" active="steps.step3" select="tabclick(2)">
+                <div json-edit="" json="configsJson" field="field"></div>
+                <div class="m-t m-b">
+                    <button type="button" class="btn btn-default btn-rounded" ng-click="steps.step2=true">Prev</button>
+                    <button type="button" class="btn btn-default btn-rounded" ng-click="steps.percent=100">Click me to
+                        Finish
+                    </button>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+</script>
+<!--JSON编辑器弹窗END-->

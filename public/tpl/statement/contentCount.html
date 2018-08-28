@@ -1,0 +1,118 @@
+<div class="hbox hbox-auto-xs" unselectable="on">
+    <div class="contentbatchMask">
+        <div class="loading-spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+    </div>
+    <div class="application-wrap content-count-box">
+        <div class="bg-light lter b-b wrapper-md ng-scope">
+            <h1 class="m-n font-thin h3">统计报表</h1>
+        </div>
+        <div class="wrapper">
+            <ul class="breadcrumb bg-white b-a m-n">
+                <li ng-click="navClick('root')">
+                    <a class="text-info transition">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                <li ng-repeat="item in sitemap" ng-click="navClick('site', item, $index)">
+                    <a class="text-info transition">
+                        {{item.name}}
+                    </a>
+                </li>
+                <li ng-repeat="item in columnmap"
+                    ng-click="$index != columnmap.length - 1 && navClick('column', item, $index)">
+                    <a class="text-info transition">{{item.name}}</a>
+                </li>
+            </ul>
+        </div>
+        <div class="padder m-t-sm">
+            <div class="panel panel-default m-n">
+                <div class="panel-heading font-bold">
+                    统计报表
+                    <span class="font-normal text-success">(图表数据仅取发布量前5条,详情请于下方明细表中查阅)</span>
+                    <span tooltip="点击各站点文章发布量查看详情" class="text-muted m-l-sm">
+                        <i class="fa fa-question"></i>
+                    </span>
+                </div>
+                <div class="panel-body pos-rlt no-padder">
+                    <div class="btn-box b-b b-t">
+                        <div class="btnitem transition text-center wrapper-sm padder h-full cursor-p cur"
+                             ng-click="getDataByType('all', $event)">全部
+                        </div>
+                        <div class="btnitem transition text-center wrapper-sm padder h-full cursor-p"
+                             ng-click="getDataByType('day', $event)">昨日
+                        </div>
+                        <div class="btnitem transition text-center wrapper-sm padder h-full cursor-p"
+                             ng-click="getDataByType('week', $event)">最近7天
+                        </div>
+                        <div class="btnitem transition text-center wrapper-sm padder h-full cursor-p"
+                             ng-click="getDataByType('month', $event)">最近30天
+                        </div>
+                        <form>
+                            <div class="m-b-none m-t-xs">
+                                <datetimepicker type="text" time="false" max-date="etime" value="stime" class="input-sm"
+                                                placeholder="开始时间"></datetimepicker>
+                            </div>
+                            <p class="wrapper-sm text-center m-n">至</p>
+                            <div class="m-b-n m-t-xs">
+                                <datetimepicker type="text" time="false" min-date="stime" value="etime" class="input-sm"
+                                                placeholder="结束时间"></datetimepicker>
+                            </div>
+                            <button type="submit" class="btn m-l-sm m-t-xs btn-sm btn-primary"
+                                    ng-click="getDataByTime()">确定
+                            </button>
+                            <button type="submit" class="btn pull-right m-r m-t-xs btn-sm btn-success"
+                                    ng-click="changeMode()">{{currentMode == 'site' ? '查看栏目详情' : '查看网站详情'}}
+                            </button>
+                        </form>
+                    </div>
+                    <div class="charts-box row bg-white m-n">
+                        <div class="item charts-left col-md-5"></div>
+                        <div class="item charts-right col-md-7"></div>
+                    </div>
+                    <div class="tipsbox" ng-show="!currentData.length">暂无数据</div>
+                </div>
+            </div>
+        </div>
+        <div class="padder b-t-n">
+            <div class="panel panel-default m-n">
+                <div class="panel-heading font-bold">
+                    详细信息
+                    <span tooltip="点击字段名进行排序" class="text-muted m-l-sm">
+                        <i class="fa fa-question"></i>
+                    </span>
+                </div>
+                <div class="panel-body pos-rlt no-padder">
+                    <div class="tablebox wrapper bg-white" ng-show="currentData.length">
+                        <div class="table-responsive">
+                            <table class="table table-striped b b-light m-n">
+                                <thead>
+                                <tr>
+                                    <th>站点名称</th>
+                                    <th ng-repeat="item in currentMap" ng-click="sort(item.key, $event)"
+                                        class="cursor-p">
+                                        {{item.value}}
+                                        <i class="m-l-xs text-success fa fa-long-arrow-up" ng-if="$index == 0"></i>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="items in currentData" ng-click="goNext(items, $index)">
+                                    <td>{{items.name}}</td>
+                                    <td ng-repeat="item in currentMap">{{items[item.key]}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <p ng-show="!currentData.length" class="text-center m-t">暂无数据</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

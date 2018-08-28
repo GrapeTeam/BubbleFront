@@ -1,0 +1,101 @@
+<script type="text/ng-template" id="quesitionAdd.html">
+    <div class="modal-header">
+        <h3 class="modal-title">编辑</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">题目名称</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.name" placeholder="请输入题目名称">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">题目类型</label>
+                <div class="col-sm-9">
+                    <select class="form-control" ng-model="value.type" ng-init="value.type = '0'">
+                        <option value="0">单选</option>
+                        <option value="1">多选</option>
+                        <option value="3">简答题</option>
+                        <option value="4">问答</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<div class="contentbatchMask">
+    <div class="loading-spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
+<div class="question-box">
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3">问卷题目管理</h1>
+    </div>
+    <div class="wrapper-md">
+        <select-table multiple="true" editable="true" interface="question" title="问卷题目列表"
+                      create-modal="quesitionAdd.html" control="tableControl"></select-table>
+    </div>
+    <ui-bubble-modal show="modalVisible" name="选项管理" confirm="modalConfirm">
+        <div class="option-box b-r">
+            <div class="item b-b" ng-repeat="item in currentOption track by $index">
+                <div class="name b-r">
+                    <input type="text" ng-model="item.name" class="form-control b-n">
+                </div>
+                <div class="tool b-r" ng-click="moveup(item, $index)">
+                    <i class="fa fa-arrow-up"></i>
+                </div>
+                <div class="tool b-r">
+                    <i class="fa fa-arrow-down" ng-click="movedown(item, $index)"></i>
+                </div>
+                <div class="tool">
+                    <i class="fa fa-times" ng-click="remove(item, $index)"></i>
+                </div>
+            </div>
+            <div class="item b-b text-center cursor-p" ng-click="add()">
+                <i class="fa fa-plus addbtn"></i>
+            </div>
+        </div>
+        <div class="preview-box wrapper-md">
+            <div class="panel panel-default">
+                <div class="panel-heading">预览
+                    <span class="text-info">(勾选的选项将会作为正确答案保存)</span>
+                </div>
+                <div class="panel-body">
+                    <p>1. {{current.name}}</p>
+                    <div class="m-t">
+                        <div ng-if="current.type == 1" class="inputitem checkbox pull-left"
+                             ng-repeat="item in currentOption track by $index">
+                            <label class="i-checks">
+                                <input type="checkbox" ng-checked="item.select" value="{{item.id}}">
+                                <i></i>
+                                {{item.name}}
+                            </label>
+                        </div>
+                        <div ng-if="current.type == 0" class="inputitem radio  pull-left"
+                             ng-repeat="item in currentOption track by $index">
+                            <label class="i-checks">
+                                <input type="radio" ng-model="answer[0]" name="iteminput" value="{{item.id}}">
+                                <i></i>
+                                {{item.name}}
+                            </label>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui-bubble-modal>
+</div>

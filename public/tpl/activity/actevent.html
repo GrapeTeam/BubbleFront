@@ -1,0 +1,98 @@
+<script type="text/ng-template" id="acteventCreate.html">
+    <div class="modal-header">
+        <h3 class="modal-title">新增活动</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">活动名称</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.name" placeholder="请输入名称">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">活动编号</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.number" placeholder="请输入编号">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">活动开始时间</label>
+                <div class="col-sm-9">
+                    <datetimepicker value="value.startTime"></datetimepicker>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">活动结束时间</label>
+                <div class="col-sm-9">
+                    <datetimepicker value="value.endTime"></datetimepicker>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">活动说明</label>
+                <div class="col-sm-9">
+                    <textarea type="text" class="form-control" ng-model="value.desp" placeholder="请输入说明"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">举办方信息</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.autherInfo" placeholder="请输入举办方信息">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">举办单位</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.auther" placeholder="请输入举办单位">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<script type="text/ng-template" id="actRule.html">
+    <div class="modal-header">
+        <h3 class="modal-title">活动规则</h3>
+    </div>
+    <div class="modal-body">
+        <form role="form" class="ng-pristine ng-valid">
+            <div class="form-group">
+                <label>重置时间(多久后可以再次投票)</label>
+                <div class="input-group m-b">
+                    <input type="text" class="form-control" ng-disabled="disabled" ng-model="timeCD"
+                           placeholder="请输入时间">
+                    <span class="input-group-addon">天</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>重置时间段对象可被同一个人投几票</label>
+                <input type="text" class="form-control" ng-disabled="disabled" ng-model="repeatNo" placeholder="请输入数值">
+            </div>
+            <div class="form-group">
+                <label>每个人重置时间段内可以投几票</label>
+                <input type="text" class="form-control" ng-disabled="disabled" ng-model="ownNo" placeholder="请输入数值">
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">保存</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">活动管理</h1>
+</div>
+<div class="wrapper">
+    <select-table multiple="true" editable="true" interface="actevent" title="活动列表" create-modal="acteventCreate.html"
+                  create-controller="acteventCreate"
+                  control="tableControl"></select-table>
+</div>

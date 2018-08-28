@@ -1,0 +1,116 @@
+<div class="hbox hbox-auto-xs" unselectable="on" ng-init="app.settings.full = true;">
+    <div class="application-box statement-box">
+        <div class="application-wrap">
+            <div class="bg-light lter b-b wrapper-md ng-scope">
+                <h1 class="m-n font-thin h3">统计报表</h1>
+            </div>
+            <div class="padder m-t">
+                <div class="panel panel-default">
+                    <div class="panel-heading font-bold">
+                        发布统计
+                    </div>
+                    <div class="panel-body pos-rlt">
+                        <div class="datebox wrapper">
+                            <form class="form-inline w-full" ng-submit="searchRepoer()">
+                                <div class="btn-group m-r">
+                                    <button type="button"
+                                            class="btn {{type2 == 'month' ? 'btn-success' :  'btn-default'}}"
+                                            ng-click="changetype2('month')">本月
+                                    </button>
+                                    <button type="button"
+                                            class="btn {{type2 == 'week' ? 'btn-success' :  'btn-default'}}"
+                                            ng-click="changetype2('week')">本周
+                                    </button>
+                                    <button type="button"
+                                            class="btn {{type2 == 'day' ? 'btn-success' :  'btn-default'}}"
+                                            ng-click="changetype2('day')">今日
+                                    </button>
+                                </div>
+                                <div class="form-group">
+                                    <datetimepicker type="text" time="false" value="stime2" class="form-control"
+                                                    placeholder="开始时间"></datetimepicker>
+                                </div>
+                                至
+                                <div class="form-group">
+                                    <datetimepicker type="text" time="false" value="etime2" class="form-control"
+                                                    placeholder="结束时间"></datetimepicker>
+                                </div>
+                                <button type="submit" class="btn btn-sm btn-primary">确定</button>
+                            </form>
+                        </div>
+                        <div class="row row-sm text-center">
+                            <div class="col-sm-6 cursor-p" ui-sref="app.consult({type: 1})" ng-init="suggest = 0">
+                                <div href="" class="block panel padder-v bg-info item">
+                                    <span class="text-white font-thin h1 block">{{suggest}}</span>
+                                    <span class="text-muted text-xs">总咨询量</span>
+                                    <span class="top text-left">
+                                            <i class="fa fa-caret-up text-warning m-l-sm"></i>
+                                        </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 cursor-p" ui-sref="app.report({type: 0})" ng-init="report = 0">
+                                <div class="panel padder-v item bg-success">
+                                    <div class="font-thin h1">{{report}}</div>
+                                    <span class="text-muted text-xs">总举报量</span>
+                                    <div class="bottom text-left">
+                                        <i class="fa fa-caret-up text-warning m-l-sm"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper">
+                <div class="contentbatchMask">
+                    <div class="loading-spinner">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading font-bold">
+                        发布统计
+                        <button class="btn btn-xs btn-info pull-right" ng-show="path.length" ng-click="returnS()">
+                            返回上一级
+                        </button>
+                    </div>
+                    <div class="panel-body pos-rlt">
+                        <div class="datebox wrapper">
+                            <form class="form-inline w-full" ng-submit="searchContent()">
+                                <div class="btn-group m-r">
+                                    <button type="button"
+                                            class="btn {{type1 == 'month' ? 'btn-success' :  'btn-default'}}"
+                                            ng-click="changetype1('month')">本月
+                                    </button>
+                                    <button type="button"
+                                            class="btn {{type1 == 'week' ? 'btn-success' :  'btn-default'}}"
+                                            ng-click="changetype1('week')">本周
+                                    </button>
+                                    <button type="button"
+                                            class="btn {{type1 == 'day' ? 'btn-success' :  'btn-default'}}"
+                                            ng-click="changetype1('day')">今日
+                                    </button>
+                                </div>
+                                <div class="form-group">
+                                    <datetimepicker type="text" value="stime1" class="form-control"
+                                                    placeholder="开始时间"></datetimepicker>
+                                </div>
+                                至
+                                <div class="form-group">
+                                    <datetimepicker type="text" value="etime1" class="form-control"
+                                                    placeholder="结束时间"></datetimepicker>
+                                </div>
+                                <button type="submit" class="btn btn-sm btn-primary">确定</button>
+                            </form>
+                        </div>
+                        <div class="charts1 w-full"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

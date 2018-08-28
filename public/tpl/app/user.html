@@ -1,0 +1,121 @@
+<!--字段内容编辑弹窗-->
+<script type="text/ng-template" id="userEdit.html">
+    <div class="modal-header">
+        <h3 class="modal-title">编辑</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">名称</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value" placeholder="请输入字段名">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<!--字段内容编辑弹窗END-->
+<!--用户添加弹窗-->
+<script type="text/ng-template" id="userCreate.html">
+    <div class="modal-header">
+        <h3 class="modal-title">用户</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">用户名</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.id" placeholder="请输入字段名">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">姓名</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.name" placeholder="请输入字段名">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">性别</label>
+                <div class="col-sm-9">
+                    <select class="form-control" ng-model="value.sex" ng-init="value.sex = '1'">
+                        <option value="1">男</option>
+                        <option value="2">女</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">所在用户组</label>
+                <div class="col-sm-9">
+                    <async-select key="name" interface="userGroup" ng-model="value.ugid"></async-select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">密码</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.password" placeholder="请输入字段名">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">手机号</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.mobphone" placeholder="请输入字段名">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">身份证号</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.IDcard" placeholder="请输入字段名">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.email" placeholder="请输入字段名">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">地址</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.address" placeholder="请输入字段名">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<!--用户添加弹窗END-->
+<div class="bg-light lter b-b wrapper-md" ng-init="app.settings.asideFolded = true;">
+    <h1 class="m-n font-thin h3">用户管理</h1>
+</div>
+<div class="wrapper">
+    <select-table multiple="true" editable="true" interface="user" title="用户列表" create-modal="userCreate.html"
+                  control="tableControl"></select-table>
+</div>
+<div class="user-record-wrap">
+    <div class="user-record">
+        <div class="record-header b-b">访问统计
+            <a class="pull-right btn btn-sm btn-default m-t ng-binding" ng-click="closeInfo()">关闭</a>
+        </div>
+        <div class="item-wrap">
+            <div class="item b-b" ng-repeat="item in data" ng-if="!isajax">
+                <div class="name">文章标题: [ {{item.content.mainName}} ]</div>
+                <div class="count">访问数量: [ {{item.count}} ]</div>
+            </div>
+            <div class="tipsbox" ng-show="!isajax && !data.length">暂无记录</div>
+            <div class="tipsbox" ng-show="isajax">数据加载中....</div>
+        </div>
+    </div>
+</div>

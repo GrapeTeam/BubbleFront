@@ -1,0 +1,155 @@
+<script type="text/ng-template" id="replyConsultInfoModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">反馈内容</h3>
+    </div>
+    <div class="modal-body reportImgUploadBox">
+        <div style="height:5px;margin:3px 0;">
+            <div class="bg-info h-full" style="width:0px;"></div>
+        </div>
+        <textarea id="editor_id" name="content" style="width:100%;height:600px;"></textarea>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default pull-left" ng-click="cancel()">关闭</button>
+        <button class="btn btn-info" id="fileUploadPicker1" style="width: 80px;height: 33px;">上传图片</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<script type="text/ng-template" id="consultInfoModal.html">
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xs-1">
+                <a class="report-modal-title-btn left hover-color">
+                    <h1 class="m-n font-thin h3 text-dark" ng-click="prev($event)"><i class="fa fa-angle-left"></i></h1>
+                </a>
+            </div>
+            <div class="col-xs-10">
+                <h1 class="m-n font-thin h3 text-center">{{data.name}}</h1>
+            </div>
+            <div class="col-xs-1">
+                <a class="report-modal-title-btn right hover-color">
+                    <h1 class="m-n font-thin h3 text-right text-dark" ng-click="next($event)"><i
+                        class="fa fa-angle-right"></i></h1>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">咨询内容</label>
+                <div class="col-sm-9">
+                    <textarea rows="" cols="" disabled="disabled" class="form-control"
+                              ng-model="data.content"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">咨询时间</label>
+                <div class="col-sm-9">
+                    <input type="text" disabled="disabled" class="form-control" ng-model="data.stime" placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">咨询评分</label>
+                <div class="col-sm-9">
+                    <input type="text" disabled="disabled" class="form-control" ng-model="data.star" placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">咨询状态</label>
+                <div class="col-sm-9">
+                    <!--添加stateText-->
+                    <input type="text" disabled="disabled" class="form-control" ng-model="stateText[data.state]"
+                           placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">反馈时间</label>
+                <div class="col-sm-9">
+                    <input type="text" disabled="disabled" class="form-control" ng-model="data.sreplyTime"
+                           placeholder="">
+                </div>
+            </div>
+            <div class="form-group" ng-show="data.reason">
+                <label class="col-sm-2 control-label">咨询反馈</label>
+                <div class="col-sm-9">
+                    <pre ng-bind-html="data.reason"></pre>
+                </div>
+            </div>
+            <div class="form-group reportaudiobox" ng-if="data.media && refresh">
+                <label class="col-sm-2 control-label">咨询音频</label>
+                <div class="col-sm-9">
+                    <ui-audio url="data.media" class="m-l-sm"></ui-audio>
+                </div>
+            </div>
+            <div class="form-group reportvideobox" ng-if="data.video && refresh && refreshVideo">
+                <label class="col-sm-2 control-label">咨询视频</label>
+                <div class="col-sm-9">
+                    <div class="input-group m-b">
+                        <div class="report-modal-toolbox">
+                            <div class="item" tooltip="上一个视频"><i ng-click="videoleft()"
+                                                                 class="fa fa-arrow-left cursor-p"
+                                                                 ng-class="{disabled:videoCurrent == 0}"></i></div>
+                            <div class="item"><i ng-click="deg = deg - 90" class="fa fa-rotate-left cursor-p"></i></div>
+                            <div class="item"><i ng-click="deg = deg + 90" class="fa fa-rotate-right cursor-p"></i>
+                            </div>
+                            <div class="item" tooltip="视频不支持在线播放?点我下载到本地播放"><i ng-click="download()"
+                                                                               class="fa fa-download cursor-p"></i>
+                            </div>
+                            <div class="item" tooltip="下一个视频"><i ng-click="videoright()"
+                                                                 class="fa fa-arrow-right cursor-p"
+                                                                 ng-class="{disabled:videoCurrent == data.video.length - 1}"></i>
+                            </div>
+                        </div>
+                        <ui-video url="data.video[videoCurrent]" rotate="deg"
+                                  type="video/{{data.video[videoCurrent].split('.').pop()}}" width="350"
+                                  height="350"></ui-video>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-if="data.image">
+                <label class="col-sm-2 control-label">咨询图片</label>
+                <div class="col-sm-9">
+                    <div class="ui-img-wrap pull-left m-r-sm m-b-sm cursor-p"
+                         ng-repeat="item in data.image track by $index">
+                        <img src="{{item}}" ui-img="popup" ui-width="100" ui-height="100"
+                             class="pull-left m-r-sm cursor-p"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-if="files && files.length">
+                <label class="col-sm-2 control-label">举报文件</label>
+                <div class="col-sm-9">
+                    <table>
+                        <tr>
+                            <th class="wrapper-sm b">文件名</th>
+                            <th class="wrapper-sm b">操作</th>
+                        </tr>
+                        <tr ng-repeat="item in files">
+                            <td class="wrapper-sm b">{{item.name}}</td>
+                            <td class="wrapper-sm b cursor-p"><span class="text-info"
+                                                                    ng-click="downloadfile(item.path)">下载</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default pull-left" ng-click="cancel()">关闭</button>
+        <button class="btn btn-success ladda-button" ng-click="ok($event, '0')" ng-show="data.state !== '已受理'">
+            <span class="ladda-label">咨询回复</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<div class="bg-light lter b-b wrapper-md" ng-init="app.settings.popupReportSlideBox = false">
+    <h1 class="m-n font-thin h3">{{title}}</h1>
+</div>
+<div class="wrapper">
+    <select-table ng-click="clickList()" multiple="true" editable="true" interface="suggest" title="咨询列表"
+                  control="tableControl" create-modal="" select-par="par"></select-table>
+</div>
+</div>

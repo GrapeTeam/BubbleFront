@@ -1,0 +1,231 @@
+<script type="text/ng-template" id="replyReportContentModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">{{kick ? '封号内容' : '举报反馈内容'}}</h3>
+    </div>
+    <div class="modal-body reportImgUploadBox">
+        <div style="height:5px;margin:3px 0;">
+            <div class="bg-info h-full" style="width:0px;"></div>
+        </div>
+        <textarea id="editor_id" name="content" style="width:100%;height:600px;"></textarea>
+        <form class="form-horizontal ng-pristine" role="form" ng-if="kick">
+            <div class="form-group">
+                <label class="col-sm-2 control-label text-center">封号时间</label>
+                <div class="col-sm-10">
+                    <div class="radio pull-left m-l">
+                        <label class="i-checks">
+                            <input type="radio" name="a" ng-model="value" value="1">
+                            <i></i>
+                            一天
+                        </label>
+                    </div>
+                    <div class="radio pull-left m-l">
+                        <label class="i-checks">
+                            <input type="radio" name="a" ng-model="value" value="30">
+                            <i></i>
+                            一个月
+                        </label>
+                    </div>
+                    <div class="radio pull-left m-l">
+                        <label class="i-checks">
+                            <input type="radio" name="a" ng-model="value" value="9999">
+                            <i></i>
+                            永久
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default pull-left" ng-click="cancel()">关闭</button>
+        <async-select key="Rcontent" interface="reportReply" ng-model="content" btn="true"></async-select>
+        <button class="btn btn-info" id="fileUploadPicker1" style="width: 80px;height: 33px;">上传图片</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<script type="text/ng-template" id="replyReportModal.html">
+    <div class="modal-header">
+        <div class="row">
+            <div class="col-xs-1">
+                <a class="report-modal-title-btn left hover-color">
+                    <h1 class="m-n font-thin h3 text-dark" ng-click="prev($event)"><i class="fa fa-angle-left"></i></h1>
+                </a>
+            </div>
+            <div class="col-xs-10">
+                <h1 class="m-n font-thin h3 text-center">{{data.Wrongdoer}}</h1>
+            </div>
+            <div class="col-xs-1">
+                <a class="report-modal-title-btn right hover-color">
+                    <h1 class="m-n font-thin h3 text-right text-dark" ng-click="next($event)"><i
+                        class="fa fa-angle-right"></i></h1>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">举报内容</label>
+                <div class="col-sm-9">
+                    <textarea rows="" cols="" disabled="disabled" class="form-control"
+                              ng-model="data.content"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">举报时间</label>
+                <div class="col-sm-9">
+                    <input type="text" disabled="disabled" class="form-control" ng-model="data.time" placeholder="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">举报状态</label>
+                <div class="col-sm-9">
+                    <input type="text" disabled="disabled" class="form-control" ng-model="stateText[data.state]"
+                           placeholder="">
+                </div>
+            </div>
+            <div class="form-group" ng-show="data.reason && (data.state == '2' || data.state == '3')">
+                <label class="col-sm-2 control-label">举报反馈</label>
+                <div class="col-sm-9">
+                    <pre ng-bind-html="data.reason"></pre>
+                </div>
+            </div>
+            <div class="form-group" ng-show="data.state == '2' || data.state == '3'">
+                <label class="col-sm-2 control-label">反馈时间</label>
+                <div class="col-sm-9">
+                    <pre ng-bind-html="data.state == '2' ? data.completetime : data.refusetime"></pre>
+                </div>
+            </div>
+            <!--<div class="form-group">
+                <label class="col-sm-2 control-label">反馈内容</label>
+                <div class="col-sm-9">
+                    <async-select key="Rcontent" interface="reportReply" ng-model="value.content" textinput="true" ng-if="mode"></async-select>
+                </div>
+            </div>
+            <div class="form-group reportImgUploadBox">
+                <label class="col-sm-2 control-label">反馈图片</label>
+                <div class="col-sm-9">
+                    <div style="height:5px;margin:3px 0;"><div class="bg-info h-full" style="width:0px;"></div></div>
+                    <div class="ui-img-wrap m-r m-b pull-left" style="width:100px;height:100px;" ng-repeat="item in resumeImg">
+                        <img ui-img ui-width="100" ui-height="100" src="{{item}}" />
+                    </div>
+                    <div class="reportImgUploadBtn m-b b cursor-p pull-left" id="fileUploadPicker1">
+                        <i class="fa fa-upload text-info"></i>
+                    </div>
+                </div>
+            </div>-->
+            <div class="form-group reportvideobox" ng-if="videoList.length && refresh && refreshVideo">
+                <label class="col-sm-2 control-label">举报视频</label>
+                <div class="col-sm-9">
+                    <div class="input-group m-b">
+                        <div class="report-modal-toolbox">
+                            <div class="item" tooltip="上一个视频"><i ng-click="videoleft()"
+                                                                 class="fa fa-arrow-left cursor-p"
+                                                                 ng-class="{disabled:videoCurrent == 0}"></i></div>
+                            <div class="item"><i ng-click="deg = deg - 90" class="fa fa-rotate-left cursor-p"></i></div>
+                            <div class="item"><i ng-click="deg = deg + 90" class="fa fa-rotate-right cursor-p"></i>
+                            </div>
+                            <div class="item" tooltip="视频不支持在线播放?点我下载到本地播放"><i ng-click="download()"
+                                                                               class="fa fa-download cursor-p"></i>
+                            </div>
+                            <div class="item" tooltip="下一个视频"><i ng-click="videoright()"
+                                                                 class="fa fa-arrow-right cursor-p"
+                                                                 ng-class="{disabled:videoCurrent == videoList.length - 1}"></i>
+                            </div>
+                        </div>
+                        <ui-video url="videoList[videoCurrent]" rotate="deg"
+                                  type="video/{{videoList[videoCurrent].split('.').pop()}}" width="350"
+                                  height="350"></ui-video>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group reportaudiobox" ng-if="data.media && refresh">
+                <label class="col-sm-2 control-label">举报音频</label>
+                <div class="col-sm-9">
+                    <!--<ui-audio url="surl" class="m-l-sm" style="width:70%;float:left;"></ui-audio>-->
+                    <ui-audio url="data.media" class="m-l-sm"></ui-audio>
+                    <!--<select class="form-control pull-right" style="width:28%" ng-model="surl">
+                        <option value="http://www.jq22.com/demo/audiojs20161020/jq22com.mp3">1</option>
+                        <option value="http://www.jq22.com/demo/bofq/audio.mp3">2</option>
+                    </select>-->
+                </div>
+            </div>
+            <div class="form-group" ng-if="data.image">
+                <label class="col-sm-2 control-label">举报图片</label>
+                <div class="col-sm-9">
+                    <div class="ui-img-wrap pull-left m-r-sm m-b-sm cursor-p" ng-repeat="item in imgs track by $index">
+                        <img src="{{item}}" ui-img="popup" ui-width="100" ui-height="100"
+                             class="pull-left m-r-sm cursor-p"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-if="files && files.length">
+                <label class="col-sm-2 control-label">举报文件</label>
+                <div class="col-sm-9">
+                    <table>
+                        <tr>
+                            <th class="wrapper-sm b">文件名</th>
+                            <th class="wrapper-sm b">操作</th>
+                        </tr>
+                        <tr ng-repeat="item in files">
+                            <td class="wrapper-sm b">{{item.name}}</td>
+                            <td class="wrapper-sm b cursor-p"><span class="text-info"
+                                                                    ng-click="downloadfile(item.path)">下载</span></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!--<ui-video url="http://123.57.214.226:8080/File/upload/2017-05-22/3.ogg" type="video/ogg"></ui-video>-->
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default pull-left" ng-click="cancel()">关闭</button>
+        <button class="btn btn-default ladda-button" ng-click="kill($event, '1')" ng-show=" data.state == '0'">
+            <span class="ladda-label">封号处理</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+        <button class="btn btn-danger ladda-button" ng-click="ok($event, '1')" ng-show=" data.state == '0'">
+            <span class="ladda-label">拒绝受理</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+        <button class="btn btn-info ladda-button" ng-click="proces($event)" ng-show="data.state == '0'">
+            <span class="ladda-label">同意受理</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+        <button class="btn btn-success ladda-button" ng-click="ok($event, '0')" ng-show=" data.state == '1'">
+            <span class="ladda-label">处理完成</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<div class="bg-light lter b-b wrapper-md" ng-init="app.settings.popupReportSlideBox = false">
+    <h1 class="m-n font-thin h3">{{title}}
+        <a class="pull-right btn btn-sm btn-info ng-binding" ng-show="gkList.length" ng-click="publicReport()">转发</a>
+    </h1>
+</div>
+<div class="wrapper">
+    <select-table editable="true" interface="report" title="举报列表" control="tableControl" list="list" create-modal=""
+                  select-par="par"></select-table>
+</div>
+<div class="push-config-wrap">
+    <div class="push-config-box">
+        <div class="title">
+            举报转发
+            <button type="button" class="btn btn-default pull-right m-l-sm m-t-sm" ng-click="circulation.hide()">关闭
+            </button>
+            <button type="button" class="btn btn-info pull-right m-l-sm m-t-sm" ng-click="circulation.push()">确认转发
+            </button>
+        </div>
+        <div class="content-box">
+            <div class="tipsbox">暂无可转发站点</div>
+            <abn-tree tree-data="column_tree_data" text="column_tree_current" tree-control="ctree"
+                      on-select="treeSelect(branch)" icon-leaf="fa fa-columns"
+                      expand-level="1" icon-expand="fa fa-plus" icon-collapse="fa fa-minus">
+            </abn-tree>
+        </div>
+    </div>
+</div>
+</div>
