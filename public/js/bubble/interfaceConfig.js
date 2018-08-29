@@ -1,67 +1,35 @@
 (function () {
-    var config226 = {
-        api: "226:801",
-        upload: "226:8080"
+    var configDemo = {
+        api: "119:801",
+        upload: "119:900"
     };
 
-    var config60 = {
-        api: "60:801",
-        upload: "60:9000"
-    }
-
-    var config185 = {
-        api: "185:7000",
-        upload: "185:9000"
-    }
 
     bubbleFrame.setHost({
-        "226:801": "http://123.57.214.226:801",
-        "226:802": "http://123.57.214.226:802",
-        "226:803": "http://123.57.214.226:803",
-        "226:8080": "http://123.57.214.226:8080",
-        "60:801": "http://60.173.0.46:801",
-        "60:803": "http://60.173.0.46:803",
-        "60:9801": "http://60.173.0.46:9801",
-        "60:9000": "http://60.173.0.46:9000",
-        "185:7000": "http://60.173.1.185:7000",
-        "185:9000": "http://60.173.1.185:9000",
-        "59:803": "http://59.110.21.171:803",
-        "226:810": "http://123.57.214.226:810",
-        "226:999": "http://123.57.214.226:999"
+        "119:801": "http://47.106.113.119:801",
+        "119:900": "http://47.106.113.119:900",
     });
 
     bubbleFrame.setDistributive({
         debug: {
-            "GrapeFW": {
-                api: "226:999",
-                upload: "226:8080"
-            },
-            22: config226,
-            23: config226,
-            25: config226,
-            13: config226,
-            19: config226,
-            18: config226,
-            17: config226,
-            // 17: {
-            //     api: "226:802",
-            //     upload: "226:8080"
-            // },
-            15: config185
+            "GrapeFW": configDemo,
+            22: configDemo,
+            23: configDemo,
+            25: configDemo,
+            13: configDemo,
+            19: configDemo,
+            18: configDemo,
+            17: configDemo
         },
         runner: {
-            "GrapeFW": config60,
-            23: config60,
-            25: config60,
-            22: config60,
-            13: config60,
-            19: config60,
-            18: config60,
-            17: {
-                api: "60:9801",
-                upload: "60:9000"
-            },
-            15: config185
+            "GrapeFW": configDemo,
+            23: configDemo,
+            25: configDemo,
+            22: configDemo,
+            13: configDemo,
+            19: configDemo,
+            18: configDemo,
+            17: configDemo
         }
     });
 
@@ -646,4 +614,4 @@
             add:['filter1','hookService','insert',[typeList.String,typeList.Int]],
         }
     });
-})()
+})();
