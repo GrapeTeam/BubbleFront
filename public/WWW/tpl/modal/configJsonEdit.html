@@ -1,0 +1,20 @@
+<!--JSON编辑器弹窗-->
+<script type="text/ng-template">
+    <div class="modal-header">
+        <h3 class="modal-title">JSON编辑器</h3>
+    </div>
+    <div class="modal-body" json-edit="" for-json="configjsonlist" for-return="jsonReturn" for-field="field">
+        <form role="form" class="ng-pristine ng-valid">
+            <div class="form-group config-json-content config-json-content-0" ng-repeat="(key, value) in configjsonlist"
+                 ng-if="field[key] ? field[key].mark != 'hide' : true"
+                 ng-init="getJsonHtml(configjsonlist, key, field[key], $index, 0)">
+                <label>{{field[key] && field[key].mark ? field[key].mark : key}}</label>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+    </div>
+</script>
+<!--JSON编辑器弹窗END-->

@@ -1,0 +1,88 @@
+<script type="text/ng-template" id="actobjCreate.html">
+    <div class="modal-header">
+        <h3 class="modal-title">新增活动对象</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">投稿标题名称</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value.name" placeholder="请输入名称">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">投稿类型</label>
+                <div class="col-sm-9">
+                    <select class="form-control" ng-model="type" ng-init="type = 'content'">
+                        <option value="content">文章</option>
+                        <option value="video">视频</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" ng-show="type == 'content'">
+                <label class="col-sm-2 control-label">投稿内容</label>
+                <div class="col-sm-9">
+                    <textarea type="text" class="form-control" ng-model="value.attr.content"
+                              placeholder="请输入内容,不超过200字"></textarea>
+                </div>
+            </div>
+            <div class="form-group" ng-show="type == 'video'">
+                <label class="col-sm-2 control-label">投稿视频</label>
+                <div class="col-sm-9">
+                    <div class="actobj-create-upload-process bg-success"></div>
+                    <div class="actobj-create-upload b-a" id="actobjcreateupload"><i class="fa fa-upload"></i></div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<script type="text/ng-template" id="voteinfo.html">
+    <div class="modal-header">
+        <h3 class="modal-title">对象详情</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">投稿名称</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" disabled="disabled" ng-model="name">
+                </div>
+            </div>
+            <div class="form-group" ng-show="type == 'content'">
+                <label class="col-sm-2 control-label">投稿内容</label>
+                <div class="col-sm-9">
+                    <textarea type="text" disabled="disabled" class="form-control" ng-model="content"></textarea>
+                </div>
+            </div>
+            <div class="form-group" ng-if="type == 'video'">
+                <label class="col-sm-2 control-label">投稿内容</label>
+                <div class="col-sm-9">
+                    <ui-video url="url" rotate="deg" type="video/{{flg}}" width="350" height="350"></ui-video>
+                    <button class="btn btn-default" ng-click="download()">下载</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">关闭</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)" ng-show="state == 1">
+            <span class="ladda-label">审核通过</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">投稿管理</h1>
+</div>
+<div class="wrapper">
+    <select-table multiple="true" editable="true" interface="actobj" title="投稿列表" create-modal="actobjCreate.html"
+                  create-controller="actobjCreate"
+                  control="tableControl"></select-table>
+</div>

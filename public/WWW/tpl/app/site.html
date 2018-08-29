@@ -1,0 +1,116 @@
+<div class="hbox hbox-auto-xs" unselectable="on" ng-init="app.settings.full = true;">
+    <!--新建网站弹窗-->
+    <script type="text/ng-template" id="siteCreate.html">
+        <div class="modal-header">
+            <h3 class="modal-title">新建网站</h3>
+        </div>
+        <div class="modal-body">
+            <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">网站名称</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="name" class="form-control" ng-model="value.title"
+                               placeholder="请输入站群名称">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">ICP</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="name" class="form-control" ng-model="value.icp" placeholder="请输入站群名称">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">HOST</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="name" class="form-control" ng-model="value.host" placeholder="请输入站群名称">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">取消</button>
+            <button class="btn btn-info ladda-button" ng-click="ok($event)">
+                <span class="ladda-label">确定</span>
+                <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </script>
+    <!--新建网站弹窗END-->
+    <!--新建站群弹窗-->
+    <script type="text/ng-template" id="siteGroupCreate.html">
+        <div class="modal-header">
+            <h3 class="modal-title">新建站群</h3>
+        </div>
+        <div class="modal-body">
+            <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">站群名称</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="name" class="form-control" ng-model="value.name" placeholder="请输入站群名称">
+                    </div>
+                </div>
+                <input type="hidden" name="fatherid" class="form-control" ng-model="value.fatherid">
+                <input type="hidden" name="sort" class="form-control" ng-model="value.sort">
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">取消</button>
+            <button class="btn btn-info ladda-button" ng-click="ok($event)">
+                <span class="ladda-label">确定</span>
+                <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </script>
+    <!--新建站群弹窗-->
+    <!--新建站群弹窗-->
+    <script type="text/ng-template" id="siteTree.html">
+        <div class="dd-handle dd3-handle">Drag</div>
+        <div class="dd3-content">{{item.name}}</div>
+        <ol class="dd-list" ng-if="item.children">
+            <li class="dd-item dd3-item" data-id="{{item.wbgid}}" ng-repeat="item in item.children"
+                ng-include="'siteTree.html'"></li>
+        </ol>
+    </script>
+    <!--新建站群弹窗-->
+    <treenav list="gropuList" breadcrumb="breadcrumb" title="站群"></treenav>
+    <div class="col">
+        <div class="wrapper bg-light lt b-b h-70">
+            <ul class="breadcrumb bg-white b-a m-b-none">
+                <li ng-repeat="item in breadcrumb">
+                    <span ng-click="breadcrumbClick($index)"
+                          ng-class="{'cursor-p': $index != breadcrumb.length - 1,'text-info': $index != breadcrumb.length - 1, 'text-muted': $index == breadcrumb.length - 1}">{{item}}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="wrapper" ng-show="mode">
+            <div class="panel panel-default">
+                <div class="panel-heading font-bold">
+                    站群编辑
+                    <a class="pull-right btn btn-sm m-t-n-xs" tooltip="添加根站群" ng-click="createRoot()"><i
+                        class="fa fa-plus"></i></a>
+                    <a class="pull-right btn btn-sm m-t-n-xs" tooltip="全部展开" ng-click="expandAll()"><i
+                        class="fa fa-indent"></i></a>
+                    <a class="pull-right btn btn-sm m-t-n-xs" tooltip="全部收起" ng-click="collapseAll()"><i
+                        class="fa fa-dedent"></i></a>
+                </div>
+                <div class="panel-body">
+                    <div class="dd max-w-full sortbox">
+                    </div>
+                    <div>
+                        <button class="btn btn-info ladda-button pull-right m-t-xs" ng-click="indexSave($event)">
+                            <span class="ladda-label">确定</span>
+                            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper" ng-show="!mode">
+            <select-table ng-if="id" multiple="true" editable="true" interface="site" select-par="id" title="网站列表"
+                          control="tableControl" create-modal="siteCreate.html"></select-table>
+            <div class="b pos-rlt" ng-if="!id">
+                <div class="tipsbox-h">请选择站群以查看站点列表</div>
+            </div>
+        </div>
+    </div>
+</div>

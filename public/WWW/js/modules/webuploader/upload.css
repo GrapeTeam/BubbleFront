@@ -1,0 +1,570 @@
+.webuploader-container {
+    position: relative;
+}
+
+.webuploader-element-invisible {
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+.webuploader-pick-disable {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.dialog {
+    position: absolute;
+    border: 3px solid #999;
+    background: #fff;
+    box-shadow: 0 0 9px #999;
+    overflow: hidden;
+    font: 12px/1.5 tahoma, arial, 宋体 !important;
+    width: 633px;
+    display: block;
+    visibility: visible;
+    z-index: 2000;
+    bottom: 5px;
+    right: 20px;
+    display: none;
+    transition: bottom .2s;
+    -webkit-transition: bottom .2s;
+}
+
+@media (max-width: 767px) {
+    .dialog {
+        width: 100%;
+        bottom: 5px;
+        right: 5px;
+    }
+}
+
+.dialog-min {
+    animation: dialogmin .3s forwards;
+    -moz-animation: dialogmin .3s forwards;
+    -webkit-animation: dialogmin .3s forwards;
+    -o-animation: dialogmin .3s forwards;
+}
+
+.dialog-web-uploader .file-operate {
+    height: 16px;
+}
+
+.dialog-web-uploader .file-operate .cur {
+    display: block;
+}
+
+.dialog-web-uploader .file-operate em.operate-pause, .dialog-web-uploader .status-locked .file-operate em.operate-pause:hover {
+    background-position: 0 0
+}
+
+.dialog-web-uploader .file-operate em.operate-pause:hover {
+    background-position: -21px 0
+}
+
+.dialog-web-uploader .file-operate em.operate-continue, .dialog-web-uploader .status-locked .file-operate em.operate-continue:hover {
+    background-position: 0 -17px
+}
+
+.dialog-web-uploader .file-operate em.operate-continue:hover {
+    background-position: -21px -17px
+}
+
+.dialog-web-uploader .file-operate em.operate-remove, .dialog-web-uploader .status-locked .file-operate em.operate-remove:hover {
+    background-position: 0 -34px
+}
+
+.dialog-web-uploader .file-operate em.operate-remove:hover {
+    background-position: -21px -34px
+}
+
+.dialog-web-uploader .file-operate em.operate-retry, .dialog-web-uploader .status-locked .file-operate em.operate-retry:hover {
+    background-position: 0 -53px
+}
+
+.dialog-web-uploader .file-operate em.operate-retry:hover {
+    background-position: -21px -53px
+}
+
+.dialog-web-uploader .file-operate em {
+    display: none;
+    float: left;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    background: url(http://s1.pan.bdstatic.com/box-static/disk-system-cdn/widget/plugin/uploader/images/operate-icon_799c133.png) no-repeat;
+    cursor: pointer;
+}
+
+.dialog-blue {
+    border: 0 none;
+    *border: 1px solid #999
+}
+
+.dialog .dialog-min-header h3, .dialog .dialog-header h3 {
+    position: relative;
+    display: block;
+    height: 42px;
+    line-height: 42px;
+    text-indent: 1em;
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.dialog .dialog-header-title {
+    display: block;
+    padding-top: 13px;
+    line-height: 16px;
+    margin-right: 50px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+.dialog .dialog-header-title .select-text {
+    font-style: normal;
+    cursor: text
+}
+
+.hasicon .auto-up-svip {
+    background: url(http://s1.pan.bdstatic.com/box-static/system-core-cdn/system/uiService/dialog/img/vip-icon_808e9de.png) 0 -1px no-repeat;
+    background-size: 22px
+}
+
+.hasicon .auto-up-vip {
+    background: url(http://s1.pan.bdstatic.com/box-static/system-core-cdn/system/uiService/dialog/img/vip-icon_808e9de.png) 0 -26px no-repeat;
+    background-size: 22px
+}
+
+.dialog .dialog-drag {
+    cursor: move
+}
+
+.dialog .dialog-body {
+    background: #fff;
+    line-height: 24px
+}
+
+.dialog .dialog-min-header, .dialog .dialog-header {
+    position: relative;
+    color: #333;
+    background: #eee url(http://s1.pan.bdstatic.com/box-static/system-core-cdn/system/uiService/dialog/img/dialog-head_e30ee50.png) repeat-x 0 0;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -o-user-select: text;
+    -ms-user-select: text;
+    -khtml-user-select: text;
+    user-select: text
+}
+
+.dialog .dialog-min-header {
+    display: none
+}
+
+.dialog .dialog-min-header .hasicon, .dialog .dialog-header .hasicon {
+    padding-left: 35px;
+    text-indent: 0
+}
+
+.dialog .dialog-min-header .hasicon i, .dialog .dialog-header .hasicon i {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    top: 10px;
+    left: 10px
+}
+
+.dialog .dialog-control {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: 20px
+}
+
+.dialog .dialog-control span {
+    cursor: pointer;
+    float: right;
+    text-indent: 500px
+}
+
+.dialog .dialog-icon {
+    background: url(http://s1.pan.bdstatic.com/box-static/system-core-cdn/system/uiService/dialog/img/dialog-icon_a9118ce.png) no-repeat 0 0;
+    height: 20px;
+    width: 20px
+}
+
+.dialog .dialog-close {
+    background-position: 0 0
+}
+
+.dialog .dialog-max {
+    background-position: -40px 0
+}
+
+.dialog .dialog-back {
+    background-position: -40px 0
+}
+
+.dialog .dialog-min {
+    background-position: -20px 0
+}
+
+.dialog-blue .dialog-min-header, .dialog-blue .dialog-header {
+    color: #fff;
+    background: #4190e7 url(http://s1.pan.bdstatic.com/box-static/system-core-cdn/system/uiService/dialog/img/dialog-head_e30ee50.png) repeat-x 0 -53px
+}
+
+.dialog-blue .dialog-close {
+    background-position: -80px 0
+}
+
+.dialog-blue .dialog-min {
+    background-position: -60px 0
+}
+
+.dialog-blue .dialog-max, .dialog-blue .dialog-back {
+    background-position: -40px 0
+}
+
+.dialog .dialog-footer {
+    padding-bottom: 20px;
+    background: #fff;
+    text-align: center
+}
+
+.dialog .dialog-footer .g-button {
+    margin: 10px 5px 23px
+}
+
+.dialog .dialog-footer .dialog-btn-left {
+    float: left;
+    margin-right: 10px
+}
+
+.dialog .dialog-footer .dialog-btn-right {
+    float: right;
+    margin-left: 10px
+}
+
+.dialog .dialog-footer .dialog-btn-center {
+    margin: 0 5px
+}
+
+.dialog-web-uploader .header-progress {
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 100%;
+    *height: 40px;
+    background: #87c4fb;
+    transition: width .2s;
+    display: none;
+}
+
+.dialog-web-uploader .file-name {
+    position: relative;
+    float: left;
+    overflow: hidden;
+    width: 40%;
+    height: 40px;
+    white-space: nowrap;
+    text-indent: 35px;
+    text-overflow: ellipsis
+}
+
+.dialog-web-uploader .file-name .folder-count {
+    float: right;
+    text-indent: 3px
+}
+
+.dialog-web-uploader .file-name .name-text {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.dialog-web-uploader .file-icon {
+    position: absolute;
+    top: 12px;
+    left: 14px;
+    width: 16px;
+    height: 16px;
+    background-image: url(http://s1.pan.bdstatic.com/box-static/file-widget-1-cdn/common/listIcon_cb54a24.png);
+    background-position: -624px 0;
+}
+
+.dialog-web-uploader .file-size {
+    float: left;
+    width: 13%;
+    height: 40px;
+    text-indent: 10px
+}
+
+.dialog-web-uploader .file-path {
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 13%;
+    height: 40px
+}
+
+.dialog-web-uploader .file-status {
+    position: relative;
+    float: left;
+    width: 17%;
+    height: 40px
+}
+
+.dialog-web-uploader .file-operate {
+    float: left;
+    width: 17%;
+    height: 40px;
+    text-align: center;
+}
+
+.dialog-web-uploader .uploader-list-wrapper {
+    position: relative
+}
+
+.dialog-web-uploader .uploader-list-header {
+    overflow: hidden;
+    height: 35px;
+    border-bottom: 1px solid #ebebeb;
+    line-height: 35px;
+    color: #9a9a9a
+}
+
+.dialog-web-uploader .uploader-list-header div {
+    height: 35px
+}
+
+.dialog-web-uploader .uploader-list-header .file-name {
+    float: left;
+    width: 40%;
+    text-indent: 14px
+}
+
+.dialog-web-uploader .uploader-list-header .file-operate {
+    padding: 0
+}
+
+.dialog-web-uploader .tips {
+    position: absolute;
+    top: 0;
+    display: none;
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    color: #666;
+    background: #f8ebbf
+}
+
+.dialog-web-uploader .tips .close {
+    position: absolute;
+    font-size: 16px;
+    top: 0;
+    right: 6px;
+    font-style: normal;
+    cursor: pointer
+}
+
+.dialog-web-uploader .tips .close:hover {
+    opacity: .8
+}
+
+.dialog-web-uploader .resident-caution .arrow-outer, .dialog-web-uploader .resident-caution .arrow-inner {
+    width: 0;
+    height: 0;
+    line-height: 0;
+    *font-size: 0;
+    border: 10px solid #E3E3E3;
+    border-color: transparent transparent #E3E3E3;
+    position: absolute;
+    top: 20px;
+    left: 8px;
+    z-index: 101
+}
+
+.dialog-web-uploader .resident-caution .arrow-inner {
+    border-color: transparent transparent #FFF
+}
+
+.dialog-web-uploader .tips .icon, .dialog-web-uploader .tips .text, .dialog-web-uploader .tips .g-button, .dialog-web-uploader .resident-caution .arrow-outer, .dialog-web-uploader .resident-caution .arrow-inner, .dialog-web-uploader .resident-caution .caution-title {
+    display: none
+}
+
+.dialog-web-uploader .tips.has-error .icon, .dialog-web-uploader .tips.has-error .text, .dialog-web-uploader .tips.has-error .g-button, .dialog-web-uploader .has-error .resident-caution .caution-title {
+    display: block
+}
+
+.dialog-web-uploader .tips.has-error .resident-caution {
+    float: right;
+    position: relative;
+    margin-right: 25px;
+    _display: none
+}
+
+.dialog-web-uploader .has-error .resident-caution:hover .caution-text, .dialog-web-uploader .has-error .resident-caution:hover .arrow-outer, .dialog-web-uploader .has-error .resident-caution:hover .arrow-inner {
+    display: block
+}
+
+.dialog-web-uploader .tips.has-error .caution-title {
+    display: block;
+    text-indent: 0;
+    margin-left: 10px;
+    padding-left: 20px;
+    height: 32px;
+    line-height: 32px;
+    color: #666;
+    width: 30px;
+    background: url(http://s1.pan.bdstatic.com/box-static/disk-system-cdn/widget/plugin/uploader/images/upload-caution_6b45bfe.png) 0 10px no-repeat;
+    cursor: pointer
+}
+
+.dialog-web-uploader .tips .caution-text {
+    padding-left: 10px
+}
+
+.dialog-web-uploader .tips.has-error .caution-text {
+    position: absolute;
+    z-index: 100;
+    padding: 8px;
+    line-height: 1.5;
+    color: #777;
+    border: 1px solid #E3E3E3;
+    width: 206px;
+    top: 36px;
+    left: -176px;
+    box-shadow: 0 2px 2px #999;
+    cursor: default;
+    background: #FFF;
+    display: none
+}
+
+.dialog-web-uploader .tips .icon {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 18px;
+    height: 18px;
+    background: url(http://s1.pan.bdstatic.com/box-static/disk-system-cdn/widget/plugin/uploader/images/success-tips_f9fd93e.gif) no-repeat
+}
+
+.dialog-web-uploader .tips .icon-caution {
+    background: url(http://s1.pan.bdstatic.com/box-static/disk-system-cdn/widget/plugin/uploader/images/upload-caution_6b45bfe.png) no-repeat
+}
+
+.dialog-web-uploader .tips .icon-error {
+    background: url(http://s1.pan.bdstatic.com/box-static/disk-system-cdn/widget/plugin/uploader/images/operate-icon_799c133.png) -21px -78px no-repeat
+}
+
+.dialog-web-uploader .tips .text {
+    overflow: hidden;
+    width: 72%;
+    height: 35px;
+    line-height: 35px;
+    text-indent: 35px;
+    text-overflow: ellipsis
+}
+
+.dialog-web-uploader .tips .g-button {
+    float: right;
+    position: relative;
+    top: 4px
+}
+
+.dialog-web-uploader .dialog-min-header .tips {
+    position: relative
+}
+
+.dialog-web-uploader .uploader-list {
+    position: relative;
+    overflow: hidden;
+    overflow-y: auto;
+    height: 340px
+}
+
+@media (max-width: 767px) {
+    .dialog-web-uploader .uploader-list {
+        height: 200px
+    }
+}
+
+.dialog-web-uploader .uploader-container {
+    position: relative;
+    overflow: hidden;
+    color: #666;
+    list-style: none;
+    padding: 0;
+}
+
+.dialog-web-uploader .file-list {
+    position: relative;
+    height: 40px;
+    border-bottom: 1px solid #ebebeb;
+    line-height: 40px
+}
+
+.dialog-web-uploader .file-list .process {
+    position: absolute;
+    z-index: 0;
+    height: 100%;
+    *height: 40px;
+    background: #abd7fb
+}
+
+.dialog-web-uploader .file-list .info {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+.dialog-web-uploader .file-list .file-status {
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.dialog-web-uploader .file-list .file-status span {
+    display: none
+}
+
+.dialog-web-uploader .file-list em, .dialog-web-uploader .file-list i {
+    font-style: normal
+}
+
+.dialog-web-uploader .file-list .success em, .dialog-web-uploader .file-list .exist em {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url(http://s1.pan.bdstatic.com/box-static/disk-system-cdn/widget/plugin/uploader/images/operate-icon_799c133.png) 1px -80px no-repeat
+}
+
+.dialog-web-uploader .file-list .error em {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: url(http://s1.pan.bdstatic.com/box-static/disk-system-cdn/widget/plugin/uploader/images/operate-icon_799c133.png) -21px -80px no-repeat
+}
+
+.dialog-web-uploader .file-list .success i, .dialog-web-uploader .file-list .error i, .dialog-web-uploader .file-list .exist i {
+    padding-left: 20px;
+}
+
+.dialog-web-uploader .file-operate .error-link {
+    padding: 2px 10px;
+    background-color: #4190E7;
+    color: #fff;
+    top: -12px;
+    position: relative;
+    display: none
+}

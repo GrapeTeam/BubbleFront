@@ -1,0 +1,46 @@
+<a class="dropdown-toggle" ng-click="Site.show()">
+    {{sitename}}
+    <b ng-show="Site.icon" class="caret"></b>
+</a>
+<div class="site-change-wrap">
+    <div class="site-change-box">
+        <div class="title">站点选择
+            <button type="button" class="btn btn-default pull-right m-l-sm m-t-sm" ng-click="Site.hide()">关闭</button>
+        </div>
+        <div class="content row m-n">
+            <div class="site-tree col-sm-2 h-full b-r timeline">
+                <div class="b-b">
+                    <ul class="breadcrumb bg-white m-n">
+                        <li ng-class="$index == Site.nav.length - 1 && $index != 0 ? 'active' : 'text-info cursor-p'"
+                            ng-repeat="item in Site.nav"
+                            ng-click="Site.navClick($index)">
+                            <i ng-show="$index == 0" class="fa fa-home"></i>
+                            {{item.name}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="site-tree-itembox">
+                    <div class="item" ng-repeat="item in Site.currentList" ng-click="Site.levelChange(item)">
+                        {{item.wbname}}
+                    </div>
+                </div>
+            </div>
+            <div class="site-list col-sm-10 h-full timeline">
+                <div class="subtitle b-b">站点列表
+                    <div class="input-group w pull-right m-t-xs">
+                        <input type="text" style="height:27px;" class="form-control" ng-model="Site.searchKey"
+                               ng-change="Site.searchChange()">
+                        <span class="input-group-addon cursor-p" style="font-size: 10px;"><i
+                            class="fa fa-search"></i></span>
+                    </div>
+                </div>
+                <div class="site-list-itembox">
+                    <div class="item" ng-repeat="item in Site.searchList" ng-click="Site.changeSite(item)">
+                        <p>{{item.wbname}}</p>
+                    </div>
+                </div>
+                <p class="emptyTip" ng-show="!Site.searchList.length">请选择父站点</p>
+            </div>
+        </div>
+    </div>
+</div>

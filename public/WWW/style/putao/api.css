@@ -1,0 +1,50 @@
+.api-tester-box {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.api-tester-box .listbox {
+    height: 100%;
+    width: 300px;
+    float: left;
+}
+
+.api-tester-box .apicontentbox {
+    height: 100%;
+    margin: 0 0 0 300px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.api-tester-box .apicontentbox .input-group select {
+    width: 60px;
+    padding: 0;
+    height: 20px;
+    font-size: 12px;
+}
+
+.api-tester-box .tab-content {
+    height: 100%;
+    padding-bottom: 40px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.api-tester-box .tab-container {
+    height: 100%;
+}
+
+@media (max-width: 992px) {
+    .api-tester-box .listbox {
+        width: 100%;
+        height: auto;
+        float: none;
+    }
+
+    .api-tester-box .apicontentbox {
+        height: auto;
+        margin: 0;
+        float: none;
+    }
+}

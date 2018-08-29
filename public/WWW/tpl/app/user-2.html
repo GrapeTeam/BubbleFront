@@ -1,0 +1,352 @@
+<!--字段内容编辑弹窗-->
+<script type="text/ng-template" id="userEdit.html">
+    <div class="modal-header">
+        <h3 class="modal-title">编辑</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">名称</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value" placeholder="请输入字段名">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<!--字段内容编辑弹窗END-->
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">用户管理</h1>
+</div>
+<div class="wrapper-md userbox">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel b-a">
+                <div class="panel-heading bg-info lt">
+                    <div class="m-sm">
+                        <span class="h4 text-white">注册来源</span>
+                    </div>
+                </div>
+                <div class="padder-v b-t b-light bg-light lter row text-center no-gutter">
+                    <div class="col-xs-4">
+                        <div>QQ</div>
+                        <div class="inline m-t-sm">
+                            <div ui-jq="easyPieChart" ui-options="{
+                                percent: 30,
+                                lineWidth: 3,
+                                trackColor: '#e8eff0',
+                                barColor: '#7266ba',
+                                scaleColor: false,
+                                color: '#fff',
+                                size: 65,
+                                lineCap: 'butt',
+                                rotate: 45,
+                                animate: 1000
+                                }" class="easyPieChart" style="width: 65px; height: 65px; line-height: 65px;">
+                                <div>
+                                    <span class="step">30</span>%
+                                </div>
+                                <canvas width="65" height="65"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div>微信</div>
+                        <div class="inline m-t-sm">
+                            <div ui-jq="easyPieChart" ui-options="{
+                                percent: 50,
+                                lineWidth: 3,
+                                trackColor: '#e8eff0',
+                                barColor: '#23b7e5',
+                                scaleColor: false,
+                                color: '#fff',
+                                size: 65,
+                                lineCap: 'butt',
+                                rotate: 90,
+                                animate: 1000
+                                }" class="easyPieChart" style="width: 65px; height: 65px; line-height: 65px;">
+                                <div>
+                                    <span class="step">50</span>%
+                                </div>
+                                <canvas width="65" height="65"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div>微博</div>
+                        <div class="inline m-t-sm">
+                            <div ui-jq="easyPieChart" ui-options="{
+                                percent: 20,
+                                lineWidth: 3,
+                                trackColor: '#e8eff0',
+                                barColor: '#fad733',
+                                scaleColor: false,
+                                color: '#fff',
+                                size: 65,
+                                lineCap: 'butt',
+                                rotate: 180,
+                                animate: 1000
+                                }" class="easyPieChart" style="width: 65px; height: 65px; line-height: 65px;">
+                                <div>
+                                    <span class="step">20</span>%
+                                </div>
+                                <canvas width="65" height="65"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hbox text-center b-t b-light">
+                    <a href="" class="col padder-v text-muted b-r b-light">
+                        <div class="h4">5032</div>
+                        <span>第三方注册</span>
+                    </a>
+                    <a href="" class="col padder-v text-muted">
+                        <div class="h4">689</div>
+                        <span>站内注册</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel no-border">
+                <div class="panel-heading bg-primary lt">
+                    <div class="m-sm">
+                        <span class="h4 text-white">用户情况</span>
+                    </div>
+                </div>
+                <div class="hbox bg-primary bg">
+                    <div class="col wrapper">
+                        <span>普通用户</span>
+                        <div class="h1 text-info font-thin">12,790</div>
+                    </div>
+                    <div class="col wrapper bg-info">
+                        <span>VIP</span>
+                        <div class="h1 text-warning font-thin">2,560</div>
+                    </div>
+                </div>
+                <div class="panel-footer bg-light lter wrapper">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <small class="text-muted block">已激活</small>
+                            <span class="text-md">1,500</span>
+                        </div>
+                        <div class="col-xs-4">
+                            <small class="text-muted block">待激活</small>
+                            <span class="text-md">10,430</span>
+                        </div>
+                        <div class="col-xs-4">
+                            <small class="text-muted block">休眠</small>
+                            <span class="text-md">400</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel b-a">
+                <div class="panel-heading bg-danger lter">
+                    <div class="m-sm">
+                        <span class="h4 text-white">用户筛选</span>
+                    </div>
+                </div>
+                <table class="table table-striped m-b-none">
+                    <thead>
+                    <tr>
+                        <th>Progress</th>
+                        <th>Item</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="progress progress-sm progress-striped active m-t-xs m-b-none">
+                                <div class="progress-bar bg-success" data-toggle="tooltip" data-original-title="80%"
+                                     style="width: 80%"></div>
+                            </div>
+                        </td>
+                        <td>App prototype design</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="progress progress-xs m-t-xs m-b-none">
+                                <div class="progress-bar bg-info" data-toggle="tooltip" data-original-title="40%"
+                                     style="width: 40%"></div>
+                            </div>
+                        </td>
+                        <td>Design documents</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="progress progress-xs m-t-xs m-b-none">
+                                <div class="progress-bar bg-warning" data-toggle="tooltip" data-original-title="20%"
+                                     style="width: 20%"></div>
+                            </div>
+                        </td>
+                        <td>UI toolkit</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="progress progress-xs m-t-xs m-b-none">
+                                <div class="progress-bar bg-danger" data-toggle="tooltip" data-original-title="15%"
+                                     style="width: 15%"></div>
+                            </div>
+                        </td>
+                        <td>Testing</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel no-border">
+                <div class="panel-heading bg-success lter">
+                    <div class="m-sm">
+                        <span class="h4 text-white">用户统计</span>
+                    </div>
+                </div>
+                <table class="table table-striped m-b-none">
+                    <thead>
+                    <tr>
+                        <th style="width:60px;" class="text-center">Graph</th>
+                        <th>Item</th>
+                        <th style="width:70px;"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div ng-init="data1=[ 16,15,15,14,17,18,16,15,16 ]" ui-jq="sparkline"
+                                 ui-options="{{data1}}, {type:'bar', height:19, barWidth:4, barSpacing:2, barColor:'{{app.color.success}}'}"
+                                 class="sparkline inline">loading...
+                            </div>
+                        </td>
+                        <td>App downloads</td>
+                        <td class="text-success" style="width: 80px;">
+                            <i class="fa fa-level-up"></i> 40%
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">
+                            <div ng-init="data2=[ 60,30,10 ]" ui-jq="sparkline"
+                                 ui-options="{{data2}}, {type:'pie', height:19, sliceColors:['{{app.color.info}}','#fff','{{app.color.warning}}']}"
+                                 class="sparkline inline">loading...
+                            </div>
+                        </td>
+                        <td>Social connection</td>
+                        <td class="text-success">
+                            <i class="fa fa-level-up"></i> 20%
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div ng-init="data3=[ 16,15,15,14,17,18,16,15,16 ]" ui-jq="sparkline"
+                                 ui-options="{{data3}}, {type:'line', height:19, width:60, lineColor:'{{app.color.primary}}', fillColor:'#fff'}"
+                                 class="sparkline inline">loading...
+                            </div>
+                        </td>
+                        <td>Revenue</td>
+                        <td class="text-warning">
+                            <i class="fa fa-level-down"></i> 5%
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div ng-init="data4=[ 16,15,15,14,17,18,16,15,16 ]" ui-jq="sparkline"
+                                 ui-options="{{data4}}, {type:'discrete', height:19, width:60, lineColor:'{{app.color.success}}'}"
+                                 class="sparkline inline">loading...
+                            </div>
+                        </td>
+                        <td>Customer increase</td>
+                        <td class="text-danger">
+                            <i class="fa fa-level-down"></i> 20%
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel no-border">
+                <div class="panel-heading bg-warning lter">
+                    <div class="m-sm">
+                        <span class="h4 text-white">用户情况</span>
+                    </div>
+                </div>
+                <div class="row wrapper">
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <input type="text" class="input-sm form-control" placeholder="Search">
+                            <span class="input-group-btn">
+                        <button class="btn btn-sm btn-default" type="button">搜索</button>
+                    </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive user-data-table">
+                    <table class="table table-striped b-t b-light">
+                        <thead>
+                        <tr>
+                            <th style="width:20px;">
+                                <label class="i-checks m-b-none">
+                                    <input type="checkbox"><i></i>
+                                </label>
+                            </th>
+                            <th>用户名</th>
+                            <th>状态</th>
+                            <th>创建时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label>
+                            </td>
+                            <td ng-click="open($event)">Idrawfast</td>
+                            <td ng-click="open($event)">4c</td>
+                            <td ng-click="open($event)">Jul 25, 2013</td>
+                        </tr>
+                        <tr>
+                            <td ng-click="open($event)"><label class="i-checks m-b-none"><input type="checkbox"
+                                                                                                name="post[]"><i></i></label>
+                            </td>
+                            <td ng-click="open($event)">Formasa</td>
+                            <td ng-click="open($event)">8c</td>
+                            <td ng-click="open($event)">Jul 22, 2013</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <footer class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-12 text-right text-center-xs">
+                            <span tooltip="双击编辑" class="pull-left text-muted inline wrapper-xs m-r-sm"><i
+                                class="fa fa-question"></i></span>
+                            <button class="btn m-b-xs btn-sm btn-primary btn-addon table-delete-btn pull-left"
+                                    disabled="disabled"><i class="fa fa-trash-o"></i>删除
+                            </button>
+                            <ul class="pagination pagination-sm m-t-none m-b-none pull-right">
+                                <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
+                                <li><a href="">1</a></li>
+                                <li><a href="">2</a></li>
+                                <li><a href="">3</a></li>
+                                <li><a href="">4</a></li>
+                                <li><a href="">5</a></li>
+                                <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>

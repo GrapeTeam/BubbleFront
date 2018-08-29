@@ -1,0 +1,52 @@
+<div class="container w-xxl w-auto-xs ng-scope">
+    <a href="" class="navbar-brand block m-t ng-binding">葡萄云</a>
+    <div class="m-b-lg">
+        <div class="wrapper text-center">
+            <strong>登录后发现更多</strong>
+        </div>
+        <form name="form" class="form-validation ng-pristine ng-invalid ng-invalid-required ng-valid-email">
+            <div class="text-danger wrapper text-center ng-binding ng-hide" ng-show="authError">
+
+            </div>
+            <div class="list-group list-group-sm">
+                <div class="list-group-item">
+                    <input placeholder="Name"
+                           class="form-control no-border ng-pristine ng-untouched ng-invalid ng-invalid-required"
+                           ng-model="user.name"
+                           required="">
+                </div>
+                <div class="list-group-item">
+                    <input type="email" placeholder="Email"
+                           class="form-control no-border ng-pristine ng-untouched ng-valid-email ng-invalid ng-invalid-required"
+                           ng-model="user.email" required="">
+                </div>
+                <div class="list-group-item">
+                    <input type="password" placeholder="Password"
+                           class="form-control no-border ng-pristine ng-untouched ng-invalid ng-invalid-required"
+                           ng-model="user.password" required="">
+                </div>
+            </div>
+            <div class="checkbox m-b-md m-t-none">
+                <label class="i-checks">
+                    <input type="checkbox" ng-model="agree" required=""
+                           class="ng-pristine ng-untouched ng-invalid ng-invalid-required"><i></i> 同意 <a
+                    href="">葡萄云使用条款</a>
+                </label>
+            </div>
+            <button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="signup()"
+                    ng-disabled="form.$invalid" disabled="disabled">注 册
+            </button>
+            <div class="line line-dashed"></div>
+            <p class="text-center">
+                <small>已经有葡萄云账号?</small>
+            </p>
+            <a ui-sref="access.login" class="btn btn-lg btn-default btn-block">登 录</a>
+        </form>
+    </div>
+    <!-- ngInclude: 'tpl/blocks/page_footer.html' -->
+    <div class="text-center ng-scope" ng-include="'tpl/blocks/page_footer.html'">
+        <p class="ng-scope">
+            <small class="text-muted">Web app framework base on Bootstrap and AngularJS<br>© 2014</small>
+        </p>
+    </div>
+</div>

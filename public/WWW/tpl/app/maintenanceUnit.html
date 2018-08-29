@@ -1,0 +1,114 @@
+<div class="hbox hbox-auto-xs" unselectable="on" ng-init="app.settings.full = true;">
+    <!--新建站群弹窗-->
+    <script type="text/ng-template" id="columnCreate.html">
+        <div class="modal-header">
+            <h3 class="modal-title">新建栏目</h3>
+        </div>
+        <div class="modal-body">
+            <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">栏目名称</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="name" class="form-control" ng-model="value.name" placeholder="请输入站群名称">
+                    </div>
+                </div>
+                <input type="hidden" name="fatherid" class="form-control" ng-model="value.fatherid">
+                <input type="hidden" name="sort" class="form-control" ng-model="value.sort">
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">取消</button>
+            <button class="btn btn-info ladda-button" ng-click="ok($event)">
+                <span class="ladda-label">确定</span>
+                <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </script>
+    <!--新建站群弹窗-->
+    <!--新建站群弹窗-->
+    <script type="text/ng-template" id="siteTree.html">
+        <div class="dd-handle dd3-handle">Drag</div>
+        <div class="dd3-content">{{item.name}}</div>
+        <ol class="dd-list" ng-if="item.children">
+            <li class="dd-item dd3-item" data-id="{{item.wbgid}}" ng-repeat="item in item.children"
+                ng-include="'siteTree.html'"></li>
+        </ol>
+    </script>
+    <!--新建站群弹窗-->
+    <treenav list="gropuList" breadcrumb="breadcrumb" title="维护单位"></treenav>
+    <div class="col">
+        <div class="wrapper bg-light lt b-b h-70">
+            <ul class="breadcrumb bg-white b-a m-b-none">
+                <li ng-repeat="item in breadcrumb">
+                    <span ng-click="breadcrumbClick($index)"
+                          ng-class="{'cursor-p': $index != breadcrumb.length - 1,'text-info': $index != breadcrumb.length - 1, 'text-muted': $index == breadcrumb.length - 1}">{{item}}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="wrapper" ng-show="mode">
+            <div class="panel panel-default">
+                <div class="panel-heading font-bold">
+                    单位编辑
+                    <a class="pull-right btn btn-sm m-t-n-xs" tooltip="添加根单位" ng-click="createRoot()"><i
+                        class="fa fa-plus"></i></a>
+                    <a class="pull-right btn btn-sm m-t-n-xs" tooltip="全部展开" ng-click="expandAll()"><i
+                        class="fa fa-indent"></i></a>
+                    <a class="pull-right btn btn-sm m-t-n-xs" tooltip="全部收起" ng-click="collapseAll()"><i
+                        class="fa fa-dedent"></i></a>
+                </div>
+                <div class="panel-body">
+                    <div class="dd max-w-full sortbox">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper" ng-show="!mode">
+            <div class="panel panel-default" ng-if="current">
+                <div class="panel-heading font-bold">栏目项编辑</div>
+                <div class="panel-body">
+                    <form class="bs-example form-horizontal ng-pristine ng-valid">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">ownid</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="current.ownid" placeholder="">
+                                <span class="help-block m-b-none"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">isvisble</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="current.isvisble" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="current.name" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">tempid</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="current.tempid" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">type</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" ng-model="current.type" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button type="submit" class="btn btn-sm btn-info pull-right">确定</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="b pos-rlt" ng-if="!current">
+                <div class="tipsbox-h">请选择栏目</div>
+            </div>
+        </div>
+    </div>
+</div>

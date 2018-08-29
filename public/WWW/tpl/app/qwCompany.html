@@ -1,0 +1,105 @@
+<div class="hbox hbox-auto-xs" unselectable="on" ng-init="app.settings.full = true;">
+    <!--新建APP弹窗-->
+    <script type="text/ng-template" id="companyCreate.html">
+        <div class="modal-header">
+            <h3 class="modal-title">子站</h3>
+        </div>
+        <div class="modal-body">
+            <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">子站名称</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="value.title" placeholder="请输入字段名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">子站简介</label>
+                    <div class="col-sm-9">
+                        <textarea rows="4" cols="" type="text" class="form-control" ng-model="value.desp"
+                                  placeholder="请输入字段名"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">取消</button>
+            <button class="btn btn-info ladda-button" ng-click="ok($event)">
+                <span class="ladda-label">确定</span>
+                <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </script>
+    <script type="text/ng-template" id="qwCreate.html">
+        <div class="modal-header">
+            <h3 class="modal-title">子站</h3>
+        </div>
+        <div class="modal-body">
+            <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">站点类型</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" name="type" ng-model="value.type" ng-change="typeChange()"
+                                ng-init="value.type == undefined ? value.type = '0' : ''">
+                            <option value="0">普通站点</option>
+                            <option value="1">虚拟站点</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group qwCompany-infobox">
+                    <label class="col-sm-2 control-label">子站名称</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="value.title" placeholder="请输入字段名">
+                    </div>
+                </div>
+                <div class="form-group qwCompany-infobox">
+                    <label class="col-sm-2 control-label">是否添加默认栏目</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" name="type" ng-model="value.isDefaultColumn"
+                                ng-change="typeChange()" ng-init="value.isDefaultColumn = '0'">
+                            <option value="0">不添加</option>
+                            <option value="1">添加</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group qwCompany-infobox">
+                    <label class="col-sm-2 control-label">子站简介</label>
+                    <div class="col-sm-9">
+                        <textarea rows="4" cols="" type="text" class="form-control" ng-model="value.desp"
+                                  placeholder="请输入字段名"></textarea>
+                    </div>
+                </div>
+            </form>
+            <div class="wrapper-md b-a" ng-if="column_tree_data.length" style="margin: 0 100px;">
+                <abn-tree tree-data="column_tree_data" text="column_tree_current" tree-control="tree"
+                          on-select="treeSelect(branch)" icon-leaf="fa fa-columns"
+                          expand-level="1" icon-expand="fa fa-plus" icon-collapse="fa fa-minus">
+                </abn-tree>
+            </div>
+            <div class="qwCompany-loading"
+                 style="position:absolute;top:0;left:0;width:100%;height:100%;background: rgba(0,0,0,.3);display:none;"></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">取消</button>
+            <button class="btn btn-info ladda-button" ng-click="ok($event)">
+                <span class="ladda-label">确定</span>
+                <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </script>
+    <!--新建APP弹窗END-->
+    <div class="application-box">
+        <div class="wrapper-md">
+            <div class="contentbatchMask">
+                <div class="loading-spinner">
+                    <div class="rect1"></div>
+                    <div class="rect2"></div>
+                    <div class="rect3"></div>
+                    <div class="rect4"></div>
+                    <div class="rect5"></div>
+                </div>
+            </div>
+            <ui-tree ng-model="gropuList" control="control" name="title" fatherkey="wbid" btn="treebtn" title="子站管理"
+                     ng-if="shower"></ui-tree>
+        </div>
+    </div>
+</div>

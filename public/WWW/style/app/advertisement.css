@@ -1,0 +1,134 @@
+/*************************************
+ * adv
+ */
+
+.adv-box .adv-item-box {
+    position: fixed;
+    top: 0px;;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    z-index: 1040;
+    padding: 50px;
+    display: none;
+}
+
+.adv-box .adv-item-box .item-wrap {
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.adv-box .adv-item-box .item-wrap .adv-header {
+    border-radius: 5px 5px 0 0;
+    height: 60px;
+    line-height: 60px;
+    background: #fff;
+    position: relative;
+}
+
+.adv-box .adv-item-box .item-wrap .adv-header .process-bar {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    left: 0;
+}
+
+.adv-box .adv-item-box .item-wrap .adv-infobox {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.adv-box .adv-item-box .item-wrap .piclist {
+    width: 150px;
+    height: 100%;
+    float: left;
+    overflow: auto;
+}
+
+.adv-box .adv-item-box .item-wrap .picitem {
+    width: 120px;
+    height: 80px;
+    margin: 5px auto;
+    cursor: pointer;
+    position: relative;
+}
+
+.adv-box .adv-item-box .item-wrap .picitem.uploadbtn,
+.adv-box .adv-item-box .item-wrap .picitem.addbtn {
+    line-height: 80px;
+    text-align: center;
+    font-size: 40px;
+    position: relative;
+}
+
+.adv-box .adv-item-box .item-wrap .picitem.uploadbtn > div {
+    color: #58666e;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.adv-box .adv-item-box .item-wrap .picitem.cur {
+    border: 2px #ff6b6b solid;
+}
+
+.adv-box .adv-item-box .item-wrap .picitem img {
+    width: 100%;
+    height: 100%;
+}
+
+.adv-box .adv-item-box .item-wrap .picitem:hover .deletebtn {
+    opacity: 1;
+}
+
+.adv-box .adv-item-box .deletebtn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    opacity: 0;
+    padding: 0 7px;
+    text-align: right;
+    color: #fff;
+    background: rgba(0, 0, 0, .5);
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
+}
+
+.adv-box .adv-item-box .item-wrap .infobox {
+    width: 100%;
+    height: 100%;
+    padding-left: 150px;
+}
+
+.adv-box .adv-item-box .item-wrap .inputbox {
+    width: 100%;
+    height: 25%;
+}
+
+.adv-box .adv-item-box .item-wrap .inputbox .newitem {
+    height: 30px;
+    line-height: 30px;
+    border: 1px #ddd solid;
+    padding: 0 15px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: all .2s;
+    background: #fff;
+}
+
+.adv-box .adv-item-box .item-wrap .preview {
+    margin: 0 auto;
+    padding: 40px;
+    max-width: 800px;
+    overflow: auto;
+}

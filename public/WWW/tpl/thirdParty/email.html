@@ -1,0 +1,171 @@
+<div class="hbox hbox-auto-xs" unselectable="on" ng-init="app.settings.full = true;">
+    <!--新建广告弹窗-->
+    <script type="text/ng-template" id="EmailCreate.html">
+        <div class="modal-header">
+            <h3 class="modal-title">{{title ? title : '添加Email'}}</h3>
+        </div>
+        <div class="modal-body">
+            <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email密码</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="value.password" placeholder="请输入字段名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">ownid</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="value.ownid" placeholder="请输入字段名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">pop3</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="value.pop3" placeholder="请输入字段名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">smtp</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="value.smtp" placeholder="请输入字段名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">用户ID</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="value.userid" placeholder="请输入字段名">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">取消</button>
+            <button class="btn btn-info ladda-button" ng-click="ok($event)">
+                <span class="ladda-label">确定</span>
+                <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </script>
+    <!--新建广告弹窗END-->
+    <!--激活-->
+    <script type="text/ng-template" id="EmailActiveModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">邮箱激活</h3>
+        </div>
+        <div class="modal-body">
+            <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">验证码</label>
+                    <div class="col-sm-9">
+                        <div class="input-group m-b">
+                            <input type="text" class="form-control" ng-model="value">
+                            <span class="input-group-addon cursor-p" ng-click="send()">{{num}}</span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">关闭</button>
+            <button class="btn btn-info ladda-button" ng-click="ok($event)">
+                <span class="ladda-label">确定</span>
+                <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </script>
+    <!--激活END-->
+    <!--发送消息-->
+    <script type="text/ng-template" id="EmailSendModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">发送邮件</h3>
+        </div>
+        <div class="modal-body">
+            <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">邮件主题</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="value.subject" placeholder="请输入字段名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">收件人邮箱</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="value.to" placeholder="请输入字段名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">发送内容</label>
+                    <div class="col-sm-9">
+                        <textarea ng-model="value.content" class="form-control"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">关闭</button>
+            <button class="btn btn-info ladda-button" ng-click="ok($event)">
+                <span class="ladda-label">确定</span>
+                <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </script>
+    <!--发送消息END-->
+    <div class="adv-box">
+        <div>
+            <div class="bg-light lter b-b wrapper-md ng-scope">
+                <h1 class="m-n font-thin h3">Email管理</h1>
+            </div>
+            <div class="table-box wrapper">
+                <select-table multiple="true" editable="true" interface="email" title="Email列表" control="tableControl"
+                              create-modal="EmailCreate.html"></select-table>
+            </div>
+        </div>
+        <div class="adv-item-box">
+            <div class="item-wrap bg-light lter">
+                <div class="adv-header wrapper b-b">
+                    <h2 class="m-n font-thin h3">
+                        Email详情
+                        <a class="pull-right btn btn-sm btn-default m-r-sm ng-binding" ng-click="closeAdv()">关闭</a>
+                        <a class="pull-right btn btn-sm btn-default m-r-sm ng-binding" ng-click="create()">新增</a>
+                    </h2>
+                </div>
+                <div class="wrapper">
+                    <div ng-if="!advs.length" class="tipsbox">暂无广告</div>
+                    <div class="m-b-md m-l-md w-xl animated fadeInUp pull-left" ng-repeat="item in advs"
+                         ng-if="advs.length">
+                        <div class="b-a">
+                            <div class="panel-heading no-border hover-anchor" ng-class="colors[0]">
+                                <span class="text-lt">{{item.adname}}</span>
+                                <span class="pull-right hover-action cursor-p" ng-click="deleteAdv(item)"><i
+                                    class="fa fa-times"></i></span>
+                            </div>
+                            <div class="item m-l-n-xxs m-r-n-xxs bg-white clear-b">
+                                <form
+                                    class="form-horizontal ng-pristine ng-valid ng-valid-date ng-valid-required ng-valid-parse ng-valid-date-disabled"
+                                    method="get">
+                                    <div class="row padder-v-xs">
+                                        <label class="col-sm-4 text-center">广告名称: </label>
+                                        <div class="col-sm-8">
+                                            {{item.adname}}
+                                        </div>
+                                    </div>
+                                    <div class="row padder-v-xs">
+                                        <label class="col-sm-4 text-center">广告图片: </label>
+                                        <div class="col-sm-8" ng-click="showPic(item)">
+                                            <a>点击查看</a>
+                                        </div>
+                                    </div>
+                                    <div class="row padder-v-xs">
+                                        <label class="col-sm-4 text-center">广告信息: </label>
+                                        <div class="col-sm-8" ng-click="editAdv(item)"><a>编辑</a></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear-b"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

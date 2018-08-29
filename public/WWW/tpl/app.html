@@ -1,0 +1,212 @@
+<!-- navbar -->
+<div data-ng-include=" 'tpl/blocks/header.html' " class="app-header navbar">
+</div>
+<!-- / navbar -->
+
+<!-- menu -->
+<div data-ng-include=" 'tpl/blocks/aside.html' " class="app-aside hidden-xs {{app.settings.asideColor}}">
+</div>
+<!-- / menu -->
+
+<!-- content -->
+<canvas class="main-canvas-bg"></canvas>
+<div class="app-content">
+    <div ui-butterbar></div>
+    <a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".app-aside"></a>
+    <div class="app-content-body fade-in-up" ng-class="{'app-content-full': app.settings.full}">
+        <div ui-view></div>
+    </div>
+</div>
+<!-- /content -->
+
+<!-- loading -->
+<div class="main-loading-box">
+    <div class="loading-spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
+<!-- /loading -->
+
+<!-- aside right -->
+<div class="app-aside-right pos-fix no-padder w-md w-auto-xs bg-white b-l animated fadeInRight hide">
+    <div class="vbox">
+        <div class="wrapper b-b b-t b-light m-b">
+            <a href class="pull-right text-muted text-md" ui-toggle-class="show" target=".app-aside-right">
+                <i class="icon-close"></i>
+            </a> Chat
+        </div>
+        <div class="row-row">
+            <div class="cell">
+                <div class="cell-inner padder">
+                    <!-- chat list -->
+                    <div class="m-b">
+                        <a href class="pull-left thumb-xs avatar">
+                            <img src="img/a2.jpg" alt="...">
+                        </a>
+                        <div class="clear">
+                            <div class="pos-rlt wrapper-sm b b-light r m-l-sm">
+                                <span class="arrow left pull-up"></span>
+                                <p class="m-b-none">Hi John, What's up...</p>
+                            </div>
+                            <small class="text-muted m-l-sm">
+                                <i class="fa fa-ok text-success"></i> 2 minutes ago
+                            </small>
+                        </div>
+                    </div>
+                    <div class="m-b">
+                        <a href class="pull-right thumb-xs avatar">
+                            <img src="img/a3.jpg" class="img-circle" alt="...">
+                        </a>
+                        <div class="clear">
+                            <div class="pos-rlt wrapper-sm bg-light r m-r-sm">
+                                <span class="arrow right pull-up arrow-light"></span>
+                                <p class="m-b-none">Lorem ipsum dolor :)</p>
+                            </div>
+                            <small class="text-muted">1 minutes ago</small>
+                        </div>
+                    </div>
+                    <div class="m-b">
+                        <a href class="pull-left thumb-xs avatar">
+                            <img src="img/a2.jpg" alt="...">
+                        </a>
+                        <div class="clear">
+                            <div class="pos-rlt wrapper-sm b b-light r m-l-sm">
+                                <span class="arrow left pull-up"></span>
+                                <p class="m-b-none">Great!</p>
+                            </div>
+                            <small class="text-muted m-l-sm">
+                                <i class="fa fa-ok text-success"></i>Just Now
+                            </small>
+                        </div>
+                    </div>
+                    <!-- / chat list -->
+                </div>
+            </div>
+        </div>
+        <div class="wrapper m-t b-t b-light">
+            <form class="m-b-none">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Say something">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">SEND</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- / aside right -->
+
+<!-- footer -->
+<div class="app-footer wrapper b-t bg-light">
+    &copy; 2017 GrapeSoft Copyright.
+</div>
+<!-- / footer -->
+
+<!--<div data-ng-include=" 'tpl/blocks/task.html' " class="task panel panel-default" ng-controller="taskPopUpController">-->
+<!--<div data-ng-include=" 'tpl/blocks/report.html' " class="task panel panel-default" ng-controller="reportPopUpController">-->
+
+<!--列表显示字段编辑弹窗-->
+<script type="text/ng-template" id="modalVisibleItem.html">
+    <div class="modal-header">
+        <h3 class="modal-title">列表显示字段</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-4" ng-repeat="item in items track by $index">
+                <label class="checkbox-inline i-checks line-sm">
+                    <input type="checkbox" ng-model="item.visible"><i></i>{{item.mark}}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">关闭</button>
+    </div>
+</script>
+<!--列表显示字段编辑弹窗END-->
+
+<!--删除确认弹窗-->
+<script type="text/ng-template" id="configDeleteItem.html">
+    <div class="modal-header">
+        <h3 class="modal-title">删除</h3>
+    </div>
+    <div class="modal-body">
+        <h4 class="modal-title text-center">确定要删除所有选中项吗?</h4>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<!--删除确认弹窗END-->
+
+<!--字段内容编辑弹窗-->
+<script type="text/ng-template" id="modalEdit.html">
+    <div class="modal-header">
+        <h3 class="modal-title">编辑</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid" ng-if="!mode">
+            <div class="form-group" ng-class="error ? 'has-error' : 'has-success'">
+                <label class="col-sm-2 control-label">名称</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="value" ng-change="textchange()"
+                           placeholder="请输入字段名">
+                </div>
+            </div>
+        </form>
+        <json-edit json="value" field="field" ng-if="mode"></json-edit>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<!--字段内容编辑弹窗END-->
+
+<!--JSON编辑器弹窗-->
+<script type="text/ng-template" id="configJsonEdit.html">
+    <div class="modal-header">
+        <h3 class="modal-title">编辑</h3>
+    </div>
+    <div class="modal-body" json-edit="" json="configjsonlist" field="field"></div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<!--JSON编辑器弹窗END-->
+
+<!--表格编辑器弹窗-->
+<script type="text/ng-template" id="tableEdit.html">
+    <div class="modal-header">
+        <h3 class="modal-title">编辑</h3>
+    </div>
+    <div class="modal-body">
+        <json-edit json="value" field="visible"></json-edit>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<!--JSON编辑器弹窗END-->
+
+</div>

@@ -1,0 +1,55 @@
+<!-- list -->
+<ul class="nav">
+    <li ui-sref-active="active">
+        <a ui-sref="app.user">
+            <i class="text-success fa fa-user"></i>
+            <span class="font-bold">用户管理</span>
+        </a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.usergroup">
+            <i class="text-primary fa fa-users"></i>
+            <span class="font-bold">用户组管理</span>
+        </a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.site">
+            <i class="text-primary-dk fa fa-sitemap"></i>
+            <span class="font-bold">站群管理</span>
+        </a>
+    </li>
+    <li ng-class="{active:$state.includes('app.maintenanceUnit')}">
+        <a href class="auto">
+            <span class="pull-right text-muted">
+                <i class="fa fa-fw fa-angle-right text"></i>
+                <i class="fa fa-fw fa-angle-down text-active"></i>
+            </span>
+            <i class="fa fa-wechat icon text-success"></i>
+            <span class="font-bold">第三方平台管理</span>
+        </a>
+        <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+                <a href>
+                    <span>第三方平台管理</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.thirdParty.email">
+                    <span>Email</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.thirdParty.wechat">
+                    <span class="font-bold">微信管理</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.system">
+            <i class="text-info-dker fa fa-wrench"></i>
+            <span class="font-bold">系统设置</span>
+        </a>
+    </li>
+</ul>
+<!-- / list -->

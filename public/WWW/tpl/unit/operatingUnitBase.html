@@ -1,0 +1,72 @@
+<div class="bg-light lter b-b wrapper-md ng-scope">
+    <h1 class="m-n font-thin h3">运行单位基本信息</h1>
+</div>
+<div class="hbox hbox-auto-xs bg-light wrapper">
+    <div class="panel panel-default">
+        <div class="panel-heading font-bold">设置</div>
+        <div class="panel-body">
+            <form class="form-horizontal" method="get">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">单位名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="info.companyName" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">单位简介</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="info.companyDesp" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">单位网址</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="info.companyURL" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">单位地址</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="info.companyAddr" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">固定电话</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="info.companyTele" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">手机</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="info.companyMob" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">邮箱</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="info.companyEmail" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">QQ</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="info.companyQQ" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">联系人</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="info.companyPerson" class="form-control">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <button class="pull-right btn btn-info ladda-button" ng-click="confirm($event)">
+                    <span class="ladda-label">确定</span>
+                    <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+                </button>
+                <button class="btn m-r-xs btn-info pull-right" ng-click="review()">还原</button>
+            </form>
+        </div>
+    </div>
+</div>

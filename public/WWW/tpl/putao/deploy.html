@@ -1,0 +1,131 @@
+<div class="contentbatchMask">
+    <div class="loading-spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
+<script type="text/ng-template" id="configAddModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">添加</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+            <div class="form-group" ng-repeat="item in list track by $index">
+                <label class="col-sm-2 control-label">内容</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" ng-model="list[$index]" placeholder="请输入内容">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<div class="hbox hbox-auto-xs overflow-h" unselectable="on" ng-init="app.settings.full = true;">
+    <ul class="nav nav-tabs nav-justified deploy-nav">
+        <li ng-class="{active: currentTab == 0}" ng-click="tabChange(0)">
+            <a>APP</a>
+        </li>
+        <li ng-class="{active: currentTab == 1}" ng-click="tabChange(1)">
+            <a>Config</a>
+        </li>
+    </ul>
+    <div class="deploy-wrap-box" ng-show="currentTab == 0">
+        <div class="deploy-box">
+            <div class="servicebox h-full">
+                <div class="applistbox b">
+                    <div class="alert pull-left item {{item.select ? 'alert-danger':'alert-info'}}"
+                         ng-repeat="item in app" ng-show="item.desp"
+                         ng-click="appClick(item)">
+                        <div>
+                            <span class="ng-binding ng-scope">{{item.desp}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="servicelistbox b">
+                    <div class="list-header padder b-b">
+                        服务列表
+                    </div>
+                    <div class="itembox">
+                        <div class="item" ng-repeat="item in service" ng-show="item.serviceDescription">
+                            <span class="check padder-sm pull-left" ng-click="addSerivce(item)"
+                                  ng-class="{active: item.active}">
+                                <i class="fa fa-check-square"></i>
+                            </span>
+                            <span class="text pull-left">{{item.serviceDescription}}</span>
+                            <span class="icon pull-left padder">
+                                <i class="fa fa-align-justify"></i>
+                            </span>
+                            <div class="clear-b"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="deploy-mind" type="application/kityminder" minder-data-type="json"></div>
+            </div>
+        </div>
+    </div>
+    <div class="config-wrap-box" ng-show="currentTab == 1">
+        <div class="config-box">
+            <div class="applistbox b-r configitembox">
+                <p>服务列表</p>
+                <div class="alert item cursor-p {{item.select ? 'alert-danger':'alert-info'}}"
+                     ng-repeat="item in service" ng-show="item.serviceDescription"
+                     ng-click="serviceClick(item)">
+                    <div>
+                        <span class="ng-binding ng-scope">{{item.serviceDescription}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="configlist b-r configitembox">
+                <div class="tablelist">
+                    <p>服务所含表</p>
+                    <div class="alert item cursor-p {{item.select ? 'alert-danger':'alert-info'}}"
+                         ng-repeat="item in serviceConfig" ng-click="serviceTableClick(item)">
+                        <div>
+                            <span class="ng-binding ng-scope">{{item}}</span>
+                        </div>
+                    </div>
+                    <!-- <div class="alert item cursor-p alert-info" ng-click="appField()">
+                        <div>
+                            <span class="ng-binding ng-scope">添加表</span>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="line"></div>
+                <div class="fieldlist">
+                    <p>当前表所含字段</p>
+                    <div class="alert item cursor-p {{item.select ? 'alert-danger':'alert-info'}}"
+                         ng-repeat="item in tableFields" ng-click="serviceFieldClick(item)">
+                        <div>
+                            <span class="ng-binding ng-scope">{{item.fieldName}}</span>
+                        </div>
+                    </div>
+                    <!-- <div class="alert item cursor-p alert-info" ng-click="appField()" ng-show="tableFields">
+                        <div>
+                            <span class="ng-binding ng-scope">添加字段</span>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="fieldbox b-r configitembox">
+                <json-edit json="value" field="field"></json-edit>
+                <div>
+                    <button class="btn btn-info pull-right" ng-click="save()">保存</button>
+                </div>
+            </div>
+            <div class="textbox configitembox">
+                <textarea class="form-control" ng-model="text" ng-change="textChange()" rows="30"></textarea>
+            </div>
+            <div class="clear-b"></div>
+        </div>
+    </div>
+</div>
+</div>

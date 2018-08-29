@@ -1,0 +1,66 @@
+<div class="hbox hbox-auto-xs" unselectable="on" ng-init="app.settings.full = true;">
+    <!--新建回复弹窗-->
+    <script type="text/ng-template" id="replyMessageModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">回复留言</h3>
+        </div>
+        <div class="modal-body">
+            <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">留言内容</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" ng-model="value" rows="3"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">取消</button>
+            <button class="btn btn-info ladda-button" ng-click="ok($event)">
+                <span class="ladda-label">确定</span>
+                <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </script>
+    <!--新建回复弹窗END-->
+    <!--回复查看弹窗-->
+    <script type="text/ng-template" id="messageViewModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">留言查看</h3>
+        </div>
+        <div class="modal-body">
+            <h3 class="text-center" ng-show="!list">回复数据加载中....</h3>
+            <h3 class="text-center h5">{{tipscontent}}</h3>
+            <div class="message-view-box">
+                <div ng-repeat="item in list">
+                    <div class="item">
+                        <span class="name text-info">{{item.oid}}:</span>
+                        <span class="content m-l-sm">{{item.messageContent}}</span>
+                        <span
+                            class="time text-muted pull-right">{{item.messageDate | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                    </div>
+                    <div class="line line-dashed b-b line-lg"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">取消</button>
+            <button class="btn btn-info ladda-button" ng-click="ok($event)">
+                <span class="ladda-label">确定</span>
+                <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </script>
+    <!--回复查看弹窗END-->
+    <div class="application-box">
+        <div class="application-wrap">
+            <div class="bg-light lter b-b wrapper-md ng-scope">
+                <h1 class="m-n font-thin h3">留言管理</h1>
+            </div>
+            <div class="table-box wrapper">
+                <select-table multiple="true" editable="true" interface="message" title="留言列表" helper="点击蓝色数字查看回复详情"
+                              control="tableControl"></select-table>
+            </div>
+        </div>
+    </div>
+</div>

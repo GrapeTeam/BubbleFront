@@ -1,0 +1,201 @@
+<script type="text/ng-template" id="ApiSaveModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">保存接口</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">接口名称</label>
+                <div class="col-sm-9">
+                    <input type="text" ng-model="name" class="form-control">
+                </div>
+            </div>
+            <div class="form-group" ng-show="listshow">
+                <label class="col-sm-2 control-label">请选择分类</label>
+                <div class="col-sm-9">
+                    <select class="form-control" ng-model="type">
+                        <option value="{{$index}}" ng-repeat="item in list">{{item.name}}</option>
+                        <option value="-1">新建分类</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" ng-show="type == '-1'">
+                <label class="col-sm-2 control-label">新建分类名</label>
+                <div class="col-sm-9">
+                    <input type="text" ng-model="newtype" class="form-control">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<div class="api-tester-box row m-n h-full" ng-init="app.settings.full = true;">
+    <div class="contentbatchMask powerloading">
+        <div class="loading-spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+    </div>
+    <div class="listbox b-r">
+        <tabset justified="true" class="tab-container">
+            <tab heading="系统API">
+                <accordion>
+                    <accordion-group heading="{{key}}" ng-repeat="(key, value) in interfaceList">
+                        <p class="cursor-p text-info m-b b-b" ng-repeat="(key1, value1) in value"
+                           ng-click="systemClick(value1, key1)">{{key1}}</p>
+                    </accordion-group>
+                </accordion>
+            </tab>
+            <tab heading="用户API">
+                <accordion>
+                    <accordion-group heading="{{group.name}}" ng-repeat="group in groups">
+                        <p class="cursor-p text-info m-b b-b" ng-repeat="item in group.data" ng-click="userClick(item)">
+                            {{item.name}}</p>
+                    </accordion-group>
+                </accordion>
+            </tab>
+        </tabset>
+    </div>
+    <div class="apicontentbox wrapper">
+        <form role="form" class="ng-pristine ng-valid">
+            <div class="form-group">
+                <label>请求地址</label>
+                <div class="input-group m-b">
+                    <span class="input-group-addon">
+                        <select class="form-control" ng-model="type">
+                            <option value="GET">GET</option>
+                            <option value="POST">POST</option>
+                        </select>
+                    </span>
+                    <input type="text" class="form-control" ng-change="changeUrl()" ng-model="url">
+                    <span class="input-group-addon">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" ng-model="req.isGrape"> GrapeApi
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in" ng-show="req.isGrape"></div>
+            <div class="m-b" ng-show="req.isGrape">
+                <p>常用主机</p>
+                <button type="button" class="btn btn-sm btn-default" ng-click="changeHost('60.173.0.46')">60.173.0.46
+                </button>
+                <button type="button" class="btn btn-sm btn-default" ng-click="changeHost('123.57.214.226')">
+                    123.57.214.226
+                </button>
+            </div>
+            <div class="m-b" ng-show="req.isGrape">
+                <p>常用端口</p>
+                <button type="button" class="btn btn-sm btn-default" ng-click="changePort('801')">801</button>
+                <button type="button" class="btn btn-sm btn-default" ng-click="changePort('802')">802</button>
+                <button type="button" class="btn btn-sm btn-default" ng-click="changePort('8001')">8001</button>
+                <button type="button" class="btn btn-sm btn-default" ng-click="changePort('8080')">8080</button>
+            </div>
+            <div class="m-b" ng-show="req.isGrape">
+                <p>常用appid</p>
+                <button type="button" class="btn btn-sm btn-default" ng-click="changeReq('13', 3, 'appid')">13</button>
+                <button type="button" class="btn btn-sm btn-default" ng-click="changeReq('18', 3, 'appid')">18</button>
+                <button type="button" class="btn btn-sm btn-default" ng-click="changeReq('19', 3, 'appid')">19</button>
+                <button type="button" class="btn btn-sm btn-default" ng-click="changeReq('20', 3, 'appid')">20</button>
+                <button type="button" class="btn btn-sm btn-default" ng-click="changeReq('22', 3, 'appid')">22</button>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in" ng-show="req.isGrape"></div>
+            <div class="form-group" ng-show="req.isGrape">
+                <label>请求详情</label>
+                <div class="input-group m-b">
+                    <span class="input-group-addon">主机</span>
+                    <input type="text" class="form-control" ng-model="req.host" ng-change="changeHost()">
+                </div>
+                <div class="input-group m-b">
+                    <span class="input-group-addon">端口</span>
+                    <input type="text" class="form-control" ng-model="req.port" ng-change="changePort()">
+                </div>
+                <div class="input-group m-b">
+                    <span class="input-group-addon">appid</span>
+                    <input type="text" class="form-control" ng-model="req.appid" ng-change="changeReq('', 3, 'appid')">
+                </div>
+                <div class="input-group m-b">
+                    <span class="input-group-addon">包名</span>
+                    <input type="text" class="form-control" ng-model="req.jar" ng-change="changeReq('', 4, 'jar')">
+                </div>
+                <div class="input-group m-b">
+                    <span class="input-group-addon">类名</span>
+                    <input type="text" class="form-control" ng-model="req.class" ng-change="changeReq('', 5, 'class')">
+                </div>
+                <div class="input-group m-b">
+                    <span class="input-group-addon">方法</span>
+                    <input type="text" class="form-control" ng-model="req.func" ng-change="changeReq('', 6, 'func')">
+                </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in" ng-show="req.isGrape"></div>
+            <div class="form-group" ng-show="req.isGrape">
+                <label>参数列表</label>
+                <div class="input-group m-b" ng-repeat="item in req.par">
+                    <span class="input-group-addon">
+                        <select class="form-control" ng-model="item.type">
+                            <option value="int" selected>int</option>
+                            <option value="s">string</option>
+                        </select>
+                    </span>
+                    <input type="text" class="form-control" ng-model="item.value" ng-change="changePar(item, $index)">
+                </div>
+                <div class="input-group m-b">
+                    <span class="input-group-addon">
+                        <select class="form-control" ng-model="newpar.type">
+                            <option value="int" selected>int</option>
+                            <option value="s">string</option>
+                        </select>
+                    </span>
+                    <input type="text" class="form-control" ng-model="newpar.value" placeholder="输入参数值后点击右侧加号加入参数">
+                    <span class="input-group-addon" ng-click="addPar()">
+                        <i class="fa fa-plus"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group overflow-h">
+                <label>请求头</label>
+                <div style="margin-right: -15px; margin-left: -15px;">
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" placeholder="请求头名称" disabled value="GrapeSID">
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" placeholder="请求头值" ng-model="header">
+                    </div>
+                </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="overflow-h">
+                <button type="submit" class="btn btn-sm btn-primary pull-right" ng-click="request()">请求</button>
+                <button type="button" class="btn btn-sm btn-primary pull-right m-r m-l" ng-click="save()">保存</button>
+            </div>
+        </form>
+
+        <div class="alert alert-{{process.type}} m-t" ng-show="process.show" ng-bind-html="process.content"></div>
+
+        <button ng-show="result" type="button" class="btn btn-sm btn-default" ng-click="json.ex()">全部展开</button>
+        <button ng-show="result" type="button" class="btn btn-sm btn-default" ng-click="json.coll()">全部折叠</button>
+        <button ng-show="result" type="button" class="btn btn-sm btn-default" ng-click="json.level(1)">折叠等级1</button>
+        <button ng-show="result" type="button" class="btn btn-sm btn-default" ng-click="json.level(2)">折叠等级2</button>
+        <button ng-show="result" type="button" class="btn btn-sm btn-default" ng-click="json.level(3)">折叠等级3</button>
+        <button ng-show="result" type="button" class="btn btn-sm btn-default" ng-click="json.level(4)">折叠等级4</button>
+        <button ng-show="result" type="button" class="btn btn-sm btn-default" ng-click="json.level(5)">折叠等级5</button>
+        <button ng-show="result" type="button" class="btn btn-sm btn-default" ng-click="json.level(6)">折叠等级6</button>
+        <button ng-show="result" type="button" class="btn btn-sm btn-default" ng-click="json.level(7)">折叠等级7</button>
+        <button ng-show="result" type="button" class="btn btn-sm btn-default" ng-click="json.level(8)">折叠等级8</button>
+        <button ng-show="result" type="button" class="btn btn-sm btn-default" ng-click="json.level(9)">折叠等级8</button>
+        <button ng-show="result" type="button" class="btn btn-sm btn-default" ng-click="json.level(10)">折叠等级10</button>
+        <div ng-show="result" id="Canvas" class="m-t w-full"
+             style="overflow:auto;max-height:500px;margin-bottom: 10px;"></div>
+    </div>
+</div>
+</div>

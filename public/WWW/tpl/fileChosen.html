@@ -1,0 +1,84 @@
+<div class="file-chosen-wrap animated fadeInUp">
+    <div class="hbox hbox-auto-xs pos-rlt overflow-h bg-light" unselectable="on">
+        <div class="col w w-auto-xs bg-light lter b-r navbox">
+            <div class="subnav-top b-b">文件选择
+                <button class="btn m-t-md m-r-sm btn-sm btn-info pull-right" id="fileUploadPickerChose"
+                        style="width: 50px;height: 30px;">上传
+                </button>
+            </div>
+            <a class="subnav-item hover-color" ng-class="item.selected ? 'active' : ''" ng-click="typeClick(item)"
+               ng-repeat="item in types">{{item.name}}</a>
+        </div>
+        <div class="col pos-rlt filebox w-full">
+            <div class="breadcrumbbox h-70 wrapper b-b">
+                <ul class="breadcrumb bg-white b-a">
+                    <li ng-repeat="item in pathmap">
+                        <span ng-click="breadcrumbClick($index)"
+                              ng-class="{'cursor-p': $index != pathmap.length - 1,'text-info': $index != pathmap.length - 1}">{{item[0].fileoldname}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="filelistbox">
+                <div class="wrapper-sm h-full pos-rlt overflow-auto" ng-mousedown="darw.start($event)"
+                     ng-mousemove="darw.move($event)" ui-scroll-load=".fileitembox"
+                     control="scrollControl">
+                    <div class="select-box"></div>
+                    <div class="fileitembox">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dialog dialog-web-uploader dialog-blue h5-uploader animated fadeInRight">
+            <div class="dialog-header">
+                <div class="header-progress" style="width: 1.24679%;"></div>
+                <h3><span class="dialog-header-title"><em class="select-text">上传文件</em></span></h3>
+                <div class="dialog-control">
+                    <span class="dialog-icon dialog-close" ng-click="closeUpload($event)">×</span>
+                    <span class="dialog-icon dialog-min" ng-click="uploadMin($event)">-</span>
+                </div>
+            </div>
+            <div class="dialog-body">
+                <div class="uploader-list-wrapper">
+                    <div class="uploader-list-header">
+                        <div class="file-name">文件名</div>
+                        <div class="file-size">大小</div>
+                        <div class="file-path">文件夹</div>
+                        <div class="file-status">状态</div>
+                        <div class="file-operate">速度</div>
+                    </div>
+                    <div class="tips has-error" style="display: none;">
+                        <div class="resident-caution">
+                            <span class="caution-title">警告</span>
+                            <span class="caution-text"></span>
+                            <em class="arrow-outer"></em>
+                            <em class="arrow-inner"></em>
+                        </div>
+                        <em class="icon icon-caution"></em>
+                        <div class="text">有1个文件被暂停或取消</div>
+                        <em class="close">×</em>
+                    </div>
+                    <div class="uploader-list">
+                        <ul class="uploader-container" id="uploaderList">
+                            <li class="file-list status-pause" ng-repeat="item in fileList" id="uploaditem{{item.idx}}">
+                                <div class="process" style="width: 0px;"></div>
+                                <div class="info">
+                                    <div class="file-name" title="{{item.name}}">
+                                        <div class="file-icon fileicon-sys-s-exe"></div>
+                                        <span class="name-text">{{item.name}}</span>
+                                    </div>
+                                    <div class="file-size">{{item.formatSize}}</div>
+                                    <div class="file-path"><a>{{folder ? folder.fileoldname : '根目录'}}</a></div>
+                                    <div class="file-status">
+                                        <span class="waiting {{item.stateColor}}" style="display: inline">{{item.uploadState}}</span>
+                                    </div>
+                                    <div class="file-operate"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

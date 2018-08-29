@@ -1,0 +1,750 @@
+<div class="hbox hbox-auto-xs bg-light contentBox pos-rlt" ng-class="{'newsopen':newItem}" style="overflow:hidden;"
+     ng-init="app.settings.full = true;">
+    <div class="power-box wrapper row" ng-class="{min: !Mind.currentMeeting}">
+        <div class="contentbatchMask powerloading">
+            <div class="loading-spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+        </div>
+        <div class="col-md-4 h50">
+            <div class="panel panel-default h-full">
+                <div class="panel-heading">站点列表</div>
+                <div class="overflow-wrapper">
+                    <div class="panel-body">
+                        <abn-tree ng-if="Mind.site_tree_data.length" tree-data="Mind.site_tree_data"
+                                  text="Mind.site_tree_current" on-select="Mind.siteTreeSelect(branch)"
+                                  icon-leaf="fa fa-columns" expand-level="1" icon-expand="fa fa-plus"
+                                  icon-collapse="fa fa-minus">
+                        </abn-tree>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 h50">
+            <div class="panel panel-default h-full">
+                <div class="panel-heading">
+                    权利列表
+                    <button type="button" class="btn btn-info btn-xs m-l-sm" ng-show="Mind.currentSite"
+                            ng-click="Mind.powerTypeModal.show()">管理当前站点权利分类
+                    </button>
+                    <button type="button" class="btn btn-info btn-xs m-r-sm m-l-sm" ng-show="Mind.currentSite"
+                            ng-click="Mind.addMeeting()">新建权利
+                    </button>
+                </div>
+                <div class="overflow-wrapper">
+                    <div class="panel-body h-full">
+                        <p class="infobox" ng-show="!Mind.currentSite">请选择站点</p>
+                        <div class="row h-full" ng-show="Mind.currentSite">
+                            <div class="col-sm-2 b-r h-full overflow-auto">
+                                <ul class="nav nav-pills nav-stacked nav-sm">
+                                    <p ng-show="!Mind.powerTypeList.length" class="text-info cursor-p"
+                                       ng-click="Mind.powerTypeModal.show()">暂无分类,点击添加</p>
+                                    <li ng-class="{active: item.active}" style="margin-bottom: 5px;"
+                                        ng-repeat="item in Mind.powerTypeList" ng-click="Mind.typeChange(item)">
+                                        <a>
+                                            {{item.name}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <ul class="col-sm-10 h-full overflow-auto">
+                                <p class="infobox"
+                                   ng-show="Mind.currentSite && (!Mind.meetingList || !Mind.meetingList.length)">
+                                    {{!Mind.powerTypeList.length ? '该站点暂无权利列表' : '该分类暂无权利列表'}}</p>
+                                <li class="list-group-item clearfix cursor-p" ng-repeat="item in Mind.meetingList"
+                                    ng-click="Mind.onMeetingSelect(item)">
+                                    <span class="clear">
+                                        <span>{{item.name}}</span>
+                                        <small class="text-muted clear text-ellipsis">{{Mind.currentType.name}}</small>
+                                    </span>
+                                    <span class="meeting-delete-btn"
+                                          ng-click="Mind.deleteMeeting(item, $index, $event)">
+                                        <i class="fa fa-times"></i>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 h50">
+            <div class="panel panel-default h-full">
+                <div class="panel-heading">权利图
+                    <span class="text-info">(按住右键即可拖动)</span>
+                </div>
+                <div class="overflow-wrapper" style="overflow:hidden;">
+                    <div id="minder-view" class="h-full" type="application/kityminder" minder-data-type="json"></div>
+                    <div class="scalbtn">
+                        <button class="btn btn-sm btn-info" ng-show="Mind.currentNode && Mind.currentNode.data.type < 3"
+                                ng-click="Mind.delete()">删除
+                        </button>
+                        <button class="btn btn-sm btn-info" ng-click="Mind.scal(true)">放大</button>
+                        <button class="btn btn-sm btn-info" ng-click="Mind.scal(false)">缩小</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-wraper-box animated" ng-show="Mind.contentShow">
+        <button class="btn btn-sm btn-info wrapper-close-btn" ng-click="Mind.contentShow = false">关闭</button>
+        <div class="content-popup-box">
+            <div class="contentbatchMask">
+                <div class="loading-spinner">
+                    <div class="rect1"></div>
+                    <div class="rect2"></div>
+                    <div class="rect3"></div>
+                    <div class="rect4"></div>
+                    <div class="rect5"></div>
+                </div>
+            </div>
+            <!-- column -->
+            <div ng-show="!shower" class="content-column-box col">
+                <div class="wrapper b-b">
+                    <div class="font-thin h4 content-title">
+                        栏目列表
+                    </div>
+                </div>
+                <div class="wrapper-md" style="height: 100%;overflow: auto;padding-bottom:60px;">
+                    <abn-tree ng-if="column_tree_data.length" tree-data="column_tree_data" text="column_tree_current"
+                              tree-control="tree" on-select="treeSelect(branch)"
+                              icon-leaf="fa fa-columns" expand-level="1" icon-expand="fa fa-plus"
+                              icon-collapse="fa fa-minus">
+                    </abn-tree>
+                    <div class="open-btn">
+                        <i class="fa fa-angle-right"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- /column -->
+            <div class="robotBtn animated" ng-show="newItem">
+                <img src="./img/content-ani1.png"/>
+                <img src="./img/content-ani2.png" style="display: none;"/>
+                <img src="./img/content-ani3.png" style="display: none;"/>
+                <img src="./img/content-ani4.png" style="display: none;"/>
+                <img src="./img/content-ani5.png" style="display: none;"/>
+                <img src="./img/content-ani6.png" style="display: none;"/>
+                <div class="messagebox">
+                    <div class="content p1">
+                        <p>您好,我是智能编辑小助手,请选择您需要的功能</p>
+                        <p class="text-center">
+                            <a class="text-info">错别字</a>
+                            <a class="text-info">隐私信息</a>
+                            <a class="text-info">全部检测</a>
+                        </p>
+                    </div>
+                    <div class="content p2">
+                        <p>智能小助手正在检测中...</p>
+                    </div>
+                </div>
+            </div>
+            <!-- content -->
+            <div ng-show="!shower" class="content-list-wrap">
+                <div class="tipsbox" ng-show="!news">请选择栏目</div>
+                <div class="tipsbox" ng-show="!newItem && news && !news.length && !pager.parameter.length">该栏目暂无新闻</div>
+                <div class="pos-rlt content-console-box b-l">
+                    <div class="vbox">
+                        <div class="row-row">
+                            <div class="cell m-h-s">
+                                <div class="cell-inner">
+                                    <div class="wrapper-md">
+                                        <form
+                                            class="form-horizontal ng-pristine ng-valid ng-valid-date ng-valid-required ng-valid-parse ng-valid-date-disabled">
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <label>新闻类型</label>
+                                                    </br>
+                                                    <label class="i-checks topbox">
+                                                        <input type="checkbox">
+                                                        <i></i>轮播
+                                                    </label>
+                                                    <!--<label class="i-checks topbox-news">
+                                                <input type="checkbox"><i></i>置顶
+                                            </label>-->
+                                                    <label class="i-checks topbox-news">
+                                                        <input type="checkbox">
+                                                        <i></i>置顶于新闻发布
+                                                    </label>
+                                                    <label class="i-checks topbox-suffix">
+                                                        <input type="checkbox">
+                                                        <i></i>为文章添加后缀(请于网站设置中设定)
+                                                    </label>
+                                                    <button class="btn btn-default btn-sm m-l-md"
+                                                            ui-toggle-class="active"
+                                                            ng-click="toggleshow = !toggleshow">
+                                                        <i class="fa fa-angle-double-down text"></i>
+                                                        <span class="text">高级功能</span>
+                                                        <i class="fa fa-angle-double-up text-active"></i>
+                                                        <span class="text-active">隐藏</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="line line-dashed b-b line-lg" ng-show="toggleshow"></div>
+                                            <div ng-show="toggleshow">
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <label>新闻副标题</label>
+                                                        <input type="text" ng-change="updateLocalStorage()"
+                                                               class="form-control" ng-model="newItem.subName"
+                                                               placeholder="请输入新闻副标题">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" ng-show="false">
+                                                    <div class="col-sm-12">
+                                                        <label>内容摘要</label>
+                                                        <textarea type="text" ng-change="updateLocalStorage()" rows="3"
+                                                                  class="form-control" ng-model="newItem.desp"
+                                                                  placeholder="请输入新闻内容摘要"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <label>新闻作者</label>
+                                                        <input type="text" ng-change="updateLocalStorage()"
+                                                               class="form-control" ng-model="newItem.author"
+                                                               placeholder="请输入新闻作者">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <label>新闻来源</label>
+                                                        <input type="text" ng-change="updateLocalStorage()"
+                                                               class="form-control" ng-model="newItem.souce"
+                                                               placeholder="请输入新闻来源">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <label>添加日期</label>
+                                                        <datetimepicker value="newItem.time" max-date="getMaxDate()"
+                                                                        time="false"></datetimepicker>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <label>附件
+                                                            <button class="btn btn-xs btn-info m-l attachmentUpload">
+                                                                点击上传附件
+                                                            </button>
+                                                        </label>
+                                                        <div class="content-attachment">
+                                                            <div class="process"></div>
+                                                            <div class="tipsbox" ng-show="!newItem.attrid.length"
+                                                                 style="margin-left: -50px; margin-top: -25px;">暂无附件
+                                                            </div>
+                                                            <table ng-show="newItem.attrid.length"
+                                                                   class="table table-striped m-n">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th style="width:70%;">文件名</th>
+                                                                    <th style="width:15%;">文件大小</th>
+                                                                    <th style="width:15%;" class="text-center">操作</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr ng-repeat="item in newItem.attrid">
+                                                                    <td>{{item.fileoldname}}</td>
+                                                                    <td>{{item.size}}</td>
+                                                                    <td class="text-center">
+                                                                        <a class="text-info"
+                                                                           ng-click="attachment.download(item)">{{item.filepath
+                                                                            ? '下载' : item.state}}</a>
+                                                                        <span> | </span>
+                                                                        <a class="text-info" ng-show="item.filepath"
+                                                                           ng-click="attachment.remove(item)">移除</a>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="line line-dashed b-b line-lg"></div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <label>新闻标题</label>
+                                                    <input type="text" class="form-control"
+                                                           ng-change="updateLocalStorage()" ng-model="newItem.mainName"
+                                                           placeholder="请输入新闻标题">
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="editor"
+                                             ng-show="current.contentType != '1' && current.contentType != '2' && current.contentType != '5'">
+                                            <textarea id="editor_id" name="content"
+                                                      style="width:100%;height:600px;"></textarea>
+                                        </div>
+                                        <div class="contentImageTypeBox m-t" ng-if="current.contentType == '1'">
+                                            <label>图片列表</label>
+                                            <br>
+                                            <div class="item b" ng-repeat="item in imgList">
+                                                <img src="{{item}}">
+                                                <div class="closebtn cursor-p" ng-click="deleteImgList(item)">
+                                                    <i class="icon-close"></i>
+                                                </div>
+                                            </div>
+                                            <div class="ubtn item cursor-p b" id="fileUploadPickerImge">
+                                                <i class="fa fa-upload text-muted"></i>
+                                            </div>
+                                        </div>
+                                        <div class="contentVideoTypeBox m-t" ng-if="current.contentType == '2'">
+                                            <label>新闻视频</label>
+                                            <br>
+                                            <button class="btn m-b-sm btn-sm btn-info animated fadeIn text-muted"
+                                                    style="width: 80px;height: 30px;" id="fileUploadPickerVideo"
+                                                    ng-click="uploadVideo()" style="">上传
+                                            </button>
+                                            <span class="process"></span>
+                                            <ui-video url="videoList[0]" rotate="deg" type="video/mp4" width="450"
+                                                      ng-if="validVideoNews && newItem.content" height="350"></ui-video>
+                                        </div>
+                                        <div class="contentVideoTypeBox m-t" ng-if="current.contentType == '5'">
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <label>新闻地址</label>
+                                                    <input type="text" class="form-control" ng-model="newItem.content"
+                                                           placeholder="请输入新闻来源">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="pdfbox" style="display: none;text-align: center;overflow: auto;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wrapper-sm b-t h-xxs padder-md pos-rlt">
+                            <div class="worduploadprocess"></div>
+                            <button type="button" class="btn btn-info pull-right m-l-sm btn-save"
+                                    ng-click="save(current.isCheck == 1)">发布
+                            </button>
+                            <button type="button" style="width: 80px;height: 34px;"
+                                    class="btn btn-info pull-right m-l-sm"
+                                    ng-show="current.contentType != '1' && current.contentType != '2'"
+                                    id="wordUploadPicker">选择文档
+                            </button>
+                            <button type="button" class="btn btn-info pull-right" ng-click="preview.show()">预览</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-list-box pos-rlt" ng-show="news && mindtype == 'use'">
+                    <div class="wrapper b-b">
+                        <div class="font-thin h4 content-title">
+                            新闻列表
+                            <!-- <button class="btn m-b-xs btn-sm btn-info pull-right m-r-sm animated fadeIn deleteBtn" style="display:none;" ng-click="delete()">删除选中</button> -->
+                        </div>
+                    </div>
+                    <div class="nav-tabs-alt wrapper-sm b-b">
+                        <select class="column-select" style="width: 100%;" data-placeholder="请选择栏目"></select>
+                    </div>
+                    <div class="min-list content-list pos-rlt">
+                        <div class="cell h-full scrollable hover">
+                            <div class="cell-inner m-h-xs" style="bottom:40px;">
+                                <div class="wrapper-sm" ng-show="tmpNews.length"
+                                     style="border-bottom:1px #b1b1b1 dashed;">
+                                    <p>待发布区
+                                        <a class="text-info pull-right" ng-click="publishAll()">全部发布</a>
+                                    </p>
+                                    <div class="list-group m-n">
+                                        <a class="list-group-item b-l-3x bg-muted {{colors[$index % 3]}}"
+                                           ng-click="newsClick(item)" ng-class="item.selected ? 'actived' : ''"
+                                           title="{{item.mainName}}" ng-repeat="item in tmpNews track by $index">
+                                            <span class="pull-right text-muted">
+                                                <i class="fa fa-times" ng-click="tmpNews.splice($index, 1)"></i>
+                                            </span>
+                                            <span class="block text-ellipsis ng-binding">{{item.mainName}}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="wrapper-sm" ng-show="news && news.length">
+                                    <div class="list-group news-list m-n">
+                                        <a class="list-group-item b-l-3x hover-anchor hover {{colors[$index % 3]}}"
+                                           ng-click="newsClick(item)" ng-class="item.selected ? 'actived' : ''"
+                                           title="{{item.mainName}}" ng-repeat="item in news track by $index">
+                                            <span class="pull-right staricon" ng-click="top(item, $index, $event)"
+                                                  ng-class="{'hover-action' : !item.attribute || item.attribute == '0', 'text-muted' : !item.attribute || item.attribute == '0', 'text-warning-dk': item.attribute == 1, 'text-info': item.attribute == 2}">
+                                                <i class="fa fa-star"></i>
+                                            </span>
+                                            <span class="block text-ellipsis ng-binding">{{item.mainName}}</span>
+                                            <small class="text-muted ng-binding">{{getOldTime(item.time)}}</small>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="new-pager-box" ng-show="news && news.length">
+                            <div class="prev cursor-p text-info">上一页</div>
+                            <div class="current">
+                                <span class="c">1</span>/
+                                <span class="t">10</span>页
+                            </div>
+                            <div class="page-input">到第
+                                <input type="text" class="m-l-xs m-r-xs" name="pager"/>页
+                            </div>
+                            <div class="next cursor-p text-info">下一页</div>
+                        </div>
+                    </div>
+                    <div class="table-responsive wrapper-sm normal-list content-list" ng-show="news">
+                        <div class="searchbox m-b wrapper-sm">
+                            <form class="form-inline" ng-submit="search.do()">
+                                <label class="checkbox-inline i-checks">
+                                    <input type="checkbox" value="mainName" ng-model="search.par.mainName"
+                                           ng-change="search.checkChange('mainName')">
+                                    <i></i> 标题
+                                </label>
+                                <label class="checkbox-inline i-checks">
+                                    <input type="checkbox" value="content" ng-model="search.par.content"
+                                           ng-change="search.checkChange('content')">
+                                    <i></i> 内容
+                                </label>
+                                <label class="checkbox-inline i-checks">
+                                    <input type="checkbox" value="souce" ng-model="search.par.souce"
+                                           ng-change="search.checkChange('souce')">
+                                    <i></i> 来源
+                                </label>
+                                <label class="checkbox-inline i-checks">
+                                    <input type="checkbox" value="author" ng-model="search.par.author"
+                                           ng-change="search.checkChange('author')">
+                                    <i></i> 作者
+                                </label>
+                                <input type="text" ng-model="search.keyword" class="form-control m-l m-r searchinput"
+                                       placeholder="在这里填写所选条件的关键字">
+                                <button type="submit" class="btn btn-default">搜索</button>
+                                <button type="button" class="btn btn-default" ng-click="search.reset()">重置</button>
+                            </form>
+                        </div>
+                        <table class="table table-striped b" ng-show="news && news.length">
+                            <thead>
+                            <tr>
+                                <th style="width:20px;">
+                                    <label class="i-checks m-b-none">
+                                        <input type="checkbox" ng-click="deleteCheckAll($event)">
+                                        <i></i>
+                                    </label>
+                                </th>
+                                <th>文章标题</th>
+                                <th>作者</th>
+                                <th>来源</th>
+                                <th>点击量</th>
+                                <th>状态</th>
+                                <th>发布时间</th>
+                                <th style="width:180px;text-align:center;">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="item in news track by $index" class="hover">
+                                <td>
+                                    <label class="i-checks m-b-none">
+                                        <input type="checkbox" ng-model="item.deleteCheck" ng-change="deleteCheck()">
+                                        <i></i>
+                                    </label>
+                                </td>
+                                <td ng-click="newsClick(item)">{{item.mainName}}</td>
+                                <td ng-click="newsClick(item)">{{item.author}}</td>
+                                <td ng-click="newsClick(item)">{{item.souce}}</td>
+                                <td ng-click="newsClick(item)">{{item.clickcount ? item.clickcount : '0'}}</td>
+                                <td ng-click="newsClick(item)">{{stateCh[item.state]}}</td>
+                                <td ng-click="newsClick(item)">{{getTimeText(item.time)}}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-default" ng-click="preview.show(item)">预览</button>
+                                    <button class="btn btn-sm btn-default" ng-click="delete(item)">删除</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="new-table-pager-box wrapper-sm" ng-show="news && news.length">
+                            <pagination max-size="5" last-text="末页" next-text="下一页" first-text="首页" previous-text="上一页"
+                                        total-items="pager.current.totalItem"
+                                        ng-change="pager.getData()" ng-model="pager.current.page"
+                                        class="pull-right m-t-none m-b-none pagination-sm m-t-none m-b"
+                                        boundary-links="true" rotate="true"
+                                        items-per-page="pager.pagesize"></pagination>
+                            <select class="pull-right m-r-sm b" style="width:50px;height: 30px;border-radius: 5px;"
+                                    ng-model="pager.pagesize" ng-change="pager.pagesizeChange()">
+                                <option selected value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span class="pull-right m-r-xs m-t-xs">每页显示:</span>
+                        </div>
+                        <h4 class="text-center" ng-show="news && !news.length && pager.parameter.length">
+                            没有搜索到符合条件的新闻</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- content -->
+            <div ng-show="!shower && !newItem && false" class="col">
+                <div class="vbox">
+                    <div class="tipsbox">请选择新闻</div>
+                </div>
+            </div>
+            <div class="w-md lter b-l animated fadeIn pos-rlt content-info-box">
+                <div class="listbox-wrap b-b">
+                    <div class="listbox wrapper">
+
+                    </div>
+                </div>
+                <div class="imagebox b-b">
+                    <div class="font-thin h4 text-center" style="height:30px;line-height:30px;">
+                        新闻缩略图
+                    </div>
+                    <div class="ui-img-wrap m cursor-p m-t-none b" style="width:210px;height:210px;">
+                        <img ng-if="newItem.image" ui-img="popup" ui-width="210" ui-height="210" scale="false"
+                             src="{{newItem.image}}"/>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="font-thin h4 text-center" style="height:30px;line-height:30px;">
+                    新闻图片
+                </div>
+                <div class="ui-img-wrap cursor-p m" style="width:210px;height:210px;"
+                     ng-repeat="item in imgs track by $index">
+                    <img ui-img ui-height="210" ui-width="210" src="{{item}}"/>
+                    <div class="contentImgMask hover-color">
+                        <div class="item" ng-click="setImage(item)">设为缩略图</div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-errorword-wrap">
+                <div class="content-errorword-box">
+                    <div class="title">
+                        错别字
+                        <button type="button" class="btn btn-default pull-right m-l-sm m-t-sm close-btn">关闭</button>
+                        <button type="button" class="btn btn-info pull-right m-l-sm m-t-sm confirm-btn">确认发布</button>
+                        <button type="button" class="btn btn-success pull-right m-l-sm m-t-sm hide-private">一键隐藏隐私信息
+                        </button>
+                    </div>
+                    <div class="content-box">
+                        <textarea id="editor_error" name="content" style="width:100%;height:100%;"></textarea>
+                    </div>
+                    <div class="error-box">
+                        <div class="loading">
+                            <div class="tipsbox">错别字识别中...</div>
+                        </div>
+                        <div class="count"></div>
+                        <div class="content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="power-result-wrapper animated" ng-if="Mind.powerListShower">
+    <div class="wrapper-close-btn" ng-click="Mind.powerListShower = false">
+        <i class="fa fa-times"></i>
+    </div>
+    <div class="power-result-box">
+        <div class="modal-header">
+            <h3 class="modal-title">权利执行结果</h3>
+        </div>
+        <div class="modal-body">
+            <select-table ng-if="Mind.tableCond.length" interface="powerContent" multiple="true" title="权利执行列表"
+                          control="Mind.tableControl"
+                          select-par='Mind.tableCond'></select-table>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="Mind.powerListModal.hide()">关闭</button>
+            <button class="btn btn-info" ng-click="Mind.powerListModal.addResult()">添加执行结果</button>
+        </div>
+    </div>
+</div>
+<div class="power-editor-wrapper animated" ng-if="Mind.powerEditorShower" style="padding:3%;">
+    <div class="power-editor-box">
+        <div class="modal-header">
+            <h3 class="modal-title">{{Mind.updateModal.new ? '新增' : '编辑'}}</h3>
+        </div>
+        <div class="modal-body">
+            <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">决议名称</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="Mind.updateModal.node.text" disabled
+                               placeholder="请选择关联文章">
+                    </div>
+                </div>
+                <div class="form-group" ng-show="Mind.currentNode.data.type == 1 || Mind.currentNode.data.type == 10 ">
+                    <label class="col-sm-2 control-label">决议循环周期</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="Mind.updateModal.node.runCycle"
+                               placeholder="请输入循环周期">
+                    </div>
+                </div>
+                <div class="form-group" ng-show="Mind.currentNode.data.type == 1 || Mind.currentNode.data.type == 10">
+                    <label class="col-sm-2 control-label">决议生效时间</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="Mind.updateModal.node.effectiveTime"
+                               placeholder="请输入生效时间">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">关联文章</label>
+                    <div class="col-sm-9">
+                        <button class="btn btn-default" ng-click="Mind.updateModal.use()">引用</button>
+                        <button class="btn btn-default" ng-click="Mind.updateModal.create()">新增</button>
+                        <button class="btn btn-default" ng-show="Mind.updateModal.node.text"
+                                ng-click="Mind.updateModal.view()">{{Mind.updateModal.btntext}}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="Mind.updateModal.hide()">关闭</button>
+            <button class="btn btn-info" ng-click="Mind.updateModal.confirm()">确定</button>
+        </div>
+    </div>
+</div>
+<div class="power-add-wrapper animated" ng-if="Mind.powerAddShower" style="padding:3%;">
+    <div class="power-add-box">
+        <div class="modal-header">
+            <h3 class="modal-title">新增权利</h3>
+        </div>
+        <div class="modal-body">
+            <tabset class="tab-container">
+                <tab heading="添加权利">
+                    <form class="bs-example form-horizontal ng-pristine ng-valid">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">权利名称</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" ng-model="Mind.addModal.data[2].name"
+                                       placeholder="请输入权利名称">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">权利所属站点</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" ng-model="Mind.currentSite.title" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">权利所属类型</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" ng-model="Mind.addModal.data[2].type"
+                                        ng-init="Mind.addModal.data[2].type = Mind.powerTypeList[0]._id">
+                                    <option ng-repeat="item in Mind.powerTypeList" value="{{item._id}}">{{item.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </tab>
+                <tab heading="添加会议">
+                    <form class="bs-example form-horizontal ng-pristine ng-valid">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">会议名称</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" ng-model="Mind.addModal.data[0].name" disabled
+                                       placeholder="请选择关联文章">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">关联文章</label>
+                            <div class="col-sm-9">
+                                <button class="btn btn-default" ng-click="Mind.addModal.use(0)">引用</button>
+                                <button class="btn btn-default" ng-click="Mind.addModal.create(0)">新增</button>
+                                <button class="btn btn-default" ng-show="Mind.addModal.data[0].name"
+                                        ng-click="Mind.addModal.view(0)">{{Mind.addModal.btntext}}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </tab>
+                <tab heading="添加决议">
+                    <form class="bs-example form-horizontal ng-pristine ng-valid">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">决议名称</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" ng-model="Mind.addModal.data[1].name" disabled
+                                       placeholder="请选择关联文章">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">决议循环周期</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" ng-model="Mind.addModal.data[1].runCycle"
+                                       placeholder="请输入周期">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">决议生效时间</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" ng-model="Mind.addModal.data[1].effectiveTime"
+                                       placeholder="请输入生效时间">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">关联文章</label>
+                            <div class="col-sm-9">
+                                <button class="btn btn-default" ng-click="Mind.addModal.use(1)">引用</button>
+                                <button class="btn btn-default" ng-click="Mind.addModal.create(1)">新增</button>
+                                <button class="btn btn-default" ng-show="Mind.addModal.data[1].name"
+                                        ng-click="Mind.addModal.view(1)">{{Mind.addModal.btntext}}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </tab>
+            </tabset>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="Mind.addModal.hide()">关闭</button>
+            <button class="btn btn-info" ng-click="Mind.addModal.confirm()">确定</button>
+        </div>
+    </div>
+</div>
+<div class="power-type-wrapper animated" ng-if="Mind.powerTypeShower" style="padding:3%;">
+    <div class="power-type-box">
+        <div class="modal-header">
+            <h3 class="modal-title">权利分类</h3>
+        </div>
+        <div class="modal-body">
+            <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-12">当前站点</label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" ng-model="Mind.currentSite.title" disabled>
+                    </div>
+                </div>
+            </form>
+            <div class="panel panel-default h-full">
+                <div class="panel-heading">
+                    权利分类列表
+                    <span class="text-info">(当您点击确定后所有修改将会立即生效)</span>
+                </div>
+                <div class="overflow-wrapper">
+                    <div class="panel-body">
+                        <div class="b-a bg-light lter wrapper">
+                            <div class="input-group ng-scope m-t" ng-repeat="item in Mind.powerTypeModal.json">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-fw fa-circle text-success"
+                                       ng-class="Mind.powerTypeModal.colors[$index % 3]"></i>
+                                </span>
+                                <input type="text" class="form-control" placeholder="" ng-model="item.name">
+                                <span ng-click="Mind.powerTypeModal.deleteType(item, $index, $event)"
+                                      class="input-group-addon cursor-p text-info">
+                                    删除
+                                </span>
+                            </div>
+                            <div class="input-group m-t">
+                                <input type="text" class="form-control" placeholder="输入内容后点击右侧添加按钮新增分类">
+                                <span tooltip="输入内容后点击添加" ng-click="Mind.powerTypeModal.insertType($event)"
+                                      class="input-group-addon cursor-p text-info">
+                                    添加
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="Mind.powerTypeModal.hide()">关闭</button>
+            <button class="btn btn-info" ng-click="Mind.powerTypeModal.confirm()">确定</button>
+        </div>
+    </div>
+</div>

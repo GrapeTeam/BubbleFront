@@ -1,0 +1,137 @@
+/*************************************
+ * column
+ */
+
+.column-delete-btn {
+    position: relative;
+    top: 2px;
+}
+
+.column-modal-tree-box {
+    height: 400px;
+    overflow: auto;
+}
+
+.column-modal-tree-box .item {
+    height: 30px;
+    line-height: 30px;
+    border: 1px #ddd solid;
+    padding: 0 15px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: all .2s;
+    overflow: hidden;
+}
+
+.column-modal-tree-box .item:hover {
+    background: #f3f3f3;
+}
+
+.column-modal-tree-box .item.cur {
+    background: #23b7e5;
+    color: #fff;
+}
+
+.column-modal-tree-box .item.disabled {
+    background: #f3f3f3;
+}
+
+.article-modal-tree-box {
+    height: 400px;
+    overflow: auto;
+}
+
+.article-modal-tree-box .articleItem {
+    height: 30px;
+    line-height: 30px;
+    border: 1px #ddd solid;
+    padding: 0 15px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: all .2s;
+    overflow: hidden;
+}
+
+.article-modal-tree-box .articleItem:hover {
+    background: #f3f3f3;
+}
+
+.article-modal-tree-box .articleItem.curr {
+    background: #23b7e5;
+    color: #fff;
+}
+
+.article-modal-tree-box .articleItem.disabled {
+    background: #f3f3f3;
+}
+
+.column-thumb-item {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    margin: 5px;
+    float: left;
+}
+
+.column-thumb-item img {
+    vertical-align: baseline;
+}
+
+.column-thumb-list-item {
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    line-height: 120px;
+    cursor: pointer;
+    font-size: 32px;
+    border-radius: 10px;
+    border: 1px #ddd solid;
+    transition: all .2s;
+    position: relative;
+    margin: 10px;
+    padding: 15px;
+    float: left;
+}
+
+.column-thumb-list-item .removebtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 20px;
+    line-height: 20px;
+    font-size: 16px;
+}
+
+.column-thumb-list-item .removebtn i:hover {
+    color: #23b7e5;
+}
+
+.column-thumb-list-item img {
+    vertical-align: baseline;
+}
+
+.column-thumb-list-item i {
+    color: #58666e;
+}
+
+.column-thumb-list-item:hover {
+    border: 1px #aaa solid;
+    transform: scale(1.05);
+}
+
+.column-thumb-list-item.cur {
+    border: 2px #23b7e5 solid;
+    transform: scale(1);
+}
+
+.column-thumb-upload-process {
+    width: 0;
+    height: 2px;
+}

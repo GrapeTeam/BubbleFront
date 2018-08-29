@@ -1,0 +1,171 @@
+/*************************************
+ * file
+ */
+
+.filebox {
+    min-height: 550px;
+    display: block !important;
+    margin-left: 200px;
+}
+
+.navbox.w {
+    position: absolute;
+}
+
+.filebox .filelistbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 80px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    min-height: 500px;
+}
+
+.filebox .filelisttitle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    height: 70px;
+    line-height: 35px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.filebox .filelisttitle .breadcrumb {
+    line-height: 20px;
+    height: 20px;
+    font-size: 12px;
+}
+
+.filebox .filelistbox .select-box {
+    position: absolute;
+    z-index: 2;
+    background-color: rgb(139, 191, 249);
+    border: 1px solid rgb(19, 98, 180);
+    opacity: 0.5;
+    display: none;
+}
+
+.filebox .filelistbox .file {
+    width: 120px;
+    height: 127px;
+    float: left;
+    margin: 4px 0 0 6px;
+    text-align: center;
+    border: 1px solid #edf1f2;
+    position: relative;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background .2s;
+    -webkit-transition: background .2s;
+}
+
+.filebox .filelistbox .file:hover {
+    border: 1px solid #f1f5fa;
+    border-radius: 5px;
+    background: #dbe6f5;
+}
+
+.filebox .filelistbox .file:hover .filecheckbox {
+    display: block;
+}
+
+.filebox .filelistbox .fileicon {
+    position: relative;
+    margin: 9px auto 0;
+    width: 84px;
+    height: 84px;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.filebox .filelistbox .fileicon.icon1 {
+    background: url(../../img/fileicon1.png) center no-repeat;
+}
+
+.filebox .filelistbox .fileicon.icon2 {
+    background: url(../../img/fileicon2.png) center no-repeat;
+}
+
+.filebox .filelistbox .fileicon.icon3 {
+    background: url(../../img/fileicon3.png) center no-repeat;
+}
+
+.filebox .filelistbox .filename {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin: 6px 5px 5px;
+}
+
+.filebox .filelistbox .filename:hover {
+    color: #3B8CFF;
+}
+
+.filebox .filelistbox .filecheckbox {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #3b8cff;
+    opacity: .5;
+    display: none;
+}
+
+.filebox .filelistbox .file.check {
+    background: #dbe6f5;
+    border: 1px solid #90c3fd;
+    border-radius: 5px;
+}
+
+.filebox .filelistbox .file.check .filecheckbox {
+    opacity: 1;
+    display: block;
+}
+
+.file-chosen-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(58, 63, 81, .8);
+    z-index: 1030;
+    width: 100%;
+    height: 100%;
+    padding: 50px;
+    overflow: auto;
+    display: none;
+    z-index: 1100;
+}
+
+.file-chosen-wrap.active {
+    display: block;
+}
+
+.file-chosen-wrap > div {
+    border-radius: 5px;
+}
+
+.file-chosen-wrap .breadcrumbbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.file-chosen-wrap .webuploader-pick {
+    width: 30px;
+    height: 20px;
+}

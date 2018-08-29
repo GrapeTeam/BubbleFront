@@ -1,0 +1,107 @@
+<div class="hbox hbox-auto-xs" unselectable="on" ng-init="app.settings.full = true;">
+    <!--添加投票-->
+    <script type="text/ng-template" id="voteCreate.html">
+        <div class="modal-header">
+            <h3 class="modal-title">投票详情</h3>
+        </div>
+        <div class="modal-body">
+            <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">投票名称</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="value.name" placeholder="请输入字段名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">开始时间</label>
+                    <div class="col-sm-9">
+                        <datetimepicker value="value.starttime"></datetimepicker>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">结束时间</label>
+                    <div class="col-sm-9">
+                        <datetimepicker value="value.endtime"></datetimepicker>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">投票间隔时间</label>
+                    <div class="col-sm-9">
+                        <div class="input-group m-b">
+                            <input type="text" ng-model="value.timediff" class="form-control" placeholder="请输入投票间隔时间">
+                            <span class="input-group-addon">秒</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">是否多选</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" ng-model="value.ismulti">
+                            <option value="0">否</option>
+                            <option value="1">是</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">投票项</label>
+                    <div class="col-sm-9">
+                        <div class="input-group m-b" ng-repeat="item in value.vote track by $index">
+                            <input type="text" class="form-control" ng-model="value.vote[$index].itemName"
+                                   placeholder="请输入投票间隔时间">
+                            <span class="input-group-addon cursor-p" ng-click="removeItem($index)">移除</span>
+                        </div>
+                        <div class="toggleBtn">
+                            <button class="btn btn-default btn-sm ng-binding" ng-click="addItem()">添加投票项</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">关闭</button>
+            <button class="btn btn-info ladda-button" ng-click="ok($event)">
+                <span class="ladda-label">确定</span>
+                <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </script>
+    <!--添加投票END-->
+    <!--投票详情弹窗-->
+    <script type="text/ng-template" id="voteInfoModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">投票详情</h3>
+        </div>
+        <div class="modal-body">
+            <div class="col wrapper-sm r-r">
+                <div class="">
+                    <div ng-repeat="item in data">
+                        <div class="">
+                            <span class="pull-right text-{{colors[$index % 2]}}">{{item.precent}}%</span>
+                            <span>{{item.itemName}}  <span
+                                class="text-{{colors[$index % 2]}}">({{item.count}})</span></span>
+                        </div>
+                        <progressbar class="progress-striped active progress-xs m-t-sm" max="100" value="item.precent"
+                                     type="{{colors[$index % 2]}}"></progressbar>
+                    </div>
+                </div>
+                <p class="text-muted">这里是一些投票的说明</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">关闭</button>
+        </div>
+    </script>
+    <!--投票详情弹窗END-->
+    <div class="application-box">
+        <div class="application-wrap">
+            <div class="bg-light lter b-b wrapper-md ng-scope">
+                <h1 class="m-n font-thin h3">投票管理</h1>
+            </div>
+            <div class="table-box wrapper">
+                <select-table multiple="true" editable="true" interface="vote" title="投票列表" control="tableControl"
+                              create-controller="voteCreate" helper="点击绿色数字查看投票详情"
+                              create-modal="voteCreate.html"></select-table>
+            </div>
+        </div>
+    </div>
+</div>

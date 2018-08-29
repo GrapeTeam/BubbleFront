@@ -1,0 +1,37 @@
+<div class="hbox hbox-auto-xs" unselectable="on" ng-init="app.settings.full = true;">
+    <!--新建APP弹窗-->
+    <script type="text/ng-template" id="serviceCreate.html">
+        <div class="modal-header">
+            <h3 class="modal-title">添加机构</h3>
+        </div>
+        <div class="modal-body">
+            <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">机构名称</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" ng-model="value.serviceName" placeholder="请输入字段名">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">取消</button>
+            <button class="btn btn-info ladda-button" ng-click="ok($event)">
+                <span class="ladda-label">确定</span>
+                <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </script>
+    <!--新建APP弹窗END-->
+    <div class="application-box">
+        <div class="application-wrap">
+            <div class="bg-light lter b-b wrapper-md ng-scope">
+                <h1 class="m-n font-thin h3">机构管理</h1>
+            </div>
+            <div class="table-box wrapper">
+                <select-table multiple="true" editable="true" interface="service" title="机构列表"
+                              create-modal="serviceCreate.html"></select-table>
+            </div>
+        </div>
+    </div>
+</div>

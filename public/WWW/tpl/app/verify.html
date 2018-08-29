@@ -1,0 +1,64 @@
+<div class="hbox hbox-auto-xs bg-light contentBox pos-rlt" ng-init="app.settings.full = true;">
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3">审核管理</h1>
+    </div>
+    <div class="push-wrap-box">
+        <div class="push-list">
+            <select-table ng-if="state == 0" editable="false" interface="verify" title="待审核列表"
+                          select-par='[{"field":"state","logic":"==","value":0}]'
+                          control="tableControl"></select-table>
+            <select-table ng-if="state == 1" editable="false" interface="verify" title="拒绝审核列表"
+                          select-par='[{"field":"state","logic":"==","value":1}]'
+                          control="tableControl1"></select-table>
+            <select-table ng-if="state == 2" editable="false" interface="verify" title="审核通过列表"
+                          select-par='[{"field":"state","logic":"==","value":2}]'
+                          control="tableControl1"></select-table>
+        </div>
+        <div class="push-preview b-l">
+            <div class="preview-box">
+                <div class="content-box">
+                    <div class="nav-title"></div>
+                    <h3>
+                        {{pnew.mainName}}
+                    </h3>
+                    <div class="content-info">
+                        <span> 来源: {{d.souce}} </span>
+                        <span> 发布时间：{{d.time}} </span>
+                        <span> 作者：{{d.author}} </span>
+                    </div>
+                    <div class="content b-t wrapper-md m-t">
+
+                    </div>
+                </div>
+            </div>
+            <div class="tipsbox" ng-show="!pnew" style="width:160px;margin-left:-80px;">请选择推送新闻预览</div>
+        </div>
+    </div>
+    <div class="push-cloumn-move">
+        <div class="push-move-box">
+            <div class="title">
+                <h3>
+                    请选择该推送文章所处栏目
+                    <button type="button" class="btn btn-default pull-right m-l-sm m-t-sm" ng-click="closeColumn()">关闭
+                    </button>
+                    <button type="button" class="btn btn-info pull-right m-l-sm m-t-sm" ng-click="save()">确认</button>
+                </h3>
+            </div>
+            <div class="content-box wrapper">
+                <abn-tree ng-if="columnData" tree-data="columnData" tree-control="tree" on-select="onSelect(branch)"
+                          icon-leaf="fa fa-columns"
+                          expand-level="2" icon-expand="fa fa-plus" icon-collapse="fa fa-minus">
+                </abn-tree>
+            </div>
+        </div>
+    </div>
+    <div class="contentbatchMask">
+        <div class="loading-spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+    </div>
+</div>

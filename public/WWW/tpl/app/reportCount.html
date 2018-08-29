@@ -1,0 +1,55 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3 text-black">举报统计</h1>
+    <small class="text-muted">
+        <span class="m-r"><i class="icon-pie-chart"></i> 为饼状图</span>
+        <span class="m-r"><i class="icon-bar-chart"></i> 为柱状图</span>
+        <span class="m-r"><i class="icon-graph"></i> 为折线图</span>
+        <span class="m-r">上午为8:00 - 11:00</span>
+        <span class="m-r">中午为11:00 - 14:00</span>
+        <span class="m-r">下午为14:00 - 18:00</span>
+        <span class="m-r">晚上为18:00 - 8:00</span>
+    </small>
+</div>
+<div class="wrapper reportCountBox">
+    <div class="panel panel-default pull-left m-r" style="width:520px;" ng-repeat="item in list">
+        <div class="panel-heading font-bold">
+            {{item.title}}
+            <div class="btn-group pull-right m-l" ng-if="item.date != false">
+                <label class="btn btn-sm btn-info ng-untouched ng-valid ng-dirty active ng-valid-parse"
+                       ng-click="item.onTypeChange('day')"
+                       ng-model="item.type" btn-radio="'day'"><i class="fa fa-check text-active"></i> 日</label>
+                <label class="btn btn-sm btn-success ng-untouched ng-valid ng-dirty"
+                       ng-click="item.onTypeChange('week')" ng-model="item.type"
+                       btn-radio="'week'"><i class="fa fa-check text-active"></i> 周</label>
+                <label class="btn btn-sm btn-primary ng-untouched ng-valid ng-dirty"
+                       ng-click="item.onTypeChange('month')" ng-model="item.type"
+                       btn-radio="'month'"><i class="fa fa-check text-active"></i> 月</label>
+            </div>
+            <div class="btn-group pull-right m-l" ng-if="item.charsShow != false">
+                <label class="btn btn-sm btn-success ng-untouched ng-valid ng-dirty"
+                       ng-click="item.onCharsChange('pie')" ng-model="item.chars"
+                       btn-radio="'pie'"><i class="icon-pie-chart"></i></label>
+                <label class="btn btn-sm btn-primary ng-untouched ng-valid ng-dirty"
+                       ng-click="item.onCharsChange('bar')" ng-model="item.chars"
+                       btn-radio="'bar'"><i class="icon-bar-chart"></i></label>
+            </div>
+            <div class="btn-group pull-right" ng-if="item.timeShow != false">
+                <label class="btn btn-sm btn-info ng-untouched ng-valid ng-dirty active ng-valid-parse"
+                       ng-click="item.onTimeChange('1')"
+                       ng-model="item.time" btn-radio="'1'"><i class="fa fa-check text-active"></i>早</label>
+                <label class="btn btn-sm btn-success ng-untouched ng-valid ng-dirty" ng-click="item.onTimeChange('2')"
+                       ng-model="item.time"
+                       btn-radio="'2'"><i class="fa fa-check text-active"></i>中</label>
+                <label class="btn btn-sm btn-primary ng-untouched ng-valid ng-dirty" ng-click="item.onTimeChange('3')"
+                       ng-model="item.time"
+                       btn-radio="'3'"><i class="fa fa-check text-active"></i>下</label>
+                <label class="btn btn-sm btn-warning ng-untouched ng-valid ng-dirty" ng-click="item.onTimeChange('4')"
+                       ng-model="item.time"
+                       btn-radio="'4'"><i class="fa fa-check text-active"></i>晚</label>
+            </div>
+        </div>
+        <div class="panel-body pos-rlt">
+            <ui-echarts option="item.option" width="490" height="300" control="item.control"></ui-echarts>
+        </div>
+    </div>
+</div>

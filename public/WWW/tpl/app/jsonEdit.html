@@ -1,0 +1,75 @@
+<form role="form" class="ng-pristine ng-valid">
+    <div class="form-group" ng-repeat="(key, value) in configjsonlist"
+         ng-if="field[key] ? field[key].mark != 'hide' : true">
+        <label>{{field[key] && field[key].mark ? field[key].mark : key}}_______{{isHidden(field[key].data)}}</label>
+        <input type="value" ng-model="configjsonlist[key]" class="form-control" placeholder=""
+               ng-if="isHidden(field[key].data, value) == 'text'">
+        <input type="value" ng-model="value" class="form-control" placeholder="" disabled="disabled"
+               ng-if="isHidden(field[key].data, value) == 'disabled'">
+        <div class="w-full" ng-if="isHidden(field[key].data, value) == 'bool'">
+            <select class="form-control w-full" ng-model="configjsonlist[key]"
+                    ng-options="item for item in [true, false]"></select>
+        </div>
+        <div class="w-full" ng-if="isHidden(field[key].data, value) == 'select'">
+            <select class="form-control w-full" ng-model="configjsonlist[key]"
+                    ng-options="item for item in field[key].data.split(':')[1].split('|')"></select>
+        </div>
+        <div class="row" ng-if="isHidden(field[key].data, value).indexOf('array') >= 0">
+            <div class="col-xs-12 padder">
+                <div class="b-a bg-light lter wrapper">
+                    <div class="input-group" ng-class="$index != 0 ? 'm-t' : ''" ng-repeat="item in value">
+                        <span class="input-group-addon"><i class="fa fa-fw fa-circle" ng-class="colors[$index % 3]"></i></span>
+                        <input type="text" class="form-control" placeholder="" ng-model="item">
+                    </div>
+                    <div class="input-group m-t">
+                                    <span tooltip="输入内容后点击添加" ng-click="insertArray(value, $event)"
+                                          class="input-group-addon">
+                                        <a><i class="fa fa-fw fa-plus text-info-lter"></i></a>
+                                    </span>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="isHidden(field[key].data, value) == 'object'">
+            <div class="col-xs-12 padder">
+                <div class="b-a bg-light lter wrapper">
+                    <div ng-repeat="(key1, value1) in value" ng-class="$index != 0 ? 'm-t' : ''">
+                        <label>{{field[key1] && field[key1].mark ? field[key1].mark : key1}}</label>
+                        <input type="value" ng-model="value[key1]" class="form-control" placeholder=""
+                               ng-if="isHidden(field[key1].data, value1) == 'text'">
+                        <input type="value" ng-model="value1" class="form-control" placeholder="" disabled="disabled"
+                               ng-if="isHidden(field[key1].data, value1) == 'disabled'">
+                        <div class="w-full" ng-if="isHidden(field[key1].data, value1) == 'bool'">
+                            <select class="form-control w-full" ng-model="value[key1]"
+                                    ng-options="item for item in [true, false]"></select>
+                        </div>
+                        <div class="w-full" ng-if="isHidden(field[key1].data, value1) == 'select'">
+                            <select class="form-control w-full" ng-model="value[key1]"
+                                    ng-options="item for item in field[key1].data.split(':')[1].split('|')"></select>
+                        </div>
+                        <div class="row" ng-if="isHidden(field[key1].data, value1).indexOf('array') >= 0">
+                            <div class="col-xs-12 padder">
+                                <div class="b-a bg-light lter wrapper">
+                                    <div class="input-group" ng-class="$index != 0 ? 'm-t' : ''"
+                                         ng-repeat="item in value1">
+                                        <span class="input-group-addon"><i class="fa fa-fw fa-circle"
+                                                                           ng-class="colors[$index % 3]"></i></span>
+                                        <input type="text" class="form-control" placeholder="" ng-model="item">
+                                    </div>
+                                    <div class="input-group m-t">
+                                                    <span tooltip="输入内容后点击添加" ng-click="insertArray(value1, $event)"
+                                                          class="input-group-addon">
+                                                        <a><i class="fa fa-fw fa-plus text-info-lter"></i></a>
+                                                    </span>
+                                        <input type="text" class="form-control" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

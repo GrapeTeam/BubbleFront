@@ -1,0 +1,241 @@
+<!-- list -->
+<ul class="nav">
+    <li ui-sref-active="active">
+        <a ui-sref="app.user">
+            <i class="text-success fa fa-user"></i>
+            <span class="font-bold">用户管理</span>
+        </a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.usergroup">
+            <i class="text-primary fa fa-users"></i>
+            <span class="font-bold">用户组管理</span>
+        </a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.content">
+            <i class="text-info-lter fa fa-file-text-o"></i>
+            <span class="font-bold">内容管理</span>
+        </a>
+    </li>
+
+    <li class="line dk"></li>
+
+    <li ui-sref-active="active">
+        <a ui-sref="app.file">
+            <i class="text-muted fa fa-file"></i>
+            <span class="font-bold">文件管理</span>
+        </a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.column({flot: 123,aaa: 123})">
+            <i class="text-info-dker fa fa-list-ul"></i>
+            <span class="font-bold">栏目管理</span>
+        </a>
+    </li>
+    <li ng-class="{active:$state.includes('app.maintenanceUnit')}">
+        <a href class="auto">
+        <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+        </span>
+            <i class="fa fa-wechat icon text-success"></i>
+            <span class="font-bold">第三方平台管理</span>
+        </a>
+        <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+                <a href>
+                    <span>第三方平台管理</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.thirdParty.email">
+                    <span>Email</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.thirdParty.wechat">
+                    <span class="font-bold">微信管理</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.advertisement">
+            <i class="text-primary-dker fa fa-volume-up"></i>
+            <span class="font-bold">广告管理</span>
+        </a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.template">
+            <i class="text-info-dker fa fa-paw"></i>
+            <span class="font-bold">模板管理</span>
+        </a>
+    </li>
+
+    <li class="line dk"></li>
+    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+        <span translate="aside.nav.components.COMPONENTS" class="ng-scope">单位信息</span>
+    </li>
+
+    <li ng-class="{active:$state.includes('app.maintenanceUnit')}">
+        <a href class="auto">
+        <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+        </span>
+            <i class="fa fa-building-o icon text-muted"></i>
+            <span class="font-bold">维护单位</span>
+        </a>
+        <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+                <a href>
+                    <span>维护单位</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.maintenanceUnit.maintenanceUnitBase">
+                    <span>基本信息</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li ng-class="{active:$state.includes('app.operatingUnit')}">
+        <a href class="auto">
+        <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+        </span>
+            <i class="fa fa-institution icon text-primary-dker"></i>
+            <span class="font-bold">运行单位</span>
+        </a>
+        <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+                <a href>
+                    <span>运行单位</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.operatingUnit.operatingUnitBase">
+                    <span>基本信息</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="line dk"></li>
+    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+        <span translate="aside.nav.components.COMPONENTS" class="ng-scope">举报</span>
+    </li>
+    <li ng-class="{active:$state.includes('app.maintenanceUnit')}">
+        <a href class="auto">
+        <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+        </span>
+            <i class="fa fa-wechat icon text-success"></i>
+            <span class="font-bold">举报管理</span>
+        </a>
+        <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+                <a href>
+                    <span>举报管理</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.report({type: '5'})">
+                    <span>全部举报</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.report({type: '0'})">
+                    <b class="badge bg-danger pull-right">{{reportCount}}</b>
+                    <span>待处理举报</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.report({type: '1'})">
+                    <span>处理中举报</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.report({type: '2'})">
+                    <span class="font-bold">已完成举报</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.report({type: '3'})">
+                    <span class="font-bold">已拒绝举报</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.reportType">
+            <i class="text-primary-dker fa fa-list-ul"></i>
+            <span class="font-bold">举报类型管理</span>
+        </a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.reportReply">
+            <i class="text-info-dker fa fa-mail-forward"></i>
+            <span class="font-bold">快捷回复管理</span>
+        </a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.reportAdmin">
+            <i class="text-success-dker fa fa-wrench"></i>
+            <span class="font-bold">举报管理员</span>
+        </a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.reportCount">
+            <i class="text-info-dker icon-pie-chart"></i>
+            <span class="font-bold">举报统计</span>
+        </a>
+    </li>
+    <li class="line dk"></li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.consult">
+            <i class="text-muted fa fa-comments-o"></i>
+            <span class="font-bold">咨询管理</span>
+        </a>
+    </li>
+
+    <li class="line dk"></li>
+    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+        <span translate="aside.nav.components.COMPONENTS" class="ng-scope">网站管理</span>
+    </li>
+
+    <li ui-sref-active="active">
+        <a ui-sref="app.task">
+            <i class="text-info fa fa-tasks"></i>
+            <span class="font-bold">任务管理</span>
+        </a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.message">
+            <i class="text-muted icon-envelope"></i>
+            <span class="font-bold">留言管理</span>
+        </a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.vote">
+            <i class="text-success fa fa-heart"></i>
+            <span class="font-bold">投票管理</span>
+        </a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.link">
+            <i class="text-primary-dker fa fa-external-link"></i>
+            <span class="font-bold">友情链接管理</span>
+        </a>
+    </li>
+    <li ui-sref-active="active">
+        <a ui-sref="app.system">
+            <i class="text-info-dker fa fa-wrench"></i>
+            <span class="font-bold">系统设置</span>
+        </a>
+    </li>
+</ul>
+<!-- / list -->

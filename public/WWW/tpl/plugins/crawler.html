@@ -1,0 +1,323 @@
+<script type="text/ng-template" id="crawlerBatchModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">批量添加</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">字段名</label>
+                <div class="col-sm-9">
+                    <input type="text" ng-model="json.key" class="form-control" placeholder="请输入字段名">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">字段选择器</label>
+                <div class="col-sm-9">
+                    <input type="text" ng-model="json.selecter" class="form-control" placeholder="请输入字段选择器">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">字段选择器</label>
+                <div class="col-sm-9">
+                    <select name="account" ng-model="json.isTEXT" class="form-control">
+                        <option value="0">包含HTML</option>
+                        <option value="1">不包含HTML</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">起始值</label>
+                <div class="col-sm-9">
+                    <input type="text" ng-model="json.start" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">结束值</label>
+                <div class="col-sm-9">
+                    <input type="text" ng-model="json.end" class="form-control">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<script type="text/ng-template" id="crawlerJsonModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">导入导出</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Json</label>
+                <div class="col-sm-9">
+                    <textarea type="text" ng-model="json" rows="30" class="form-control"
+                              placeholder="请输入字段名"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<script type="text/ng-template" id="crawlerNearTimeModal.html">
+    <div class="modal-header">
+        <h3 class="modal-title">neartime</h3>
+    </div>
+    <div class="modal-body">
+        <form class="bs-example form-horizontal ng-pristine ng-valid">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">时间间隔</label>
+                <div class="col-sm-9">
+                    <datetimepick></datetimepick>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="cancel()">取消</button>
+        <button class="btn btn-info ladda-button" ng-click="ok($event)">
+            <span class="ladda-label">确定</span>
+            <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+        </button>
+    </div>
+</script>
+<div ng-init="app.settings.full = true;" class="pos-rlt overflow-h h-full w-full">
+    <div class="contentbatchMask">
+        <div class="loading-spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>
+    </div>
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3">网页爬虫
+            <button type="button" class="btn btn-default pull-right btn-sm" ng-click="export()">导出已选</button>
+            <button type="button" class="btn btn-default pull-right btn-sm m-r" ng-click="import()">导入</button>
+            <button type="button" class="btn btn-default pull-right btn-sm m-r" ng-click="neartimeChange()">neartime
+            </button>
+        </h1>
+    </div>
+    <div class="wrapper row crawler-box">
+        <div class="col-sm-4 history">
+            <div class="panel panel-default m-n">
+                <div class="panel-heading font-bold">爬取任务
+                    <span class="text-info">{{state == "0" ? '关闭中' : '运行中'}}</span>
+                    <button type="button" class="btn btn-default pull-right btn-xs m-l-sm" ng-click="deleteTask()">
+                        删除任务
+                    </button>
+                    <button type="button" class="btn btn-default pull-right btn-xs m-l-sm" ng-show="mode == 'show'"
+                            ng-click="create()">新建任务
+                    </button>
+                    <button type="button" class="btn btn-default pull-right btn-xs m-l-sm" ng-click="selectAll()">全选
+                    </button>
+                    <button type="button" class="btn btn-success pull-right btn-xs m-l-sm" ng-show="state == '0'"
+                            ng-click="start()">开始爬虫进程
+                    </button>
+                    <button type="button" class="btn btn-danger pull-right btn-xs" ng-show="state == '1'"
+                            ng-click="stop()">关闭爬虫进程
+                    </button>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group list-group-lg no-bg auto">
+                        <li class="list-group-item clearfix" ng-class="item.state == 1 ? 'text-success' : 'text-danger'"
+                            ng-click="showItem(item, $event)"
+                            ng-repeat="item in task track by $index">
+                            <span class="clear">
+                                <span>{{item.name}}</span>
+                                <small class="text-muted clear text-ellipsis">
+                                    {{item.desc}}
+                                    <span class="pull-right">{{getDate(item.time)}}</span>
+                                </small>
+                            </span>
+                            <button type="button" class="btn btn-default pull-right btn-xs m-l-sm"
+                                    style="position:absolute;top: 2px; right: 23px;" ng-click="copy(item, $event)">复制
+                            </button>
+                            <span class="removebtn" ng-click="removeRule(item, $event)">
+                                <input type="checkbox" ng-model="item.check">
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 formbox">
+            <div class="panel panel-default m-n">
+                <div class="panel-heading font-bold">爬虫参数</div>
+                <div class="panel-body">
+                    <p>
+                        <button type="submit" class="btn btn-sm btn-primary pull-right m-l" ng-click="ok()">{{mode ==
+                            'new' ? '创建任务' : '更新任务'}}
+                        </button>
+                        <button type="submit" class="btn btn-sm pull-right" ng-show="mode == 'show'"
+                                ng-class="json.state == 0 ? 'btn-success' : 'btn-danger'"
+                                ng-click="run(json)">{{json.state == 1 ? '停止任务' : '运行任务'}}
+                        </button>
+                    </p>
+                    <form role="form" class="ng-pristine ng-valid">
+                        <div class="form-group">
+                            <label>任务名称</label>
+                            <input type="text" ng-model="json.name" class="form-control" placeholder="请输入任务名称">
+                        </div>
+                        <div class="form-group">
+                            <label>任务简介</label>
+                            <textarea class="form-control" ng-model="json.desc" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>任务运行间隔</label>
+                            <div class="input-group m-b">
+                                <input type="number" ng-model="json.runtime" class="form-control">
+                                <div class="input-group-btn">
+                                    <select class="form-control" ng-change="timechange(timetype)" ng-model="timetype"
+                                            style="width: 80px; text-align: center;">
+                                        <option value="0">秒</option>
+                                        <option value="2">小时</option>
+                                        <option value="3">天</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>基础HOST</label>
+                            <input type="text" ng-model="json.info.host" class="form-control" placeholder="请输入网址">
+                        </div>
+                        <div class="line line-dashed b-b line-lg thumbnail"></div>
+                        <div class="form-group">
+                            <label>{{json.info.init.method == 0 ? '爬取URL' : '爬取参数'}}</label>
+                            <input type="text" ng-model="json.info.init.base" class="form-control"
+                                   placeholder="{{json.info.init.method == 0 ? '请输入网址' : '请输入参数'}}">
+                        </div>
+                        <div class="line line-dashed b-b line-lg thumbnail"></div>
+                        <div class="form-group">
+                            <label>爬取模式</label>
+                            <div class="m-b">
+                                <select name="account" ng-model="json.info.init.type" class="form-control m-b">
+                                    <option value="0">页面模式</option>
+                                    <option value="1">URL模式</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div ng-show="json.info.init.type == 1" class="line line-dashed b-b line-lg thumbnail"></div>
+                        <div ng-show="json.info.init.type == 1" class="form-group">
+                            <label>爬取方法</label>
+                            <div class="m-b">
+                                <select name="account" ng-model="json.info.init.method" class="form-control m-b">
+                                    <option value="0">get</option>
+                                    <option value="1">post</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="line line-dashed b-b line-lg thumbnail"></div>
+                        <div class="form-group">
+                            <label>爬取目标选择器(可多个)</label>
+                            <div class="input-group m-b" ng-repeat="item in json.info.init.selecter track by $index">
+                                <input type="text" ng-model="json.info.init.selecter[$index]" class="form-control"
+                                       placeholder="请输入选择器">
+                                <span class="input-group-addon cursor-p" ng-click="removeSelector($index)">
+                                    <i class="fa fa-remove"></i>
+                                </span>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-default" ng-click="addSelector()">新增选择器</button>
+                            </div>
+                        </div>
+                        <div class="line line-dashed b-b line-lg thumbnail"></div>
+                        <div class="form-group">
+                            <label>循环模式</label>
+                            <div class="m-b">
+                                <select name="account" ng-model="json.info.loop.mode" class="form-control m-b">
+                                    <option value="0">不循环</option>
+                                    <option value="1">init页循环</option>
+                                    <option value="2">content页循环</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="line line-dashed b-b line-lg thumbnail"></div>
+                        <div class="form-group">
+                            <label>循环选择器</label>
+                            <div class="input-group m-b" ng-repeat="item in json.info.loop.selecter track by $index">
+                                <input type="text" ng-model="json.info.loop.selecter[$index]" class="form-control"
+                                       placeholder="请输入选择器">
+                                <span class="input-group-addon cursor-p" ng-click="removeLoop($index)">
+                                    <i class="fa fa-remove"></i>
+                                </span>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-default" ng-click="addLoop()">新增选择器</button>
+                            </div>
+                        </div>
+                        <div class="line line-dashed b-b line-lg thumbnail"></div>
+                        <div class="form-group">
+                            <label>内容所在选择器</label>
+                            <div class="row m-b" ng-repeat="item in json.info.data track by $index">
+                                <div class="col-sm-4">
+                                    <input type="text" ng-model="item.key" class="form-control" placeholder="请输入字段名">
+                                </div>
+                                <div class="col-sm-5">
+                                    <input type="text" ng-model="item.selecter" class="form-control"
+                                           placeholder="请输入字段选择器">
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="input-group m-b">
+                                        <select name="account" ng-model="item.isTEXT" class="form-control m-b">
+                                            <option value="0">包含HTML</option>
+                                            <option value="1">不包含HTML</option>
+                                        </select>
+                                        <span class="input-group-addon cursor-p" ng-click="removeContent($index)">
+                                            <i class="fa fa-remove"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-default" ng-click="addContent()">新增内容选择器</button>
+                                <button type="button" class="btn btn-default" ng-click="addContentBatch()">批量新增内容选择器
+                                </button>
+                            </div>
+                        </div>
+                        <div class="line line-dashed b-b line-lg thumbnail"></div>
+                        <div class="form-group">
+                            <label>回调地址</label>
+                            <input type="text" ng-model="json.info.collectApi" class="form-control"
+                                   placeholder="请输入回调地址">
+                        </div>
+                        <div class="text-right">
+                            <!-- <button type="submit" class="btn btn-sm btn-primary" ng-show="mode == 'edit'" ng-click="getContent()">查看爬取结果</button> -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper" ng-show="contentList.length">
+        <div class="panel panel-default">
+            <div class="panel-heading">返回内容</div>
+            <div class="table-responsive">
+                <table class="table table-striped b-t b-light">
+                    <thead>
+                    <tr>
+                        <th ng-repeat="item in newRule.contentConfig">{{item.key}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in contentList">
+                        <td ng-repeat="citem in newRule.contentConfig">{{item[citem.key]}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

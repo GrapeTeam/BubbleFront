@@ -1,0 +1,75 @@
+/*************************************
+ * application
+ */
+
+.application-box {
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.application-box .application-wrap {
+    width: 100%;
+    height: 100%;
+    transition: transform .4s;
+    -webkit-transition: transform .4s;
+}
+
+.application-box .table-box {
+    width: 100%;
+    height: 100%;
+    float: left;
+}
+
+.application-box .info-box {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+.application-box .info-box .title-box {
+    margin-right: 150px;
+}
+
+.application-box .info-box .pool-box {
+    width: 150px;
+    float: right;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.application-box .info-box .grid-box {
+    margin-right: 150px;
+    overflow: auto;
+}
+
+.application-box .info-box .grid-box .grid-item {
+    float: left;
+}
+
+@media (max-width: 767px) {
+    .application-box .info-box .grid-box {
+        height: auto !important;
+        margin-right: 110px;
+    }
+
+    .application-box .info-box .grid-box .grid-item {
+        width: 100% !important;
+    }
+
+    .application-box .info-box .pool-box {
+        width: 110px;
+    }
+
+    .application-box .info-box .title-box {
+        margin-right: 110px;
+    }
+
+    .application-box .info-box {
+        border-bottom: 1px solid #dee5e7;
+    }
+}

@@ -1,0 +1,154 @@
+.deploy-wrap-box {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 42px;
+}
+
+.deploy-box {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.deploy-nav.nav-tabs > li.active > a {
+    border-bottom-color: #f1f1f1 !important;
+}
+
+.deploy-box #deploy-mind {
+    padding-right: 200px;
+    padding-top: 60px;
+    height: 100%;
+    width: 100%;
+}
+
+.deploy-box .servicelistbox {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100%;
+    overflow: hidden;
+    background: #f6f8f8;
+}
+
+.deploy-box .servicelistbox .list-header {
+    height: 59px;
+    line-height: 59px;
+    font-weight: 300;
+    font-size: 24px;
+}
+
+.deploy-box .servicelistbox .itembox {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.deploy-box .servicelistbox .itembox .item {
+    padding: 10px 0;
+    border-bottom: 1px #ddd solid;
+}
+
+.deploy-box .servicelistbox .itembox .item .text {
+    display: block;
+    width: 100px;
+    margin: 0 auto;
+    float: left;
+}
+
+.deploy-box .servicelistbox .itembox i {
+    /* color: #aab4cd; */
+    font-size: 16px;
+    opacity: .5;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.deploy-box .servicelistbox .check i:hover {
+    opacity: 1;
+}
+
+.deploy-box .servicelistbox .icon i:hover {
+    opacity: 1;
+    color: #23b7e5;
+}
+
+.deploy-box .servicelistbox .check.active i {
+    opacity: 1;
+    color: #23b7e5;
+}
+
+.deploy-box .applistbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    overflow: hidden;
+    padding: 5px;
+    padding-right: 200px;
+    background: #f6f8f8;
+}
+
+.deploy-box .applistbox:hover {
+    height: auto;
+}
+
+.deploy-box .applistbox .item {
+    padding: 0px 10px;
+    height: 40px;
+    margin: 5px;
+    cursor: pointer;
+    line-height: 40px;
+}
+
+.config-wrap-box {
+    position: absolute;
+    top: 42px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.config-wrap-box .config-box {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.config-wrap-box .config-box .configitembox {
+    width: 20%;
+    height: 100%;
+    float: left;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px;
+}
+
+.config-wrap-box .config-box .fieldbox {
+    width: 40%;
+}
+
+.config-wrap-box .config-box .textbox textarea {
+    height: 100% !important;
+}
+
+.config-wrap-box .config-box .tablelist,
+.config-wrap-box .config-box .fieldlist {
+    height: 48%;
+    padding: 15px 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.config-wrap-box .config-box .line {
+    margin: 3% 0;
+}

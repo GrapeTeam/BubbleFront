@@ -1,0 +1,117 @@
+<!-- hbox layout -->
+<div class="hbox hbox-auto-xs bg-light wrapper" ng-init="app.settings.full = true;">
+    <div class="panel panel-default">
+        <div class="panel-heading font-bold">系统设置</div>
+        <div class="panel-body">
+            <form class="form-horizontal" method="get">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">网站名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="siteInfo.title" class="form-control">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">HOST</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="siteInfo.host" class="form-control">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">网站描述</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="siteInfo.desp" class="form-control">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">是否可见</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="siteInfo.isvisble" class="form-control">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">ICP</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="siteInfo.icp" class="form-control">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">单位名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="siteInfo.gov" class="form-control">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">公安网备号</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="siteInfo.policeid" class="form-control">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">网站信箱</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="siteInfo.email" class="form-control">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">维护人员</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="siteInfo.engerid" class="form-control">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">政府信息公开网用户名</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="siteInfo.GovUserName" class="form-control">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">政府信息公开网组织机构号</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="siteInfo.GovCode" class="form-control">
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">新闻默认缩略图</label>
+                    <div class="col-sm-10">
+                        <img src="{{siteInfo.thumbnail}}" height="200" width="200">
+                    </div>
+                    <div class="col-sm-10 col-sm-offset-2 m-t-xs">
+                        <progressbar ng-show="isActive" class="active progress-xs m-b-xs" value="value" type="success">
+                            {{value}}%
+                        </progressbar>
+                        <button id="uploadPicker" style="width:90px;height:34px;" class="btn btn-default"><i
+                            class="fa fa-cloud-upload text text-muted"></i> <span class="text text-muted">Upload</span>
+                        </button>
+                        <span class="m-l">若文章没有缩略图的情况下将使用该缩略图</span>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label text-center">文章后缀</label>
+                    <div class="col-sm-10 uploaderdnd">
+                        <div class="bg-success" style="width:0;height:1px;"></div>
+                        <textarea id="editor_id" name="content" style="width:100%;height:100%;"></textarea>
+                    </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+                <button class="pull-right btn btn-info ladda-button" ng-click="confirm($event)">
+                    <span class="ladda-label">确定</span>
+                    <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+                </button>
+                <button class="btn m-r-xs btn-info pull-right" ng-click="review()">还原</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /hbox layout -->

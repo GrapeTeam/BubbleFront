@@ -1,0 +1,939 @@
+.content-wechat-tmp-box /*************************************
+ * content
+ */
+.content-close-btn {
+    position: absolute;
+    top: 5px;
+    right: 18px;
+    width: 60px;
+    cursor: pointer;
+    text-align: center;
+    color: #24b7e5;
+    font-size: 15px;
+    transition: color .2s;
+    z-index: 9;
+}
+
+.content-close-btn:hover {
+    color: #22a5ce;
+}
+
+.content-title {
+    height: 30px;
+    line-height: 30px;
+}
+
+.content-column-box {
+    width: 300px;
+    height: 100%;
+    float: left;
+    background: #f6f8f8;
+    border-right: 1px #dee5e7 solid;
+    position: relative;
+    transition: all .3s;
+    height: 100%;
+}
+
+.content-column-box .open-btn {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 18px;
+    height: 60px;
+    margin-top: -30px;
+    text-align: center;
+    line-height: 60px;
+    font-size: 24px;
+    background: #ececec;
+    cursor: pointer;
+    transition: all .3s;
+    display: none;
+}
+
+.content-column-box .open-btn:hover {
+    background: #ddd;
+}
+
+.content-column-box .nav li > a {
+    transition: background .2s;
+}
+
+.content-column-box .nav li > a:hover {
+    background: #ddd;
+}
+
+.content-column-box .nav li.active > a:hover {
+    background: #23b7e5;
+}
+
+.content-wechat-tmp-box {
+    position: absolute;
+    right: 70px;
+    width: 240px;
+    height: 450px;
+    border-radius: 5px 5px 0 0;
+    z-index: 1000;
+    background: #fff;
+    overflow: hidden;
+    opacity: 0;
+    display: none;
+    border-color: #bfbfbf;
+    box-shadow: 0px 5px 15px 0px #b1b1b1;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
+}
+
+.content-wechat-tmp-box.min {
+    bottom: 0;
+    right: 0px;
+    height: 40px;
+}
+
+.content-wechat-tmp-box.min .header {
+    cursor: pointer;
+}
+
+.content-wechat-tmp-box .header {
+    height: 60px;
+    padding: 5px;
+    text-align: center;
+    line-height: 25px;
+}
+
+.content-wechat-tmp-box .header .fa {
+    position: absolute;
+    right: 35px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.content-wechat-tmp-box .header .glyphicon {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.content-wechat-tmp-box .header i:hover {
+    color: #24b7e5;
+}
+
+.content-wechat-tmp-box .wechatbtn {
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.content-wechat-tmp-box .wechatbtn > div {
+    float: left;
+    width: 50%;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.content-wechat-tmp-box .wechat-itemwrap {
+    padding-bottom: 100px;
+    height: 100%;
+}
+
+.content-wechat-tmp-box .wechat-itembox {
+    height: 100% !important;
+}
+
+.content-wechat-tmp-box .itembtn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    background: rgba(0, 0, 0, .5);
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
+}
+
+.content-wechat-tmp-box .itembtn span {
+    line-height: 15px;
+    font-size: 14px;
+}
+
+.content-wechat-tmp-box .itembtn .down,
+.content-wechat-tmp-box .itembtn .up {
+    height: 100%;
+    width: 40px;
+    float: left;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
+}
+
+.content-wechat-tmp-box .itembtn .remove {
+    height: 100%;
+    width: 40px;
+    float: right;
+    font-size: 16px;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
+}
+
+.content-wechat-tmp-box .itembtn > div:hover {
+    color: #23b7e5;
+}
+
+.content-wechat-tmp-box .hitem:hover .itembtn,
+.content-wechat-tmp-box .item:hover .itembtn {
+    opacity: 1;
+}
+
+.content-wechat-tmp-box .hitem {
+    height: 140px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+.content-wechat-tmp-box .hitem img {
+    width: 100%;
+    position: relative;
+    top: -40px;
+}
+
+.content-wechat-tmp-box .hitem .desc {
+    position: absolute;
+    bottom: 0;
+    left: 1%;
+    background: rgba(0, 0, 0, .5);
+    color: #fff;
+    padding: 5px;
+    width: 98%;
+}
+
+.content-wechat-tmp-box .item {
+    height: 70px;
+    overflow: hidden;
+    margin: 5px 0;
+    padding: 5px 0;
+    cursor: pointer;
+}
+
+.content-wechat-tmp-box .item img {
+    float: right;
+    width: 27%;
+    height: 100%;
+}
+
+.content-wechat-tmp-box .item .desc {
+    float: left;
+    width: 73%;
+    padding: 10px;
+}
+
+.contentBox .content-attachment {
+    min-height: 100px;
+    border: 1px #7b7b7b dashed;
+    border-radius: 5px;
+    position: relative;
+    text-align: center;
+}
+
+.contentBox .content-attachment .process {
+    background: #23b7e5;
+    height: 3px;
+    border-radius: 20px;
+    width: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.contentBox .content-attachment table td {
+    text-align: left;
+}
+
+.contentBox .attachmentUpload > div {
+    width: 85px;
+    height: 17px;
+}
+
+.contentBox .attachmentUpload label {
+    margin: 0;
+}
+
+.contentBox.newsopen .content-column-box {
+    width: 150px;
+}
+
+.contentBox.newsopen .content-list-wrap {
+    left: 150px;
+    right: 240px;
+}
+
+.contentBox.newsopen .content-list-box {
+    width: 300px;
+    right: auto;
+}
+
+.contentBox.newsopen .content-console-box {
+    left: 300px;
+    opacity: 1;
+}
+
+.contentBox.newsopen .content-list.normal-list {
+    display: none;
+}
+
+.contentBox.newsopen .content-list.min-list {
+    display: block;
+    padding-bottom: 40px;
+}
+
+.contentBox.newsopen .content-column-box .open-btn {
+    display: block;
+}
+
+.contentBox.newsopen .content-info-box {
+    display: block;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    overflow: auto;
+}
+
+.contentBox.newsopen .content-info-box .tab-pane {
+    height: 100%;
+}
+
+@keyframes lightSpeedIn {
+    0% {
+        transform: translate3d(100%, 0, 0) skewX(-30deg);
+        opacity: 0
+    }
+    60% {
+        transform: skewX(20deg);
+        opacity: 1
+    }
+    80% {
+        transform: skewX(-5deg);
+        opacity: 1
+    }
+    to {
+        transform: none;
+        opacity: 1
+    }
+}
+
+@keyframes lightSpeedOut {
+    0% {
+        opacity: 1
+    }
+    to {
+        transform: translate3d(100%, 0, 0) skewX(30deg);
+        opacity: 0
+    }
+}
+
+@keyframes zoomIn {
+    0% {
+        opacity: 0;
+        transform: scale3d(.3, .3, .3)
+    }
+    50% {
+        opacity: 1
+    }
+}
+
+@keyframes zoomOutUp {
+    40% {
+        opacity: 1;
+        transform: scale3d(.475, .475, .475) translate3d(0, 60px, 0);
+        animation-timing-function: cubic-bezier(.55, .055, .675, .19)
+    }
+    to {
+        opacity: 0;
+        transform: scale3d(.1, .1, .1) translate3d(0, -2000px, 0);
+        transform-origin: center bottom;
+        animation-timing-function: cubic-bezier(.175, .885, .32, 1)
+    }
+}
+
+.contentBox .robotBtn {
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    width: 100px;
+    height: 100px;
+    z-index: 999;
+    animation: lightSpeedIn .8s ease-out;
+}
+
+.contentBox .robotBtn.ng-hide {
+    animation: lightSpeedOut .8s ease-in;
+}
+
+.contentBox .robotBtn img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.contentBox .robotBtn .messagebox {
+    display: none;
+    position: absolute;
+    top: -200px;
+    left: -190px;
+    width: 240px;
+    height: 190px;
+    background: url(../../img/popupbg.png) center top no-repeat;
+    background-size: 100%;
+    animation: zoomIn .3s ease-out;
+}
+
+.contentBox .robotBtn .messagebox.out {
+    animation: zoomOutUp .3s ease-out;
+}
+
+.contentBox .robotBtn .messagebox .content {
+    position: absolute;
+    width: 100%;
+    height: 90px;
+    padding: 15px 20px;
+}
+
+.contentBox .robotBtn .messagebox .p1 {
+    text-indent: 15px;
+}
+
+.contentBox .robotBtn .messagebox .p2 {
+    text-align: center;
+    margin: 30px 0px;
+    display: none;
+}
+
+.contentBox .robotBtn .messagebox a {
+    margin: 0 3px;
+    cursor: pointer;
+}
+
+.content-list .list-group-item.actived {
+    background: #eaeaea;
+}
+
+.content-list .searchbox {
+    width: 100%;
+    border-radius: 5px;
+    background: #fff;
+    border: 1px #ddd solid;
+}
+
+.content-list .searchbox .searchinput {
+    width: 500px;
+    width: -moz-calc(100% - 510px);
+    width: -webkit-calc(100% - 510px);
+    width: calc(100% - 510px);
+    min-width: 200px;
+}
+
+.content-info-box {
+    display: none;
+}
+
+.content-list-wrap {
+    position: absolute;
+    right: 0;
+    left: 300px;
+    top: 0;
+    bottom: 0;
+    transition: all .2s;
+}
+
+.content-list-box {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transition: all .2s;
+    width: 100%;
+}
+
+.content-list-box .content-list {
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 115px;
+    bottom: 0;
+}
+
+.content-list-box .content-list.min-list {
+    display: none;
+}
+
+.content-list-box .content-list.normal-list {
+    overflow: auto;
+}
+
+.content-list-box .chosen-container {
+    width: 100% !important;
+}
+
+.content-list-box .table {
+    background: #fff;
+    border-color: #dee5e7;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    margin: 0;
+}
+
+.content-list-box .table th {
+    background: #edf1f2;
+}
+
+.content-list-box .table td {
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.content-list-box .table tr:hover td {
+    background: #efefef !important;
+}
+
+/* .content-list-box .table td{padding: 15px 15px;} */
+
+.content-list-box .new-table-pager-box {
+    height: 50px;
+    margin-top: 5px;
+}
+
+.content-console-box {
+    position: absolute;
+    right: 0;
+    left: 300px;
+    top: 0;
+    bottom: 0;
+    transition: all .3s;
+    opacity: 0;
+}
+
+.columnPicker {
+    width: 20px;
+    height: 34px;
+    line-height: 34px;
+    float: right;
+}
+
+.toggleBtn {
+    height: 25px;
+    line-height: 25px;
+    width: 100%;
+    text-align: center;
+}
+
+.staricon {
+    position: absolute;
+    right: 13px;
+    bottom: 10px;
+}
+
+.topbox-news {
+    margin-top: 10px !important;
+}
+
+.contentBox .tab-content {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    top: 50px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.ke-icon-hello {
+    background-image: url(../skins/default/default.gif);
+    background-position: 0px -496px;
+    width: 16px;
+    height: 16px;
+}
+
+.image-chose-btn {
+    text-align: center;
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+    font-size: 28px;
+}
+
+.contentImgMask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .4);
+    opacity: 0;
+    padding: 75px 50px;
+}
+
+.contentImgMask .item {
+    width: 80px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    margin: 10px auto;
+    border: 1px #dadada solid;
+    border-radius: 5px;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.18);
+    transition: all .2s;
+}
+
+.contentImgMask .item:hover {
+    color: #ddd;
+    background: rgba(0, 0, 0, 0.28);
+}
+
+.contentImgMask:hover {
+    opacity: 1;
+}
+
+.contentImageTypeBox {
+    width: 100%;
+    min-height: 60px;
+}
+
+.contentImageTypeBox .item {
+    width: 100px;
+    height: 100px;
+    float: left;
+    margin-right: 10px;
+    text-align: center;
+    line-height: 100px;
+    font-size: 28px;
+}
+
+.contentImageTypeBox .item .closebtn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 18px;
+}
+
+.contentBox.hbox {
+    display: block;
+}
+
+.contentImageTypeBox .item img {
+    width: 100%;
+    height: 100%;
+    margin-top: -9px;
+}
+
+.contentControlMaskBox {
+    position: absolute;
+    top: 0;
+    left: 280px;
+    height: 100%;
+    right: 0;
+    background: rgba(0, 0, 0, .2);
+    z-index: 10;
+}
+
+.worduploadprocess {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: #90c3fd;
+}
+
+.content-errorword-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    z-index: 1050;
+    padding: 50px;
+    display: none;
+}
+
+.content-errorword-wrap .content-errorword-box {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #fff;
+    border-radius: 10px 10px 0 0;
+    border: 2px #ddd solid;
+}
+
+.content-errorword-wrap .content-errorword-box .title {
+    width: 100%;
+    height: 60px;
+    position: relative;
+    padding: 0 15px;
+    line-height: 60px;
+    font-size: 24px;
+    border-bottom: 1px #ddd solid;
+}
+
+.content-errorword-wrap .content-errorword-box .list-box {
+    width: 15%;
+    border-right: 1px #ddd solid;
+    position: absolute;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+}
+
+.content-errorword-wrap .content-errorword-box .list-box .item {
+    height: 50px;
+    padding-left: 15px;
+    line-height: 50px;
+    border-bottom: 1px #ddd solid;
+    transition: all .2s;
+    cursor: pointer;
+}
+
+.content-errorword-wrap .content-errorword-box .list-box .item.cur {
+    background: #ddd;
+}
+
+.content-errorword-wrap .content-errorword-box .list-box .item:hover {
+    background: #f3f3f3;
+}
+
+.content-errorword-wrap .content-errorword-box .content-box {
+    position: absolute;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    right: 50%;
+    border-right: 1px #ddd solid;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.content-errorword-wrap .content-errorword-box .error-box {
+    position: absolute;
+    top: 60px;
+    bottom: 0;
+    left: 50%;
+    right: 0;
+    overflow: auto;
+    padding: 10px;
+}
+
+.content-errorword-wrap .content-errorword-box .error-box .count {
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    color: #f16565;
+    border-bottom: 1px #ddd solid;
+}
+
+.content-errorword-wrap .content-errorword-box .error-box .loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.content-errorword-wrap .content-errorword-box .error-box .loading .tipsbox {
+    color: #6d6d6d;
+    font-size: 20px;
+    width: 135px;
+    margin-left: -70px;
+}
+
+.preview-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    z-index: 1050;
+    padding: 50px 20%;
+    display: none;
+}
+
+.preview-wrap .preview-box {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    border: 2px #ddd solid;
+}
+
+.preview-wrap .preview-box .title {
+    width: 100%;
+    height: 60px;
+    position: relative;
+    padding: 0 15px;
+    line-height: 60px;
+    font-size: 24px;
+    border-bottom: 1px #ddd solid;
+}
+
+.preview-wrap .preview-box .content-box {
+    position: absolute;
+    width: 100%;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+}
+
+.preview-wrap .preview-box .content-info {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.preview-wrap .preview-box .content-box h3 {
+    width: 100%;
+    text-align: center;
+}
+
+.preview-wrap .preview-box .content-box span {
+    margin: 0 10px;
+}
+
+.push-config-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    z-index: 1050;
+    display: none;
+}
+
+.push-config-wrap .push-config-box {
+    position: absolute;
+    width: 50%;
+    height: 80%;
+    top: 10%;
+    left: 25%;
+    background: #fff;
+    border-radius: 10px;
+    border: 2px #ddd solid;
+}
+
+.push-config-wrap .push-config-box .title {
+    width: 100%;
+    height: 60px;
+    position: relative;
+    padding: 0 15px;
+    line-height: 60px;
+    font-size: 24px;
+    border-bottom: 1px #ddd solid;
+}
+
+.push-config-wrap .push-config-box .wrapbox {
+    position: absolute;
+    width: 100%;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    overflow: auto;
+    background: #fff;
+    transition: all .2s;
+}
+
+.push-config-wrap .push-config-box.min .wrapbox {
+    top: 120px;
+}
+
+.push-config-wrap .push-config-box.min .process-box {
+    display: block;
+}
+
+.push-config-wrap .push-config-box .process-box {
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    top: 60px;
+    left: 0;
+    padding: 10px;
+    overflow: auto;
+    background: #fff;
+    display: none;
+}
+
+.push-config-wrap .push-config-box .wrapbox .subtitle {
+    font-weight: bold;
+    border-bottom: 1px #ddd solid;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.push-config-wrap .push-config-box .wrapbox .item {
+    height: 30px;
+    line-height: 30px;
+    border: 1px #ddd solid;
+    padding: 0 15px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: all .2s;
+    overflow: hidden;
+}
+
+.push-config-wrap .push-config-box .wrapbox .item:hover {
+    background: #f3f3f3;
+}
+
+.push-config-wrap .push-config-box .wrapbox .item.cur {
+    background: #00b8f5;
+    color: #fff;
+}
+
+.new-pager-box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    border-top: 1px #ddd solid;
+    background: #f6f8f8;
+}
+
+.new-pager-box div {
+    float: left;
+    margin-left: 15px;
+}
+
+.new-pager-box .next {
+    float: right;
+    margin: 0 15px;
+}
+
+.new-pager-box input {
+    width: 30px;
+    height: 20px;
+    text-align: center;
+}

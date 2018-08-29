@@ -1,0 +1,22 @@
+<!-- settings -->
+<button class="btn btn-default no-shadow pos-abt" ui-toggle-class="active" target=".task">
+    <i class="fa fa-spin fa-gear text-muted"></i>
+</button>
+<div class="panel-heading">
+    任务
+</div>
+<div class="slimScrollDiv">
+    <div class="panel-body" min-scroll offset-height="144">
+        <a ui-sref="app.task">
+            <div class="alert ng-isolate-scope alert-dismissable" ng-class="colors[item.type]"
+                 ng-repeat="item in tasks">
+                <button type="button" class="close">
+                    <span>×</span>
+                </button>
+                <div><span>{{item.name}}</span></div>
+            </div>
+        </a>
+    </div>
+</div>
+</div>
+<!-- /settings -->

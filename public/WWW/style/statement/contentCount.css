@@ -1,0 +1,95 @@
+/*************************************
+ * contentCount 发布统计
+ */
+.content-count-box .btn-box {
+    background: #f6f8f8;
+}
+
+.content-count-box .btn-box:after {
+    content: "";
+    height: 0;
+    line-height: 0;
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+.content-count-box .btn-box .btnitem {
+    float: left;
+    min-height: 40px;
+}
+
+.content-count-box .btn-box .btnitem:hover {
+    background: #f3f3f3;
+}
+
+.content-count-box .btn-box .btnitem.cur {
+    color: #23b7e5;
+}
+
+.content-count-box .btn-box form > * {
+    float: left;
+}
+
+.content-count-box .charts-box .item {
+    height: 500px;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
+}
+
+.content-count-box tr {
+    cursor: pointer;
+}
+
+.content-count-box tr:hover td {
+    background: #eaeaea !important;
+    background-color: #eaeaea !important;
+}
+
+.content-count-box td,
+.content-count-box th {
+    text-align: center;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    transition: all .2s;
+}
+
+.content-count-box .tabletool {
+    height: 40px;
+    line-height: 40px;
+}
+
+.content-count-box select {
+    width: 200px;
+    display: inline-block;
+}
+
+@media (max-width: 970px) {
+    .content-count-box .btn-box {
+        padding-bottom: 20px;
+    }
+
+    .content-count-box .btn-box .btnitem {
+        width: 100%;
+        float: none;
+    }
+
+    .content-count-box .btn-box form {
+        float: none;
+        padding: 0 15px;
+        margin: 5px auto;
+    }
+
+    .content-count-box .btn-box form > * {
+        float: none;
+        width: 100%;
+    }
+
+    .content-count-box .btn-box form button {
+        margin-top: 35px;
+        height: 35px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+}

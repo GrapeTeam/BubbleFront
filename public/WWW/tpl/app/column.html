@@ -1,0 +1,222 @@
+<div class="hbox hbox-auto-xs bg-light pos-rlt" style="overflow:hidden;" ng-init="app.settings.full = true;">
+    <script type="text/ng-template" id="columnCreate.html">
+        <div class="modal-header">
+            <h3 class="modal-title">栏目</h3>
+        </div>
+        <div class="modal-body">
+            <form class="bs-example form-horizontal ng-pristine ng-valid">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">栏目名称</label>
+                    <div class="col-sm-10">
+                        <div class="input-group m-b">
+                            <input type="text" name="name" class="form-control" ng-model="value.name"
+                                   placeholder="请输入栏目名称">
+                            <span class="input-group-addon">
+                                <label class="checkbox-inline" style="padding-top:0px;">
+                                    <input type="checkbox" ng-model="value.Contant">将所有改动应用于下级单位
+                                </label>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">列表模版</label>
+                    <div class="col-sm-10">
+                        <async-select key="name" interface="template" ng-model="value.tempList"></async-select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">内容模版</label>
+                    <div class="col-sm-10">
+                        <async-select key="name" interface="template" ng-model="value.tempContent"></async-select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">预览模版</label>
+                    <div class="col-sm-10">
+                        <async-select key="name" interface="template" ng-model="value.tempYulan"></async-select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">栏目类型</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" ng-model="value.type"
+                                ng-init="value.type = value.type == 2 ? '2' : '0'">
+                            <option value="0">普通栏目</option>
+                            <option value="2">导航栏目</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">强制隐私检测</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" ng-model="value.isCheck">
+                            <option value="0">不开启</option>
+                            <option value="1">开启</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">是否隐藏</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" ng-model="value.isvisble">
+                            <option value="0">不隐藏</option>
+                            <option value="1">隐藏</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">栏目后缀</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" ng-model="value.ColumnProperty">
+                            <option value="0">长期公开</option>
+                            <option value="1">定期公开</option>
+                            <option value="2">及时公开</option>
+                            <option value="3">无后缀</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">新闻类型</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" ng-model="value.contentType">
+                            <option value="0">常规图文新闻</option>
+                            <option value="1">纯图片新闻</option>
+                            <option value="2">视频新闻</option>
+                            <option value="3">咨询新闻</option>
+                            <option value="4">公开新闻</option>
+                            <option value="5">超链接新闻</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">是否需要审核</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" ng-model="value.isreview">
+                            <option value="0">无需审核</option>
+                            <option value="1">需要审核</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">是否公开</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" ng-model="value.slevel">
+                            <option value="0">完全公开</option>
+                            <option value="1">部分公开</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">更新周期</label>
+                    <div class="col-sm-10">
+                        <div class="input-group m-b">
+                            <input type="text" class="form-control" ng-model="value.timediff" placeholder="">
+                            <span class="input-group-addon">天(0为无更新要求)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">更新数量</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="name" class="form-control" ng-model="value.editCount"
+                               placeholder="请输入更新数量">
+                    </div>
+                </div>
+                <div class="form-group" ng-show="false">
+                    <label class="col-sm-2 control-label">fatherid</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" ng-model="value.fatherid" placeholder="">
+                    </div>
+                </div>
+                <div class="form-group padder-md">
+                    <p>栏目缩略图(存在多个缩略图时将随机抽取)</p>
+                    <div class="column-thumb-item b" ng-repeat="item in thumb.getCurrentData()"
+                         ng-click="thumb.remove(v, $index)">
+                        <img src="{{item}}" class="w-full h-full"/>
+                    </div>
+                    <div class="column-thumb-item b" ng-click="thumb.show()">
+                        <i class="fa fa-plus"></i>
+                    </div>
+                </div>
+                <input type="hidden" name="fatherid" class="form-control" ng-model="value.fatherid">
+                <input type="hidden" name="sort" class="form-control" ng-model="value.sort">
+                <input type="hidden" name="type" class="form-control" ng-model="value.type">
+                <input type="hidden" name="type" class="form-control" ng-model="value.wbid">
+                <input type="hidden" name="type" class="form-control" ng-model="value.contentType">
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">取消</button>
+            <button class="btn btn-info ladda-button" ng-click="ok($event)">
+                <span class="ladda-label">确定</span>
+                <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </script>
+    <script type="text/ng-template" id="columnBind.html">
+        <div class="modal-header">
+            <h3 class="modal-title">栏目</h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <div class=" control-label text-info">是否包含栏目自身内容</div>
+                <div class="">
+                    <select class="form-control" ng-model="isinlude">
+                        <option value="0">不显示自身栏目文章</option>
+                        <option value="1">显示自身栏目文章</option>
+                    </select>
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="column-modal-tree-box"></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">取消</button>
+            <button class="btn btn-info ladda-button" ng-click="ok($event)">
+                <span class="ladda-label">确定</span>
+                <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </script>
+    <script type="text/ng-template" id="articleBind.html">
+        <div class="modal-header">
+            <h3 class="modal-title">内容</h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <div class=" control-label text-info">请选择需要移入的栏目</div>
+            </div>
+            <div class="line"></div>
+            <div class="article-modal-tree-box"></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-default" ng-click="cancel()">取消</button>
+            <button class="btn btn-info ladda-button" ng-click="ok($event)">
+                <span class="ladda-label">确定</span>
+                <span class="ladda-spinner"><i class="fa fa-spin fa-spinner"></i></span>
+            </button>
+        </div>
+    </script>
+    <div class="bg-light lter b-b wrapper-md ng-scope">
+        <h1 class="m-n font-thin h3">栏目管理</h1>
+    </div>
+    <tree-table interface="column" btn="btn" itembtn="itembtn" callback="callback"></tree-table>
+    <ui-sitechose config="siteconfig"></ui-sitechose>
+</div>
+<ui-bubble-modal show="modalVisible" name="缩略图库" confirm="modalConfirm">
+    <div class="tipsbox" ng-show="!thumbList">数据加载中...</div>
+    <div class="column-thumb-upload-process bg-info"></div>
+    <div class="wrapper" ng-if="thumbList">
+        <div class="column-thumb-list-item" ng-class="{cur: item.select}" ng-repeat="item in thumbList"
+             ng-click="columnThumb.onclick(item, $event)">
+            <img src="{{item.ThumbnailImage}}" class="w-full h-full"/>
+            <div class="removebtn" ng-click="columnThumb.deleteThumb(item)">
+                <i class="fa fa-times"></i>
+            </div>
+        </div>
+        <div class="column-thumb-list-item item-uploader">
+            <i class="fa fa-upload"></i>
+        </div>
+    </div>
+</ui-bubble-modal>

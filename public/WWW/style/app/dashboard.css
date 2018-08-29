@@ -1,0 +1,12 @@
+/*************************************
+ * console 控制台
+ */
+
+.console-box .list-group-item {
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.console-box .list-group-item:hover {
+    background: #f7f7f7;
+}
